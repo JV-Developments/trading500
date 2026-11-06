@@ -78,11 +78,15 @@
         li {
             margin-bottom: 8px;
         }
-        .ticker {
-            color: #34d399;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: underline dotted;
+        .placeholder-image {
+            background-color: #334155;
+            border: 2px dashed #64748b;
+            padding: 30px;
+            text-align: center;
+            margin: 25px 0;
+            color: #94a3b8;
+            border-radius: 4px;
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -90,13 +94,13 @@
 
 <!-- Language Selector Navigation -->
 <div class="lang-navbar">
-    <button class="lang-btn active" onclick="changeLanguage('en')">English</button>
-    <button class="lang-btn" onclick="changeLanguage('es')">Español</button>
-    <button class="lang-btn" onclick="changeLanguage('fr')">Français</button>
+    <button id="btn-en" class="lang-btn active" onclick="changeLanguage('en')">English</button>
+    <button id="btn-es" class="lang-btn" onclick="changeLanguage('es')">Español</button>
+    <button id="btn-fr" class="lang-btn" onclick="changeLanguage('fr')">Français</button>
 </div>
 
 <div class="guide-container">
-    <!-- DYNAMIC CONTENT CONTAINERS -->
+    <!-- PORTADA E INDICE -->
     <h1 id="main-title"></h1>
     <p><strong id="author-tag"></strong></p>
 
@@ -106,12 +110,27 @@
     <h2 id="contents-heading"></h2>
     <ul id="contents-list"></ul>
 
+    <!-- CAPÍTULO: PREFACIO -->
     <h2 id="preface-heading"></h2>
     <div id="preface-body"></div>
+
+    <!-- CAPÍTULO: LA BOLSA DE VALORES -->
+    <h2 id="market-heading"></h2>
+    <div id="market-img" class="placeholder-image">IMAGE: NYSE / Stock Market Reference</div>
+    <div id="market-body"></div>
+
+    <!-- CAPÍTULO: S&P 500 -->
+    <h2 id="spy-heading"></h2>
+    <div id="spy-img" class="placeholder-image">IMAGE: S&P 500 Evolution Chart</div>
+    <div id="spy-body"></div>
+
+    <!-- CAPÍTULO: OFICINA EN CASA -->
+    <h2 id="home-heading"></h2>
+    <div id="home-img" class="placeholder-image">IMAGE: Laptop & Trader Multi-screen Desk</div>
+    <div id="home-body"></div>
 </div>
 
 <script>
-    // Dictionary containing translations for the initial parts
     const translations = {
         en: {
             title: "Keys to Trade or Invest in the S&P 500 Stock Index and Stocks",
@@ -133,50 +152,122 @@
                 "When I started trading a few years ago, I did it more with my heart than with my reason, with my emotions at a thousand, which led to many losses. However, over time, I learned vital lessons to improve my trading strategies and that was when I started to see profits. It has also shown me that just as it is possible to live off trading, any person who follows the right steps can do it as well. Lately, I have leaned more toward thinking about investing rather than trading, but everyone has their own inclination.",
                 "You will win or lose according to what you deposit into your account, and you should follow the rule of the best traders in the world, who say that rule number one is not to lose money; but this will be possible to the extent that you obey certain principles of trading and accept that the market is a world of opportunities.",
                 "The internet is full of digital books, therefore my job is to synthesize practical strategies so you can get started as soon as possible. With me, you will learn to do 'paper trading', and that is as far as I go. Once you feel capable of swimming, you can make the decision to invest real money with your own trader personality, because you are unique in the world. God bless you."
-            ]
-        },
-        es: {
-            title: "Claves para Transar o Invertir en el Índice bursátil S&P 500 y stocks",
-            author: "Por J. Victory",
-            indexTitle: "➢ Indice del Manual",
-            indexSubtitle: "(si deseas empezar desde cero, consulta este índice de temas)",
-            contentsHeading: "Contenido",
-            contents: [
-                "Prefacio",
-                "La Bolsa de Valores, horas y días de negocio",
-                "El índice que transamos: S&P 500",
-                "Antes de transar … date un baño",
-                "¿Cuándo hacemos un “Call” o un “Put”?",
-                "Lo que nos enseña … la historia"
             ],
-            prefaceHeading: "Prefacio",
-            prefaceParagraphs: [
-                "Antes que un libro, esta es una guía básica para que cualquier ciudadano de a pie pueda aprender a transar uno de los mercados más líquidos del mundo. Uso la palabra inglesa trading en vez de comercio pues ha sido aceptada mundialmente, de la misma forma que stock en vez de acción e igual para otros términos.",
-                "Cuando empecé a transar hace algunos años, lo hice más con el corazón que con la razón, con mis emociones a mil, lo que condujo a que sufriera muchas pérdidas. Sin embargo y con el paso del tiempo, fui aprendiendo lecciones vitales para mejorar mis estrategias en el trading y fue allí cuando empecé a ver ganancias. Igualmente he aprendido que así como es posible a vivir del trading, cualquier persona que siga los pasos adecuados puede hacerlo igualmente. En el último tiempo me he inclinado más a pensar en invertir antes que en transar, pero cada uno tiene su propia inclinación.",
-                "Tu ganarás o perderás conforme a lo que deposites en tu cuenta y deberías seguir la norma de los mejores traders del mundo, los cuales dicen que la regla número uno es no perder dinero, pero esto será posible en la medida que obedezcas ciertos principios del trading y aceptes que el mercado es un mundo de oportunidades.",
-                "El internet está lleno de libros digitales, por tanto mi trabajo es sintetizar estrategias prácticas para que puedas arrancar cuanto antes. Conmigo aprenderás a hacer “paper trading”, y hasta allí llego yo. Una vez que te sientas en capacidad de nadar, puedes tomar la decisión de invertir dinero real con tú propia personalidad de trader, pues tú eres único en el mundo. Dios te bendiga."
-            ]
-        },
-        fr: {
-            title: "Clés pour Traiter ou Investir dans l'Indice Boursier S&P 500 et les Actions",
-            author: "Par J. Victory",
-            indexTitle: "➢ Index du Manuel",
-            indexSubtitle: "(Si vous souhaitez repartir de zéro, consultez cet index thématique)",
-            contentsHeading: "Table des Matières",
-            contents: [
-                "Préface",
-                "La Bourse, heures et jours d'ouverture",
-                "L'indice que nous négocions : S&P 500",
-                "Avant de négocier… prenez una douche",
-                "Quand faisons-nous un 'Call' ou un 'Put' ?",
-                "Ce que l'histoire nous enseigne…"
+            marketHeading: "The Stock Exchange",
+            marketParagraphs: [
+                "At the stock exchange (or Stock Market) (physical or virtual) its clients (buyers and sellers of shares) come together to buy, sell, or trade those securities. The exchange can be public or private. For practical purposes, we focus on saying that the SPY index, which concerns us, is traded on both the New York Stock Exchange and the Nasdaq.",
+                "In the Inn of the Belgian textile worker, Robert Van der Burse, back in the 14th century, merchants gathered to negotiate different securities. In the Stock Exchange, both variable income (stocks) and fixed income (debt) are traded. Although the oldest exchanges date back to Greece and Rome, we have dates and places that tell us a lot about the evolution of this type of activity, such as the commodity exchange in Antwerp (1460), London (1570), Lyon, France (1595), the Madrid stock exchange in 1831, and the New York stock exchange in 1792.",
+                "In synthesis, the objective of the stock exchange is basically...",
+                "• to procure financing for those companies that require capital to expand their borders and",
+                "• to allow investors at the same time to deposit their capital in search of a substantial return or profit.",
+                "The hours for the NY stock exchange and the Nasdaq are Monday through Friday from 09:30 am until 4:15 pm. There are extended hours known as 'after hours' (until 8 pm), meaning after the stock market closes, and 'premarket' (before the bell rings), which runs from 4 am to 09:30 am EST.",
+                "Finally, there are holidays when the Stock Exchange is closed."
             ],
-            prefaceHeading: "Préface",
-            prefaceParagraphs: [
-                "Plutôt qu'un livre, il s'agit d'un guide de base pour que tout citoyen ordinaire puisse apprendre à négocier sur l'un des marchés les plus liquides au monde. J'utilise le mot anglais trading plutôt que commerce car il a été accepté dans le monde entier, de la même manière que stock plutôt qu'action et de même pour d'autres termes.",
-                "Quand j'ai commencé le trading il y a quelques années, je l'ai fait plus avec mon cœur qu'avec ma raison, avec mes émotions à mille, ce qui m'a conduit à de nombreuses pertes. Cependant, au fil du temps, j'ai appris des leçons vitales pour améliorer mes stratégies de trading et c'est à ce moment-là que j'ai commencé à voir des profits. Cela m'a également montré que tout comme il est possible de vivre du trading, toute personne qui suit les bonnes étapes peut également y parvenir. Dernièrement, j'ai eu tendance à penser davantage à investir plutôt qu'à trader, mais chacun a sa propre inclination.",
-"Vous gagnerez ou perdrez en fonction de ce que vous déposez sur votre compte, et vous devriez suivre la règle des meilleurs traders du monde, qui disent que la règle numéro un est de ne pas perdre d'argent ; mais cela sera possible dans la mesure où vous obéirez à certains principes du trading et accepterez que le marché est un monde d'opportunités.",
+            spyHeading: "The Standard & Poor's 500 Index",
+            spyParagraphs: [
+                "Better known as the S&P 500, this index tracks the performance of 500 large companies listed on stock exchanges in the United States. Among the most outstanding companies we can mention out of the 500 are: Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Berkshire Hathaway, and JP Morgan Chase. This mention is just to give you an idea of the economic power of these corporations.",
+                "The breakdown of the S&P 500 sector is as follows:",
+                "• Information Technology 27.48% | • Health Care 14.58% | • Consumer Discretionary 11.18% | • Communication Services 10.90% | • Financials 9.89% | • Industrials 7.90% | • Consumer Staples 7.05% | • Utilities 3.13% | • Real Estate 2.80% | • Materials 2.56% | • Energy 2.53%",
+                "As you can see, the technology segment occupies 27%, which is why when this sector trades down or, on the contrary, goes up, it significantly affects the S&P 500 index.",
+                "Someone can undoubtedly trade stocks separately, such as Apple, Microsoft, etc. To do this, they should trade with 3, 4, or 5 companies at the same time, so that they can diversify, in such a way that they have a higher probability in some in case the others do not turn out well. However, the purpose of this manual, as I said at the beginning, is to focus primarily on the S&P 500 index and then on the companies separately."
+            ],
+            homeHeading: "Office-fy Your Home",
+            homeParagraphs: [
+                "Just because you are working from home and in slippers does not mean you shouldn't take a shower. It is a gross mistake to trade without having all your senses on alert, in addition to being well-nourished. That is why it is important to give your home a certain office air, with the essentials to function.",
+"After the proper cleaning of your body, a calm state, and good breathing, have the basic tools at hand: a notebook, pencil and pen, calculator, your computer and cell phone, and above all, a reliable internet connection. Realize that if this fails and you have open positions, you will not be able to close them, whether for profit or loss. Have you noticed that professional traders have multiple screens? The more information you handle, the better, because many decisions sometimes have to be made in seconds. However, thanks to the information provided in this guide, you will not require 10 screens to trade because the only information you are going to need is provided in a dynamic Google Sheet or Excel table that I provide for you.",
+"If you have basic knowledge of Excel, you can make different tables to record your trading activity. If you do not have that skill, you can do it by hand. The important thing here—although I will expand on this later—is that you take note of the position you have decided to open, the number of contracts, strike price, expiration date, entry and exit time, the percentage you won or lost, and a box to enter the result of your trading day. Getting used to registering everything you do will strengthen your weaknesses and increase your profits."
+]
+},
+es: {
+title: "Claves para Transar o Invertir en el Índice bursátil S&P 500 y stocks",
+author: "Por J. Victory",
+indexTitle: "➢ Indice del Manual",
+indexSubtitle: "(si deseas empezar desde cero, consulta este índice de temas)",
+contentsHeading: "Contenido",
+contents: [
+"Prefacio",
+"La Bolsa de Valores, horas y días de negocio",
+"El índice que transamos: S&P 500",
+"Antes de transar … date un baño",
+"¿Cuándo hacemos un “Call” o un “Put”?",
+"Lo que nos enseña … la historia"
+],
+prefaceHeading: "Prefacio",
+prefaceParagraphs: [
+"Antes que un libro, esta es una guía básica para que cualquier ciudadano de a pie pueda aprender a transar uno de los mercados más líquidos del mundo. Uso la palabra inglesa trading en vez de comercio pues ha sido aceptada mundialmente, de la misma forma que stock en vez de acción e igual para otros términos.",
+"Cuando empecé a transar hace algunos años, lo hice más con el corazón que con la razón, con mis emociones a mil, lo que condujo a que sufriera muchas pérdidas. Sin embargo y con el paso del tiempo, fui aprendiendo lecciones vitales para mejorar mis estrategias en el trading y fue allí cuando empecé a ver ganancias. Igualmente he aprendido que así como es posible a vivir del trading, cualquier persona que siga los pasos adecuados puede hacerlo igualmente. En el último tiempo me he inclinado más a pensar en invertir antes que en transar, pero cada uno tiene su propia inclinación.",
+"Tu ganarás o perderás conforme a lo que deposites en tu cuenta y deberías seguir la norma de los mejores traders del mundo, los cuales dicen que la regla número uno es no perder dinero, pero esto será posible en la medida que obedezcas ciertos principios del trading y aceptes que el mercado es un mundo de oportunidades.",
+"El internet está lleno de libros digitales, por tanto mi trabajo es sintetizar estrategias prácticas para que puedas arrancar cuanto antes. Conmigo aprenderás a hacer “paper trading”, y hasta allí llego yo. Una vez que te sientas en capacidad de nadar, puedes tomar la decisión de invertir dinero real con tú propia personalidad de trader, pues tú eres único en el mundo. Dios te bendiga."
+],
+marketHeading: "La Bolsa de Valores",
+marketParagraphs: [
+"En la bolsa de valores (o Mercado de Acciones) (física o virtual) sus clientes (los compradores y vendedores de acciones) se juntan para comprar, vender o transar dichos valores. La bolsa puede ser pública o privada. Para fines prácticos, nos concentramos en decir que el índice SPY al cual nos concierne se transa tanto en la bolsa de Nueva York como en el Nasdaq.",
+"En el Mesón del textilero belga, Robert Van der Burse por alla en el siglo 14, se reunían comerciantes a negociar diferentes valores. En la Bolsa se negocian tanto renta variable (acciones) como renta fija (deuda). Aunque las bolsas más antiguas se remontan a Grecia y Roma, tenemos fecha y lugares que nos dicen mucho sobre la evolución de este tipo de actividad, como la bolsa de materias primas en Amberes (1460), Londres (1570), Lyon, Francia (1595), la bolsa de Madrid en 1831 y la de Nueva York en 1792.",
+"En síntesis, el objetivo de la bolsa de valores es básicamente…",
+"• procurar financiamiento a aquellas empresas que requieren de capital para ensanchar sus fronteras y",
+"• permitir al mismo tiempo que inversionistas depositen su capital en procura de un retorno o ganancia sustancial.",
+"El horario de la bolsa de NY y el Nasdaq es de lunes a viernes de 09:30 am hasta las 4:15 pm. Hay horarios extendidos conocidos como “after hours” (hasta las 8 pm) es decir, después del cierre de la bolsa y “premarket”; (antes del toque de campana) y que va de 4 am a 09:30 am EST.",
+"Finalmente hay días feriados cuando la Bolsa está cerrada."
+],
+spyHeading: "El Indice Standard & Poor's 500",
+spyParagraphs: [
+"Más conocido como el S&P 500, este índice sigue el rendimiento de 500 grandes empresas que cotizan en las bolsas de valores de los Estados Unidos. Entre las empresas más sobresalientes podemos mencionar de las 500 a: Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Nvidia, Berkshire Hathaway y JP Morgan Chase. Esta mención es solo para darte una idea del poderío económico de estas corporaciones.",
+"El desglose del sector S&P 500, es así:",
+"• Tecnología de la Información 27.48% | • Cuidado de la Salud 14.58% | • Consumidor Discrecional 11.18% | • Servicios de Comunicación 10.90% | • Finanzas 9.89% | • Acciones Industriales 7.90% | • Productos Básicos de Consumo 7.05% | • Utilidades 3.13% | • Bienes Raíces 2.80% | • Materiales 2.56% | • Energía 2.53%",
+"Como puedes ver, el segmento de la tecnología ocupa un 27%, por lo cual cuando este sector transa a la baja o por el contrario va al alza, afecta significativamente el índice S&P 500.",
+"Alguien puede sin duda, transar stocks (acciones) separadamente, como por ejemplo Apple, Microsoft, etc. Para ello debería hacer trading con 3, 4 o 5 empresas al mismo tiempo, cosa que pueda diversificar, de tal manera que tenga mayor probabilidad en unas por si las otras no salen bien. Sin embargo, el propósito de este manual como dije al principio es enfocarnos en primera instancia en el índice S&P 500 y luego en las empresas por separado."
+],
+homeHeading: "Ofici-na tu Casa",
+homeParagraphs: [
+"Por el simple hecho de que estás trabajando desde tu casa y en pantuflas, no significa que no debas darte un baño. Es un craso error hacer trading sin tener todos los sentidos en alerta, además de estar bien alimentado. Por eso es importante que a tu casa le des un cierto aire de oficina, con lo esencial para funcionar.",
+"Después del debido aseo de tu cuerpo, de un estado calmado y buena respiración, ten a mano los útiles básicos: una libreta de apuntes, lápiz y lapicero, calculadora, tu computador y celular y ante todo una confiable conexión a internet. Date cuenta que si esta falla y tienes posiciones abiertas, no podrás cerrarlas ya sea para provecho o pérdida. ¿Has notado que los traders profesionales tienen varias pantallas? Mientras más información manejes mejor, pues muchas de las decisiones a veces las debes hacer en segundos. Sin embargo y gracias a la información prevista en esta guía, no requerirá 10 pantallas para hacer trading pues la única información que vas a necesitar es provista en una dinámica tabla de google sheet o excel que te proveo.",
+"Si tienes conocimientos básicos de Excel, puedes hacer diferentes tablas para que registres tu actividad de trading. Si no tienes esa habilidad, puedes hacerla a mano. Lo importante aquí, -aunque expandiré esto más adelante- es que tomes nota de la posición que has decidido abrir, el número de contratos, strike price, fecha de expiración, hora de entrada y salida, porcentaje que has ganado o perdido y una casilla para que se ingrese el resultado de tu día de trading. El acostumbrarse a registrar todo lo que haces, fortalecerá tus debilidades e incrementará tus ganancias."
+]
+},
+fr: {
+title: "Clés pour Traiter ou Investir dans l'Indice Boursier S&P 500 et les Actions",
+author: "Par J. Victory",
+indexTitle: "➢ Index du Manuel",
+indexSubtitle: "(Si vous souhaitez repartir de zéro, consultez cet index thématique)",
+contentsHeading: "Table des Matières",
+contents: [
+"Préface",
+"La Bourse, heures et jours d'ouverture",
+"L'indice que nous négocions : S&P 500",
+"Avant de négocier… prenez une douche",
+"Quand faisons-nous un 'Call' ou un 'Put' ?",
+"Ce que l'histoire nous enseigne…"
+],
+prefaceHeading: "Préface",
+prefaceParagraphs: [
+"Plutôt qu'un livre, il s'agit d'un guide de base pour que tout citoyen ordinaire puisse apprendre à négocier sur l'un des marchés les plus liquides au monde. J'utilise le mot anglais trading plutôt que commerce car il a été accepté dans le monde entier, de la même manière que stock plutôt qu'action et de même pour d'autres termes.",
+"Quand j'ai commencé le trading il y a quelques années, je l'ai fait plus avec mon cœur qu'avec ma raison, avec mes émotions à mille, ce qui m'a conduit à de nombreuses pertes. Cependant, au fil du temps, j'ai appris des leçons vitales pour améliorer mes stratégies de trading et c'est à ce moment-là que j'ai commencé à voir des profits. Cela m'a également montré que tout comme il est possible de vivre du trading, toute personne qui suit les bonnes étapes peut également y parvenir. Dernièrement, j'ai eu tendance à penser davantage à investir plutôt qu'à trader, mais chacun a sa propre inclination.",
+"Vous gagnerez ou perdrez en fonction de ce que vous déposez sur votre compte, et vous devriez suivre la règle des meilleurs traders du monde, qui disent que la règle numéro un est de ne pas perdre d'argent ; mais cela sera possible dans la mesure où vous obéirez à certains principes du trading et acceptez que le marché est un monde d'opportunités.",
 "Internet regorge de livres numériques, c'est pourquoi mon travail consiste à synthétiser des stratégies pratiques afin que vous puissiez démarrer le plus rapidement possible. Avec moi, vous apprendrez à faire du 'paper trading', et c'est là que s'arrêtent mes interventions. Une fois que vous vous sentirez capable de nager, vous pourrez prendre la décision d'investir de l'argent réel avec votre propre personnalité de trader, car vous êtes unique au monde. Que Dieu vous bénisse."
+],
+marketHeading: "La Bourse",
+marketParagraphs: [
+"À la bourse de valeurs (ou Marché des Actions) (physique ou virtuelle), ses clients (les acheteurs et les vendeurs d'actions) se rassemblent pour acheter, vendre ou négocier ces valeurs. La bourse peut être publique ou privée. À des fins pratiques, nous nous concentrons sur l'indice SPY qui nous concerne et qui se négocie à la fois à la bourse de New York et au Nasdaq.",
+"Dans l'auberge du travailleur du textile belge, Robert Van der Burse, vers le XIVe siècle, des marchands se réunissaient pour négocier différentes valeurs. En Bourse, on négocie aussi bien des actions (revenus variables) que des obligations (revenus fixes). Bien que les bourses les plus anciennes remontent à la Grèce et à la Rome antiques, nous avons des dates et des lieux qui nous en disent long sur l'évolution de ce type d'activité, comme la bourse des matières premières à Anvers (1460), Londres (1570), Lyon, France (1595), la bourse de Madrid en 1831 et celle de New York en 1792.",
+"En résumé, l'objectif de la bourse est fondamentalement...",
+"• obtenir un financement pour les entreprises qui ont besoin de capitaux pour élargir elles frontières et",
+"• permettre en même temps aux investisseurs de déposer leur capital en vue d'un rendement ou d'un gain substantiel.",
+"Les horaires de la bourse de NY et du Nasdaq sont du lundi au vendredi de 09h30 à 16h15. Il existe des horaires élargis appelés 'after hours' (jusqu'à 20h), c'est-à-dire après la fermeture de la bourse, et 'premarket' (avant la cloche d'ouverture), qui s'étend de 4h à 09h30 EST.",
+"Le marché est fermé pendant les jours fériés."
+],
+spyHeading: "L'Indice Standard & Poor's 500",
+spyParagraphs: [
+"Mieux connu sous le nom de S&P 500, cet indice suit la performance de 500 grandes entreprises cotées sur les bourses américaines. Parmi les entreprises les plus marquantes des 500, citons : Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Berkshire Hathaway et JP Morgan Chase. Cette mention vise juste à vous donner une idée de la puissance économique de ces corporations.",
+"La répartition sectorielle du S&P 500 est la suivante :",
+"• Technologies de l'information 27.48% | • Santé 14.58% | • Consommation discrétionnaire 11.18% | • Services de communication 10.90% | • Finance 9.89% | • Actions industrielles 7.90% | • Produits de consommation de base 7.05% | • Services publics 3.13% | • Immobilier 2.80% | • Matériaux 2.56% | • Énergie 2.53%",
+"Comme vous pouvez le constater, le segment technologique occupe 27 %, c'est pourquoi lorsque ce secteur évolue à la baisse ou, au contraire, augmente, il affecte de manière significative l'indice S&P 500.",
+"On peut sans doute négocier des actions séparément, comme Apple, Microsoft, etc. Pour ce faire, il faudrait faire du trading avec 3, 4 ou 5 entreprises en même temps afin de se diversifier, de manière à maximiser les probabilités si certaines ne fonctionnent pas bien. Cependant, le but de ce manuel, comme je l'ai dit au début, est de se concentrer en premier lieu sur l'indice S&P 500, puis sur les entreprises séparément."
+],
+homeHeading: "Faites de Votre Maison Votre Bureau",
+homeParagraphs: [
+"Ce n'est pas parce que vous travaillez à la maison en pantouflas que vous ne devez pas prendre de douche. C'est une grave erreur de faire du trading sans avoir tous ses sens en alerte, en plus d'être bien nourri. C'est pourquoi il est important de donner à votre maison un certain air de bureau, avec l'essentiel pour fonctionner.",
+"Après un bon nettoyage de votre corps, un état d'esprit calme et une bonne respiration, gardez à portée de main les outils de base : un carnet de notes, un crayon et un stylo, une calculatrice, votre ordinateur et votre téléphone portable et, surtout, une connexion internet fiable. Sachez que si celle-ci échoue et que vous avez des positions ouvertes, vous ne pourrez pas les fermer, que ce soit pour en tirer profit ou pour accuser une perte. Avez-vous remarqué que les traders professionnels ont plusieurs écrans ? Plus vous gérez d'informations, mieux c'est, car de nombreuses décisions doivent parfois être prises en quelques secondes. Cependant, grâce aux informations fournies dans ce guide, vous n'aurez pas besoin de 10 écrans pour trader car la seule information dont vous aurez besoin est fournie dans un tableau dynamique Google Sheet ou Excel que je vous procure.",
+"Si vous avez des connaissances de base en Excel, vous pouvez créer différents tableaux pour enregistrer votre activité de trading. Si vous n'avez pas cette compétence, vous pouvez le faire à la main. L'important ici — même si je développerai cela plus tard — est que vous preniez note de la position que vous avez décidé d'ouvrir, du nombre de contrats, du prix d'exercice (strike), de la date d'expiration, de l'heure d'entrée et de sortie, du pourcentage de gain ou de perte et d'une case pour inscrire le résultat de votre journée de trading. S'habituer à tout enregistrer renforcera vos faiblesses et augmentera vos profits."
 ]
 }
 };
@@ -184,128 +275,61 @@ function changeLanguage(lang) {
 // Update active class on buttons
 const buttons = document.querySelectorAll('.lang-btn');
 buttons.forEach(btn => btn.classList.remove('active'));
-event.target.classList.add('active');
-        // Load translations into the elements
-        document.getElementById('main-title').innerText = translations[lang].title;
-        document.getElementById('author-tag').innerText = translations[lang].author;
-        document.getElementById('index-title').innerText = translations[lang].indexTitle;
-        document.getElementById('index-subtitle').innerText = translations[lang].indexSubtitle;
-        document.getElementById('contents-heading').innerText = translations[lang].contentsHeading;
-
-        // Render index list
-        const listContainer = document.getElementById('contents-list');
-        listContainer.innerHTML = '';
-        translations[lang].contents.forEach(item => {
-            const li = document.createElement('li');
-            li.innerText = item;
-            listContainer.appendChild(li);
-        });
-
-        // Render Preface heading and paragraphs
-        document.getElementById('preface-heading').innerText = translations[lang].prefaceHeading;
-        const prefaceContainer = document.getElementById('preface-body');
-        prefaceContainer.innerHTML = '';
-        translations[lang].prefaceParagraphs.forEach(pText => {
-            const p = document.createElement('p');
-            p.innerText = pText;
-            prefaceContainer.appendChild(p);
-        });
-
-        // Renderizar Bolsa de Valores (NUEVO BLOQUE)
-        document.getElementById('market-heading').innerText = translations[lang].marketHeading;
-        const marketContainer = document.getElementById('market-body');
-        marketContainer.innerHTML = '';
-        translations[lang].marketParagraphs.forEach(text => {
-            const p = document.createElement('p');
-            p.innerHTML = text;
-            marketContainer.appendChild(p);
-        });
-
-        // Renderizar S&P 500 (NUEVO BLOQUE)
-        document.getElementById('spy-heading').innerText = translations[lang].spyHeading;
-        const spyContainer = document.getElementById('spy-body');
-        spyContainer.innerHTML = '';
-        translations[lang].spyParagraphs.forEach(text => {
-            const p = document.createElement('p');
-            p.innerHTML = text;
-            spyContainer.appendChild(p);
-        });
-
-        // Renderizar Oficina en Casa (NUEVO BLOQUE)
-        document.getElementById('home-heading').innerText = translations[lang].homeHeading;
-        const homeContainer = document.getElementById('home-body');
-        homeContainer.innerHTML = '';
-        translations[lang].homeParagraphs.forEach(text => {
-            const p = document.createElement('p');
-            p.innerHTML = text;
-            homeContainer.appendChild(p);
-        });
-    } 
-            indexTitle: "➢ Index du Manuel",
-            indexSubtitle: "(Si vous souhaitez repartir de zéro, consultez cet index thématique)",
-            contentsHeading: "Table des Matières",
-            contents: [
-                "Préface",
-                "La Bourse, heures et jours d'ouverture",
-                "L'indice que nous négocions : S&P 500",
-                "Avant de négocier… prenez une douche",
-                "Quand faisons-nous un 'Call' ou un 'Put' ?",
-                "Ce que l'histoire nous enseigne…"
-            ],
-            prefaceHeading: "Préface",
-            prefaceParagraphs: [
-                "Plutôt qu'un livre, il s'agit d'un guide de base pour que tout citoyen ordinaire puisse apprendre à négocier sur l'un des marchés les plus liquides au monde. J'utilise le mot anglais trading plutôt que commerce car il a été accepté dans le monde entier, de la même manière que stock plutôt qu'action et de même pour d'autres termes.",
-                "Quand j'ai commencé le trading il y a quelques années, je l'ai fait plus avec mon cœur qu'avec ma raison, avec mes émotions à mille, ce qui m'a conduit à de nombreuses pertes. Cependant, au fil du temps, j'ai appris des leçons vitales pour améliorer mes stratégies de trading et c'est à ce moment-là que j'ai commencé à voir des profits. Cela m'a également augmenté que tout comme il est possible de vivre du trading, toute personne qui suit les bonnes étapes peut également y parvenir. Dernièrement, j'ai eu tendance à penser davantage à investir plutôt qu'à trader, mais chacun a sa propre inclination.",
-                "Vous gagnerez ou perdrez en fonction de ce que vous déposez sur votre compte, et vous devriez suivre la règle des meilleurs traders du monde, qui disent que la règle numéro un est de ne pas perdre d'argent ; mais cela sera possible dans la mesure où vous obéirez à certains principes du trading et accepterez que le marché est un monde d'opportunités.",
-                "Internet regorge de livres numériques, c'est pourquoi mon travail consiste à synthétiser des stratégies pratiques afin que vous puissiez démarrer le plus rapidement possible. Avec moi, vous apprendrez à faire du 'paper trading', et c'est là que s'arrêtent mes interventions. Une fois que vous vous sentirez capable de nager, vous pourrez prendre la décision d'investir de l'argent réel avec votre propre personnalité de trader, car vous êtes unique au monde. Que Dieu vous bénisse."
-            ]
-        }
-    }; 
-    function changeLanguage(lang) {
-        // Update active class on buttons
-        const buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        
-        // Find the button that was clicked or matches the language and set it active
-        if (event && event.target && event.target.classList.contains('lang-btn')) {
-            event.target.classList.add('active');
-        } else {
-            buttons.forEach(btn => {
-                if (btn.getAttribute('onclick').includes(lang)) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
-        // Load translations into the elements
-        document.getElementById('main-title').innerText = translations[lang].title;
-        document.getElementById('author-tag').innerText = translations[lang].author;
-        document.getElementById('index-title').innerText = translations[lang].indexTitle;
-        document.getElementById('index-subtitle').innerText = translations[lang].indexSubtitle;
-        document.getElementById('contents-heading').innerText = translations[lang].contentsHeading;
-
-        // Render index list
-        const listContainer = document.getElementById('contents-list');
-        listContainer.innerHTML = '';
-        translations[lang].contents.forEach(item => {
-            const li = document.createElement('li');
-            li.innerText = item;
-            listContainer.appendChild(li);
-        });
-
-        // Render Preface heading and paragraphs
-        document.getElementById('preface-heading').innerText = translations[lang].prefaceHeading;
-        const prefaceContainer = document.getElementById('preface-body');
-        prefaceContainer.innerHTML = '';
-        translations[lang].prefaceParagraphs.forEach(pText => {
-            const p = document.createElement('p');
-            p.innerText = pText;
-            prefaceContainer.appendChild(p);
-        });
-    }
-
-    // Initialize with English as default language
-    document.addEventListener("DOMContentLoaded", () => {
-        changeLanguage('en');
-    });
+const activeBtn = document.getElementById('btn-' + lang);
+if (activeBtn) activeBtn.classList.add('active');
+// Load translations into elements
+document.getElementById('main-title').innerText = translations[lang].title;
+document.getElementById('author-tag').innerText = translations[lang].author;
+document.getElementById('index-title').innerText = translations[lang].indexTitle;
+document.getElementById('index-subtitle').innerText = translations[lang].indexSubtitle;
+document.getElementById('contents-heading').innerText = translations[lang].contentsHeading;
+// Render index list
+const listContainer = document.getElementById('contents-list');
+listContainer.innerHTML = '';
+translations[lang].contents.forEach(item => {
+const li = document.createElement('li');
+li.innerText = item;
+listContainer.appendChild(li);
+});
+// Render Preface
+document.getElementById('preface-heading').innerText = translations[lang].prefaceHeading;
+const prefaceContainer = document.getElementById('preface-body');
+prefaceContainer.innerHTML = '';
+translations[lang].prefaceParagraphs.forEach(pText => {
+const p = document.createElement('p');
+p.innerText = pText;
+prefaceContainer.appendChild(p);
+});
+// Render Market Section
+document.getElementById('market-heading').innerText = translations[lang].marketHeading;
+const marketContainer = document.getElementById('market-body');
+marketContainer.innerHTML = '';
+translations[lang].marketParagraphs.forEach(text => {
+const p = document.createElement('p');
+p.innerHTML = text;
+marketContainer.appendChild(p);
+});
+// Render SPY Section
+document.getElementById('spy-heading').innerText = translations[lang].spyHeading;
+const spyContainer = document.getElementById('spy-body');
+spyContainer.innerHTML = '';
+translations[lang].spyParagraphs.forEach(text => {
+const p = document.createElement('p');
+p.innerHTML = text;
+spyContainer.appendChild(p);
+});
+// Render Home Section
+document.getElementById('home-heading').innerText = translations[lang].homeHeading;
+const homeContainer = document.getElementById('home-body');
+homeContainer.innerHTML = '';
+translations[lang].homeParagraphs.forEach(text => {
+const p = document.createElement('p');
+p.innerHTML = text;
+homeContainer.appendChild(p);
+});
+}
+// Initialize English by default safely once DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+changeLanguage('en');
+});
 </script>
