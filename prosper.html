@@ -241,3 +241,71 @@ event.target.classList.add('active');
             homeContainer.appendChild(p);
         });
     } 
+            indexTitle: "➢ Index du Manuel",
+            indexSubtitle: "(Si vous souhaitez repartir de zéro, consultez cet index thématique)",
+            contentsHeading: "Table des Matières",
+            contents: [
+                "Préface",
+                "La Bourse, heures et jours d'ouverture",
+                "L'indice que nous négocions : S&P 500",
+                "Avant de négocier… prenez une douche",
+                "Quand faisons-nous un 'Call' ou un 'Put' ?",
+                "Ce que l'histoire nous enseigne…"
+            ],
+            prefaceHeading: "Préface",
+            prefaceParagraphs: [
+                "Plutôt qu'un livre, il s'agit d'un guide de base pour que tout citoyen ordinaire puisse apprendre à négocier sur l'un des marchés les plus liquides au monde. J'utilise le mot anglais trading plutôt que commerce car il a été accepté dans le monde entier, de la même manière que stock plutôt qu'action et de même pour d'autres termes.",
+                "Quand j'ai commencé le trading il y a quelques années, je l'ai fait plus avec mon cœur qu'avec ma raison, avec mes émotions à mille, ce qui m'a conduit à de nombreuses pertes. Cependant, au fil du temps, j'ai appris des leçons vitales pour améliorer mes stratégies de trading et c'est à ce moment-là que j'ai commencé à voir des profits. Cela m'a également augmenté que tout comme il est possible de vivre du trading, toute personne qui suit les bonnes étapes peut également y parvenir. Dernièrement, j'ai eu tendance à penser davantage à investir plutôt qu'à trader, mais chacun a sa propre inclination.",
+                "Vous gagnerez ou perdrez en fonction de ce que vous déposez sur votre compte, et vous devriez suivre la règle des meilleurs traders du monde, qui disent que la règle numéro un est de ne pas perdre d'argent ; mais cela sera possible dans la mesure où vous obéirez à certains principes du trading et accepterez que le marché est un monde d'opportunités.",
+                "Internet regorge de livres numériques, c'est pourquoi mon travail consiste à synthétiser des stratégies pratiques afin que vous puissiez démarrer le plus rapidement possible. Avec moi, vous apprendrez à faire du 'paper trading', et c'est là que s'arrêtent mes interventions. Une fois que vous vous sentirez capable de nager, vous pourrez prendre la décision d'investir de l'argent réel avec votre propre personnalité de trader, car vous êtes unique au monde. Que Dieu vous bénisse."
+            ]
+        }
+    }; 
+    function changeLanguage(lang) {
+        // Update active class on buttons
+        const buttons = document.querySelectorAll('.lang-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        // Find the button that was clicked or matches the language and set it active
+        if (event && event.target && event.target.classList.contains('lang-btn')) {
+            event.target.classList.add('active');
+        } else {
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(lang)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Load translations into the elements
+        document.getElementById('main-title').innerText = translations[lang].title;
+        document.getElementById('author-tag').innerText = translations[lang].author;
+        document.getElementById('index-title').innerText = translations[lang].indexTitle;
+        document.getElementById('index-subtitle').innerText = translations[lang].indexSubtitle;
+        document.getElementById('contents-heading').innerText = translations[lang].contentsHeading;
+
+        // Render index list
+        const listContainer = document.getElementById('contents-list');
+        listContainer.innerHTML = '';
+        translations[lang].contents.forEach(item => {
+            const li = document.createElement('li');
+            li.innerText = item;
+            listContainer.appendChild(li);
+        });
+
+        // Render Preface heading and paragraphs
+        document.getElementById('preface-heading').innerText = translations[lang].prefaceHeading;
+        const prefaceContainer = document.getElementById('preface-body');
+        prefaceContainer.innerHTML = '';
+        translations[lang].prefaceParagraphs.forEach(pText => {
+            const p = document.createElement('p');
+            p.innerText = pText;
+            prefaceContainer.appendChild(p);
+        });
+    }
+
+    // Initialize with English as default language
+    document.addEventListener("DOMContentLoaded", () => {
+        changeLanguage('en');
+    });
+</script>
