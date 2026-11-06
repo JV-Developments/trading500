@@ -88,6 +88,12 @@
             border-radius: 4px;
             font-size: 0.95rem;
         }
+        .ticker {
+            color: #34d399;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline dotted;
+        }
     </style>
 </head>
 <body>
@@ -121,13 +127,23 @@
 
     <!-- CAPÍTULO: S&P 500 -->
     <h2 id="spy-heading"></h2>
-    <div id="spy-img" class="placeholder-image">IMAGE: S&P 500 Evolution Chart</div>
+    <div id="spy-img" class="placeholder-image">IMAGE: S&P 500 Sector Allocation Grid</div>
     <div id="spy-body"></div>
 
     <!-- CAPÍTULO: OFICINA EN CASA -->
     <h2 id="home-heading"></h2>
-    <div id="home-img" class="placeholder-image">IMAGE: Laptop & Trader Multi-screen Desk</div>
+    <div id="home-img" class="placeholder-image">IMAGE: Laptop & Home Trader Workspace Setup</div>
     <div id="home-body"></div>
+
+    <!-- CAPÍTULO: SUBE O BAJA -->
+    <h2 id="direction-heading"></h2>
+    <div id="direction-img" class="placeholder-image">IMAGE: CALL and PUT Derivative Options Map</div>
+    <div id="direction-body"></div>
+
+    <!-- CAPÍTULO: LA HISTORIA SE REPETE -->
+    <h2 id="history-heading"></h2>
+    <div id="history-img" class="placeholder-image">IMAGE: W.D. Gann Mathematical Cycle Concept</div>
+    <div id="history-body"></div>
 </div>
 
 <script>
@@ -155,7 +171,7 @@
             ],
             marketHeading: "The Stock Exchange",
             marketParagraphs: [
-                "At the stock exchange (or Stock Market) (physical or virtual) its clients (buyers and sellers of shares) come together to buy, sell, or trade those securities. The exchange can be public or private. For practical purposes, we focus on saying that the SPY index, which concerns us, is traded on both the New York Stock Exchange and the Nasdaq.",
+                "At the stock exchange (or Stock Market) (physical or virtual) its clients (buyers and sellers of shares) come together to buy, sell, or trade those securities. The exchange can be public or private. For practical purposes, we focus on saying that the <span class='ticker'>SPY</span> index, which concerns us, is traded on both the New York Stock Exchange and the Nasdaq.",
                 "In the Inn of the Belgian textile worker, Robert Van der Burse, back in the 14th century, merchants gathered to negotiate different securities. In the Stock Exchange, both variable income (stocks) and fixed income (debt) are traded. Although the oldest exchanges date back to Greece and Rome, we have dates and places that tell us a lot about the evolution of this type of activity, such as the commodity exchange in Antwerp (1460), London (1570), Lyon, France (1595), the Madrid stock exchange in 1831, and the New York stock exchange in 1792.",
                 "In synthesis, the objective of the stock exchange is basically...",
                 "• to procure financing for those companies that require capital to expand their borders and",
@@ -169,13 +185,28 @@
                 "The breakdown of the S&P 500 sector is as follows:",
                 "• Information Technology 27.48% | • Health Care 14.58% | • Consumer Discretionary 11.18% | • Communication Services 10.90% | • Financials 9.89% | • Industrials 7.90% | • Consumer Staples 7.05% | • Utilities 3.13% | • Real Estate 2.80% | • Materials 2.56% | • Energy 2.53%",
                 "As you can see, the technology segment occupies 27%, which is why when this sector trades down or, on the contrary, goes up, it significantly affects the S&P 500 index.",
-                "Someone can undoubtedly trade stocks separately, such as Apple, Microsoft, etc. To do this, they should trade with 3, 4, or 5 companies at the same time, so that they can diversify, in such a way that they have a higher probability in some in case the others do not turn out well. However, the purpose of this manual, as I said at the beginning, is to focus primarily on the S&P 500 index and then on the companies separately."
-            ],
-            homeHeading: "Office-fy Your Home",
-            homeParagraphs: [
-                "Just because you are working from home and in slippers does not mean you shouldn't take a shower. It is a gross mistake to trade without having all your senses on alert, in addition to being well-nourished. That is why it is important to give your home a certain office air, with the essentials to function.",
+"Someone can undoubtedly trade stocks separately, such as Apple, Microsoft, etc. To do this, they should trade with 3, 4, or 5 companies at the same time, so that they can diversify, in such a way that they have a higher probability in some in case the others do not turn out well. However, the purpose of this manual, as I said at the beginning, is to focus primarily on the S&P 500 index and then on the companies separately."
+],
+homeHeading: "Office-fy Your Home",
+homeParagraphs: [
+"Just because you are working from home and in slippers does not mean you shouldn't take a shower. It is a gross mistake to trade without having all your senses on alert, in addition to being well-nourished. That is why it is important to give your home a certain office air, with the essentials to function.",
 "After the proper cleaning of your body, a calm state, and good breathing, have the basic tools at hand: a notebook, pencil and pen, calculator, your computer and cell phone, and above all, a reliable internet connection. Realize that if this fails and you have open positions, you will not be able to close them, whether for profit or loss. Have you noticed that professional traders have multiple screens? The more information you handle, the better, because many decisions sometimes have to be made in seconds. However, thanks to the information provided in this guide, you will not require 10 screens to trade because the only information you are going to need is provided in a dynamic Google Sheet or Excel table that I provide for you.",
 "If you have basic knowledge of Excel, you can make different tables to record your trading activity. If you do not have that skill, you can do it by hand. The important thing here—although I will expand on this later—is that you take note of the position you have decided to open, the number of contracts, strike price, expiration date, entry and exit time, the percentage you won or lost, and a box to enter the result of your trading day. Getting used to registering everything you do will strengthen your weaknesses and increase your profits."
+],
+directionHeading: "Up or Down?",
+directionParagraphs: [
+"That is the transaction and decision we must make when we trade:",
+"• a 'Call' if we believe that the price of the SPY index or stock is going to go up, or",
+"• a 'Put' if, on the contrary, we perceive that it is going to go down.",
+"Although there are other strategies in the field of trading and investments, we will only consider two directions: ascent (call) and descent (put). But I want to make something very clear: trading is not luck, and this does not consist of guessing.",
+"In reality, for you to estimate that the SPY or a certain stock is going in a certain direction, it is because you have done a study on the different variables that affect it. A call option is a financial derivative that gives the buyer the right (but not the obligation) to buy an asset in a future time at a certain price from the hands of the seller. In options, the buyer does not necessarily keep the stocks; they simply trade them, that is, the assets pass from hand to hand."
+],
+historyHeading: "History Repeats Itself",
+historyParagraphs: [
+"The famous and millionaire trader W. D. Gann (June 6, 1878 – June 18, 1955) once wrote the following:",
+"'My calculations are based on cyclic theory and mathematical sequences. History repeats itself. That is what I have always asserted, that to know and predict the future of anything you only have to look at what has happened in the past and have a correct basis or starting point. My authority for assuring that the future is nothing but the repetition of the past is found in the Bible.'",
+"Evidently, Gann was not only a fabulous trader, but his books are still read today as a source of consultation for investors.",
+"It is therefore of utmost importance that the trader must accept that what happened will inevitably happen again, and thus be prepared to take advantage of opportunities. History must be an incentive for each of us when we have difficult days, in the sense that we can have comebacks, or also when we have smiles on our lips having repeated a scene from earlier times in the present moment."
 ]
 },
 es: {
@@ -219,9 +250,24 @@ spyParagraphs: [
 ],
 homeHeading: "Ofici-na tu Casa",
 homeParagraphs: [
-"Por el simple hecho de que estás trabajando desde tu casa y en pantuflas, no significa que no debas darte un baño. Es un craso error hacer trading sin tener todos los sentidos en alerta, además de estar bien alimentado. Por eso es importante que a tu casa le des un cierto aire de oficina, con lo esencial para funcionar.",
+"Por el simple hecho de que estás trabajando desde tu casa y en pantuflas, no significa que no debas darte un baño. Es un craso error hacer trading sin tener todos los sentidos en alerta, además de estar bien alimentado. Por eso es importante que a tu casa le des un cierto aire de oficina, con lo esencias para funcionar.",
 "Después del debido aseo de tu cuerpo, de un estado calmado y buena respiración, ten a mano los útiles básicos: una libreta de apuntes, lápiz y lapicero, calculadora, tu computador y celular y ante todo una confiable conexión a internet. Date cuenta que si esta falla y tienes posiciones abiertas, no podrás cerrarlas ya sea para provecho o pérdida. ¿Has notado que los traders profesionales tienen varias pantallas? Mientras más información manejes mejor, pues muchas de las decisiones a veces las debes hacer en segundos. Sin embargo y gracias a la información prevista en esta guía, no requerirá 10 pantallas para hacer trading pues la única información que vas a necesitar es provista en una dinámica tabla de google sheet o excel que te proveo.",
 "Si tienes conocimientos básicos de Excel, puedes hacer diferentes tablas para que registres tu actividad de trading. Si no tienes esa habilidad, puedes hacerla a mano. Lo importante aquí, -aunque expandiré esto más adelante- es que tomes nota de la posición que has decidido abrir, el número de contratos, strike price, fecha de expiración, hora de entrada y salida, porcentaje que has ganado o perdido y una casilla para que se ingrese el resultado de tu día de trading. El acostumbrarse a registrar todo lo que haces, fortalecerá tus debilidades e incrementará tus ganancias."
+],
+directionHeading: "Sube o baja?",
+directionParagraphs: [
+"Esa es la transacción y decisión que debemos tomar cuando transamos:",
+"• un “Call” si creemos que el precio del índice SPY o stock va a subir, o",
+"• un “Put” si por el contrario, percibimos que va a bajar.",
+"Aunque existen otras estrategias en el campo del trading e inversiones, solo consideraremos dos direcciones: ascenso (call) y descenso (put). Pero quiero dejar algo bien claro: el trading no es suerte, y esto no consiste en adivinar.",
+"En realidad, para que tú estimes que el SPY o una determinada acción (stock) va en cierta dirección, es porque has hecho un estudio sobre las diferentes variables que lo afectan. La opción de compra es un derivado financiero que da al comprador, el derecho (mas no la obligación) de comprar un activo en un tiempo futuro a un determinado precio de manos del vendedor. En las opciones no necesariamente el comprador de ella se queda con los stocks, simplemente los transa, es decir, los activos pasan de mano en mano."
+],
+historyHeading: "La historia se repite",
+historyParagraphs: [
+"El famoso y millonario trader W. D Gann (Junio 6, 1878 – Junio 18, 1955) una vez escribió lo siguiente:",
+"“Mis cálculos están basados en la teoría cíclica y en secuencias matemáticas. La historia se repite. Eso es lo que siempre he afirmado, que para saber y predecir el futuro de algo solo tienes que mirar lo que ha sucedido en el pasado y tener una base correcta o punto de partida. Mi autoridad para asegurar que el futuro no es otra cosa que la repetición del pasado se encuentra en la Biblia”.",
+"Evidentemente, Gann no solo fue un fabuloso trader sino que aun sus libros son leídos hoy día como fuente de consulta para inversionistas.",
+"Es por ello de suma importancia que el trader debe aceptar que lo que pasó, indefectiblemente volverá a acontecer y así estar preparado para aprovechar las oportunidades. La historia debe ser un aliciente para cada uno de nosotros cuando tengamos días difíciles, en el sentido de que podremos tener remontadas o también cuando tengamos sonrisas en nuestros labios al haber repetido en tiempo presente una escena de tiempos anteriores."
 ]
 },
 fr: {
@@ -242,7 +288,7 @@ prefaceHeading: "Préface",
 prefaceParagraphs: [
 "Plutôt qu'un livre, il s'agit d'un guide de base pour que tout citoyen ordinaire puisse apprendre à négocier sur l'un des marchés les plus liquides au monde. J'utilise le mot anglais trading plutôt que commerce car il a été accepté dans le monde entier, de la même manière que stock plutôt qu'action et de même pour d'autres termes.",
 "Quand j'ai commencé le trading il y a quelques années, je l'ai fait plus avec mon cœur qu'avec ma raison, avec mes émotions à mille, ce qui m'a conduit à de nombreuses pertes. Cependant, au fil du temps, j'ai appris des leçons vitales pour améliorer mes stratégies de trading et c'est à ce moment-là que j'ai commencé à voir des profits. Cela m'a également montré que tout comme il est possible de vivre du trading, toute personne qui suit les bonnes étapes peut également y parvenir. Dernièrement, j'ai eu tendance à penser davantage à investir plutôt qu'à trader, mais chacun a sa propre inclination.",
-"Vous gagnerez ou perdrez en fonction de ce que vous déposez sur votre compte, et vous devriez suivre la règle des meilleurs traders du monde, qui disent que la règle numéro un est de ne pas perdre d'argent ; mais cela sera possible dans la mesure où vous obéirez à certains principes du trading et acceptez que le marché est un monde d'opportunités.",
+"Vous gagnerez ou perdrez en fonction de ce que vous déposez sur votre compte, et vous devriez suivre la règle des meilleurs traders du monde, qui d'argent ; mais cela sera possible dans la mesure où vous obéirez à certains principes du trading et acceptez que le marché est un monde d'opportunités.",
 "Internet regorge de livres numériques, c'est pourquoi mon travail consiste à synthétiser des stratégies pratiques afin que vous puissiez démarrer le plus rapidement possible. Avec moi, vous apprendrez à faire du 'paper trading', et c'est là que s'arrêtent mes interventions. Une fois que vous vous sentirez capable de nager, vous pourrez prendre la décision d'investir de l'argent réel avec votre propre personnalité de trader, car vous êtes unique au monde. Que Dieu vous bénisse."
 ],
 marketHeading: "La Bourse",
@@ -250,7 +296,7 @@ marketParagraphs: [
 "À la bourse de valeurs (ou Marché des Actions) (physique ou virtuelle), ses clients (les acheteurs et les vendeurs d'actions) se rassemblent pour acheter, vendre ou négocier ces valeurs. La bourse peut être publique ou privée. À des fins pratiques, nous nous concentrons sur l'indice SPY qui nous concerne et qui se négocie à la fois à la bourse de New York et au Nasdaq.",
 "Dans l'auberge du travailleur du textile belge, Robert Van der Burse, vers le XIVe siècle, des marchands se réunissaient pour négocier différentes valeurs. En Bourse, on négocie aussi bien des actions (revenus variables) que des obligations (revenus fixes). Bien que les bourses les plus anciennes remontent à la Grèce et à la Rome antiques, nous avons des dates et des lieux qui nous en disent long sur l'évolution de ce type d'activité, comme la bourse des matières premières à Anvers (1460), Londres (1570), Lyon, France (1595), la bourse de Madrid en 1831 et celle de New York en 1792.",
 "En résumé, l'objectif de la bourse est fondamentalement...",
-"• obtenir un financement pour les entreprises qui ont besoin de capitaux pour élargir elles frontières et",
+"• obtenir un financement pour les entreprises qui ont besoin de capitaux pour élargir leurs frontières et",
 "• permettre en même temps aux investisseurs de déposer leur capital en vue d'un rendement ou d'un gain substantiel.",
 "Les horaires de la bourse de NY et du Nasdaq sont du lundi au vendredi de 09h30 à 16h15. Il existe des horaires élargis appelés 'after hours' (jusqu'à 20h), c'est-à-dire après la fermeture de la bourse, et 'premarket' (avant la cloche d'ouverture), qui s'étend de 4h à 09h30 EST.",
 "Le marché est fermé pendant les jours fériés."
@@ -265,19 +311,33 @@ spyParagraphs: [
 ],
 homeHeading: "Faites de Votre Maison Votre Bureau",
 homeParagraphs: [
-"Ce n'est pas parce que vous travaillez à la maison en pantouflas que vous ne devez pas prendre de douche. C'est une grave erreur de faire du trading sans avoir tous ses sens en alerte, en plus d'être bien nourri. C'est pourquoi il est important de donner à votre maison un certain air de bureau, avec l'essentiel pour fonctionner.",
-"Après un bon nettoyage de votre corps, un état d'esprit calme et une bonne respiration, gardez à portée de main les outils de base : un carnet de notes, un crayon et un stylo, une calculatrice, votre ordinateur et votre téléphone portable et, surtout, une connexion internet fiable. Sachez que si celle-ci échoue et que vous avez des positions ouvertes, vous ne pourrez pas les fermer, que ce soit pour en tirer profit ou pour accuser une perte. Avez-vous remarqué que les traders professionnels ont plusieurs écrans ? Plus vous gérez d'informations, mieux c'est, car de nombreuses décisions doivent parfois être prises en quelques secondes. Cependant, grâce aux informations fournies dans ce guide, vous n'aurez pas besoin de 10 écrans pour trader car la seule information dont vous aurez besoin est fournie dans un tableau dynamique Google Sheet ou Excel que je vous procure.",
+"Ce n'est pas parce que vous travaillez à la maison en pantoufles que vous ne devez pas prendre de douche. C'est une grave erreur de faire du trading sans avoir tous ses sens en alerte, en plus d'être bien nourri. C'est pourquoi il es important de donner à votre maison un certain air de bureau, avec l'essentiel pour fonctionner.",
+"Après un bon nettoyage de votre corps, un état d'esprit calme et une bonne respiration, gardez à portée de main les outils de base : un carnet de notes, un crayon et un stylo, une calculatrice, votre ordinateur et votre téléphone portable et, surtout, une connexion internet fiable. Sachez que si celle-ci échoue et que vous avez des positions ouvertes, vous ne pourrez pas les fermer, que ce soit pour en tirer profit ou pour accuser une perte. Avez-vous remarqué que les traders professionnels ont plusieurs écrans ? Plus vous gérez d'informations, mieux c'est, car de nombreuses décisions doivent parfois être prises en quelques secondes. Cependant, grâce aux informations fournies dans ce guide, vous n'aurez pas besoin de 10 écrans para trader car la seule information dont vous aurez besoin est fournie dans un tableau dynamique Google Sheet ou Excel que je vous procure.",
 "Si vous avez des connaissances de base en Excel, vous pouvez créer différents tableaux pour enregistrer votre activité de trading. Si vous n'avez pas cette compétence, vous pouvez le faire à la main. L'important ici — même si je développerai cela plus tard — est que vous preniez note de la position que vous avez décidé d'ouvrir, du nombre de contrats, du prix d'exercice (strike), de la date d'expiration, de l'heure d'entrée et de sortie, du pourcentage de gain ou de perte et d'une case pour inscrire le résultat de votre journée de trading. S'habituer à tout enregistrer renforcera vos faiblesses et augmentera vos profits."
+],
+directionHeading: "Hausse ou Baisse?",
+directionParagraphs: [
+"C'est la transaction et la décision que nous devons prendre lorsque nous négocions :",
+"• un 'Call' si nous pensons que le prix de l'indice SPY ou de l'action va augmenter, ou",
+"• un 'Put' si, au contraire, nous percevons qu'il va baisser.",
+"Bien qu'il existe d'autres stratégies dans le domaine du trading et des investissements, nous ne considérerons que deux directions : la hausse (call) et la baisse (put). Mais je veux clarifier quelque chose : le trading n'est pas une question de chance, et cela ne consiste pas à deviner.",
+"En réalité, pour estimer que le SPY ou une certaine action va dans une direction précise, c'est parce que vous avez étudié les différentes variables qui l'affectent. Une option d'achat est un dérivé financier qui donne à l'acheteur le droit (mais pas l'obligation) d'acheter un actif dans un avenir déterminé à un certain prix auprès du vendeur. Dans les options, l'acheteur ne conserve pas nécessairement les actions ; il les négocie simplement, c'est-à-dire que les actifs passent de main en main."
+],
+historyHeading: "L'histoire se répète",
+historyParagraphs: [
+"Le célèbre et millionnaire trader W. D. Gann (6 juin 1878 - 18 juin 1955) a écrit un jour ceci :",
+"'Mes calculs sont basés sur la théorie cyclique et les séquences mathématiques. L'histoire se répète. C'est ce que j'ai toujours affirmé : pour connaître et prédire l'avenir de quelque chose, il suffit de regarder ce qui s'est passé dans le passé et d'avoir une base ou un point de départ correct. Mon autorité pour assurer que l'avenir n'est que la répétition du passé se trouve dans la Bible.'",
+"Évidemment, Gann n'était pas seulement un trader fabuleux, ses livres sont encore lus aujourd'hui comme source de consultation pour les investisseurs.",
+"Il est donc de la plus haute importance que le trader accepte que ce qui s'est passé se reproduira inévitablement, et qu'il soit ainsi prêt à saisir les opportunités. L'histoire doit être un encouragement pour chacun de nous lorsque nous traversons des journées difficiles, dans le sens où nous pouvons connaître des remontées, ou aussi lorsque nous avons le sourire aux lèvres pour avoir répété dans le présent une scène du passé."
 ]
 }
 };
 function changeLanguage(lang) {
-// Update active class on buttons
 const buttons = document.querySelectorAll('.lang-btn');
 buttons.forEach(btn => btn.classList.remove('active'));
 const activeBtn = document.getElementById('btn-' + lang);
 if (activeBtn) activeBtn.classList.add('active');
-// Load translations into elements
+// Load baseline translations
 document.getElementById('main-title').innerText = translations[lang].title;
 document.getElementById('author-tag').innerText = translations[lang].author;
 document.getElementById('index-title').innerText = translations[lang].indexTitle;
@@ -327,8 +387,25 @@ const p = document.createElement('p');
 p.innerHTML = text;
 homeContainer.appendChild(p);
 });
+// Render Direction Section
+document.getElementById('direction-heading').innerText = translations[lang].directionHeading;
+const directionContainer = document.getElementById('direction-body');
+directionContainer.innerHTML = '';
+translations[lang].directionParagraphs.forEach(text => {
+const p = document.createElement('p');
+p.innerHTML = text;
+directionContainer.appendChild(p);
+});
+// Render History Section
+document.getElementById('history-heading').innerText = translations[lang].historyHeading;
+const historyContainer = document.getElementById('history-body');
+historyContainer.innerHTML = '';
+translations[lang].historyParagraphs.forEach(text => {
+const p = document.createElement('p');
+p.innerHTML = text;
+historyContainer.appendChild(p);
+});
 }
-// Initialize English by default safely once DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
 changeLanguage('en');
 });
