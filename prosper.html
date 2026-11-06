@@ -88,13 +88,6 @@
             border-radius: 4px;
             font-size: 0.95rem;
         }
-        .footnote {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            border-top: 1px solid #334155;
-            padding-top: 5px;
-            margin-top: 5px;
-        }
         /* INTERACTIVE TICKER SYSTEM */
         .ticker {
             color: #34d399;
@@ -154,7 +147,6 @@
 </head>
 <body>
 
-<!-- Language Selector Navigation -->
 <div class="lang-navbar">
     <button id="btn-en" class="lang-btn active" onclick="changeLanguage('en')">English</button>
     <button id="btn-es" class="lang-btn" onclick="changeLanguage('es')">Español</button>
@@ -162,7 +154,6 @@
 </div>
 
 <div class="guide-container">
-    <!-- COVERS AND TEXT HEADERS -->
     <h1 id="main-title"></h1>
     <p><strong id="author-tag"></strong></p>
 
@@ -172,51 +163,41 @@
     <h2 id="contents-heading"></h2>
     <ul id="contents-list"></ul>
 
-    <!-- CAPÍTULO: PREFACIO -->
     <h2 id="preface-heading"></h2>
     <div id="preface-body"></div>
 
-    <!-- CAPÍTULO: LA BOLSA DE VALORES -->
     <h2 id="market-heading"></h2>
     <div id="market-img" class="placeholder-image">IMAGE: NYSE / Stock Market Reference</div>
     <div id="market-body"></div>
 
-    <!-- CAPÍTULO: S&P 500 -->
     <h2 id="spy-heading"></h2>
     <div id="spy-img" class="placeholder-image">IMAGE: S&P 500 Sector Allocation Grid</div>
     <div id="spy-body"></div>
 
-    <!-- CAPÍTULO: OFICINA EN CASA -->
     <h2 id="home-heading"></h2>
     <div id="home-img" class="placeholder-image">IMAGE: Laptop & Home Trader Workspace Setup</div>
     <div id="home-body"></div>
 
-    <!-- CAPÍTULO: SUBE O BAJA -->
     <h2 id="direction-heading"></h2>
     <div id="direction-img" class="placeholder-image">IMAGE: CALL and PUT Derivative Options Map</div>
     <div id="direction-body"></div>
 
-    <!-- CAPÍTULO: LA HISTORIA SE REPETE -->
     <h2 id="history-heading"></h2>
     <div id="history-img" class="placeholder-image">IMAGE: W.D. Gann Mathematical Cycle Concept</div>
     <div id="history-body"></div>
 
-    <!-- CAPÍTULO: QUI SCRIBIT BIS LEGIT -->
     <h2 id="write-heading"></h2>
     <div id="write-img" class="placeholder-image">IMAGE: Writing Trading Journal Logs Graph</div>
     <div id="write-body"></div>
 
-    <!-- CAPÍTULO: BUENA CONEXIÓN -->
     <h2 id="connect-heading"></h2>
     <div id="connect-img" class="placeholder-image">IMAGE: WiFi Signal Router and Mobile Backup Device</div>
     <div id="connect-body"></div>
 
-    <!-- CAPÍTULO: EL CORREDOR DE BOLSA -->
     <h2 id="broker-heading"></h2>
     <div id="broker-img" class="placeholder-image">IMAGE: Professional Multi-screen Broker Office Trading Desk</div>
     <div id="broker-body"></div>
 
-    <!-- INTERACTIVE REGIONAL BROKER APP -->
     <div class="broker-box">
         <h3 id="selector-title">Find Brokers Available in Your Region</h3>
         <select id="country-select" class="broker-select" onchange="updateBrokers()">
@@ -258,11 +239,11 @@
                 "Rather than a book, this is a basic guide so that any ordinary citizen can learn to trade one of the most liquid markets in the world. I use the English word trading instead of commerce because it has been accepted worldwide, in the same way as stock instead of share and the same for other terms.",
                 "When I started trading a few years ago, I did it more with my heart than with my reason, with my emotions at a thousand, which led to many losses. However, over time, I learned vital lessons to improve my trading strategies and that was when I started to see profits. It has also shown me that just as it is possible to live off trading, any person who follows the right steps can do it as well. Lately, I have leaned more toward thinking about investing rather than trading, but everyone has their own inclination.",
                 "You will win or lose according to what you deposit into your account, and you should follow the rule of the best traders in the world, who say that rule number one is not to lose money; but this will be possible to the extent that you obey certain principles of trading and accept that the market is a world of opportunities.",
-"The internet is full of digital books, therefore my job is to synthesize practical strategies so you can get started as soon as possible. With me, you will learn to do 'paper trading', and that is as far as I go. Once you feel capable of swimming, you can make the decision to invest real money with your own trader personality, because you are unique in the world. God bless you."
-],
-marketHeading: "The Stock Exchange",
-marketParagraphs: [
-"At the stock exchange (or Stock Market) (physical or virtual) its clients (buyers and sellers of shares) come together to buy, sell, or trade those securities. The exchange can be public or private. For practical purposes, we focus on saying that the index tracks the market.",
+                "The internet is full of digital books, therefore my job is to synthesize practical strategies so you can get started as soon as possible. With me, you will learn to do 'paper trading', and that is as far as I go. Once you feel capable of swimming, you can make the decision to invest real money with your own trader personality, because you are unique in the world. God bless you."
+            ],
+            marketHeading: "The Stock Exchange",
+            marketParagraphs: [
+                "At the stock exchange (or Stock Market) (physical or virtual) its clients (buyers and sellers of shares) come together to buy, sell, or trade those securities. The exchange can be public or private. For practical purposes, we focus on saying that the <span class='ticker'>SPY</span> index, which concerns us, is traded on both the New York Stock Exchange and the Nasdaq.",
 "In the Inn of the Belgian textile worker, Robert Van der Burse, back in the 14th century, merchants gathered to negotiate different securities. In the Stock Exchange, both variable income (stocks) and fixed income (debt) are traded. Although the oldest exchanges date back to Greece and Rome, we have dates and places that tell us a lot about the evolution of this type of activity, such as the commodity exchange in Antwerp (1460), London (1570), Lyon, France (1595), the Madrid stock exchange in 1831, and the New York stock exchange in 1792.",
 "In synthesis, the objective of the stock exchange is basically...",
 "• to procure financing for those companies that require capital to expand their borders and",
@@ -310,7 +291,7 @@ connectHeading: "Do you have a good connection?",
 connectParagraphs: [
 "Just as it is essential to have very good communication with your loved ones and your neighbor in general, in the same way, it is of vital importance that you have an excellent internet signal to trade from anywhere in the world. What you least want in this discipline is to lose your internet signal when you are in an important transaction. This occupation gives you the opportunity to generate income from any country on the planet, but for this, you are going to require your connection to have no failures, since seconds in the transmission of your orders—whether to carry out your transaction of the day (be it buy, sell, or both)—are worth a lot. The movement of data on the Web is so fast that even a few seconds can cost you money. This increases when there is a lot of volatility¹ and volume² in the market.",
 "The ideal would be for you to connect in two ways: with your laptop (PC) and your cell phone. If the PC should fail, you will have your mobile to continue your trading session. I want to point out that independent of the strategy you are going to use in your session, whether day trading (scalping, for example), swing trading (exiting in 1 or more days), or investing (long term), your connection must offer a certain form of peace of mind. For all of the above, you will learn to leave (set) your stop loss³, or failing that, if you are winning, raise your trailing stop⁴. Leaving the order ready to secure profits in case your stock goes in the desired direction, whether up or down, is advantageous, especially when you have defined a ready exit point.",
-"¹ Rapid variation of prices | ² Titles or contracts traded of a financial asset in a market | ³ Sell order to limit the amount of an eventual loss | ⁴ Order to secure profits in case your action goes in the desired direction, whether up or down."
+"¹ Rapid variation of prices | ② Titles or contracts traded of a financial asset in a market | ③ Sell order to limit the amount of an eventual loss | ④ Order to secure profits in case your action goes in the desired direction, whether up or down."
 ],
 brokerHeading: "The Broker... will execute your orders",
 brokerParagraphs: [
@@ -319,67 +300,74 @@ brokerParagraphs: [
 "In the United States, for example, I recommend Robinhood for beginners: they do not charge fees for options. If you subscribe with them and add the Gold service (for only $5 US a month), your deposits will be instant. Your account can be opened in 3 ways: instant, gold, and cash. Open your account immediately. If Robinhood is not in your country, try Fidelity. Open an account with them."
 ]
 },
-es: {
-title: "Claves para Transar o Invertir en el Índice bursátil S&P 500 y stocks",
-author: "Por J. Victory",
-indexTitle: "➢ Indice del Manual",
-indexSubtitle: "(si deseas empezar desde cero, consulta este índice de temas)",
-contentsHeading: "Contenido",
-contents: [
-"Prefacio",
-"La Bolsa de Valores, horas y días de negocio",
-"El índice que transamos: S&P 500",
-"Antes de transar … date un baño",
-"¿Cuándo hacemos un “Call” o un “Put”?",
-"Lo que nos enseña … la historia",
-"Ante todo, toma apuntes y registra todo lo que haces",
-"Conexión a Internet confiable, un inamovible",
-"Un broker se ligará a tú cuenta bancaria"
-],
-prefaceHeading: "Prefacio",
-prefaceParagraphs: [
-"Antes que un libro, esta es una guía básica para que cualquier ciudadano de a pie pueda aprender a transar uno de los mercados más líquidos del mundo. Uso la palabra inglesa trading en vez de comercio pues ha sido aceptada mundialmente, de la misma forma que stock en vez de acción e igual para otros términos.",
-"Cuando empecé a transar hace algunos años, lo hice más con el corazón que con la razón, con mis emociones a mil, lo que condujo a que sufriera muchas pérdidas. Sin embargo y con el paso del tiempo, fui aprendiendo lecciones vitales para mejorar mis estrategias en el trading y fue allí cuando empecé a ver ganancias. Igualmente he aprendido que así como es posible a vivir del trading, cualquier persona que siga los pasos adecuados puede hacerlo igualmente. En el último tiempo me he inclinado más a pensar en invertir antes que en transar, pero cada uno tiene su propia inclinación.",
-"Tu ganarás o perderás conforme a lo que deposites en tu cuenta y deberías seguir la norma de los mejores traders del mundo, los cuales dicen que la regla número uno es no perder dinero, pero esto será posible en la medida que obedezcas ciertos principios del trading y aceptes que el mercado es un mundo de oportunidades.",
-"El internet está lleno de libros digitales, por tanto mi trabajo es sintetizar estrategias prácticas para que puedas arrancar cuanto antes. Conmigo aprenderás a hacer “paper trading”, y hasta allí llego yo. Una vez que te sientas en capacidad de nadar, puedes tomar la decisión de invertir dinero real con tú propia personalidad de trader, pues tú eres único en el mundo. Dios te bendiga."
-],
-marketHeading: "La Bolsa de Valores",
-marketParagraphs: [
-"En la bolsa de valores (o Mercado de Acciones) (física o virtual) sus clientes (los compradores y vendedores de acciones) se juntan para comprar, vender o transar dichos valores. La bolsa puede ser pública o privada. Para fines prácticos, nos concentramos en decir que el índice se opera globalmente.",
-"En el Mesón del textilero belga, Robert Van der Burse por alla en el siglo 14, se reunían comerciantes a negociar diferentes valores. En la Bolsa se negocian tanto renta variable (acciones) como renta fija (deuda). Aunque las bolsas más antiguas se remontan a Grecia y Roma, tenemos fecha y lugares que nos dicen mucho sobre la evolución de este tipo de actividad, como la bolsa de materias primas en Amberes (1460), Londres (1570), Lyon, Francia (1595), la bolsa de Madrid en 1831 y la de Nueva York en 1792.",
-"En síntesis, el objetivo de la bolsa de valores es básicamente…",
-"• procurar financiamiento a aquellas empresas que requieren de capital para ensanchar sus fronteras y",
-"• permitir al mismo tiempo que inversionistas depositen su capital en procura de un retorno o ganancia sustancial.",
-"El horario de la bolsa de NY y el Nasdaq es de lunes a viernes de 09:30 am hasta las 4:15 pm. Hay horarios extendidos conocidos como “after hours” (hasta las 8 pm) es decir, después del cierre de la bolsa y “premarket”; (antes del toque de campana) y que va de 4 am a 09:30 am EST.",
-"Finalmente hay días feriados cuando la Bolsa está cerrada."
-],
-spyHeading: "El Indice Standard & Poor's 500",
-spyParagraphs: [
-"Más conocido como el S&P 500, este índice sigue el rendimiento de 500 grandes empresas que cotizan en las bolsas de valores de los Estados Unidos. Entre las empresas más sobresalientes podemos mencionar de las 500 a: Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Nvidia, Berkshire Hathaway y JP Morgan Chase. Esta mención es solo para darte una idea del poderío económico de estas corporaciones.",
-"El desglose del sector S&P 500, es así:",
-"• Tecnología de la Información 27.48% | • Cuidado de la Salud 14.58% | • Consumidor Discrecional 11.18% | • Servicios de Comunicación 10.90% | • Finanzas 9.89% | • Acciones Industriales 7.90% | • Productos Básicos de Consumo 7.05% | • Utilidades 3.13% | • Bienes Raíces 2.80% | • Materiales 2.56% | • Energía 2.53%",
-"Como puedes ver, el segmento de la tecnología ocupa un 27%, por lo cual cuando este sector transa a la baja o por el contrario va al alza, afecta significativamente el índice S&P 500.",
-"Alguien puede sin duda, transar stocks (acciones) separadamente, como por ejemplo Apple, Microsoft, etc. Para ello debería hacer trading con 3, 4 o 5 empresas al mismo tiempo, cosa que pueda diversificar, de tal manera que tenga mayor probabilidad en unas por si las otras no salen bien. Sin embargo, el propósito de este manual como dije al principio es enfocarnos en primera instancia en el índice S&P 500 y luego en las empresas por separado."
-],
-homeHeading: "Ofici-na tu Casa",
-homeParagraphs: [
-"Por el simple hecho de que estás trabajando desde tu casa y en pantuflas, no significa que no debas darte un baño. Es un craso error hacer trading sin tener todos los sentidos en alerta, además de estar bien alimentado. Por eso es importante que a tu casa le des un cierto aire de oficina, con lo esencial para funcionar.",
-"Después del debido aseo de tu cuerpo, de un estado calmado y buena respiración, ten a mano los útiles básicos: una libreta de apuntes, lápiz y lapicero, calculadora, tu computador y celular y ante todo una confiable conexión a internet. Date cuenta que si esta falla y tienes posiciones abiertas, no podrás cerrarlas ya sea para provecho o pérdida. ¿Has notado que los traders profesionales tienen varias pantallas? Mientras más información manejes mejor, pues muchas de las decisiones a veces las debes hacer en segundos. Sin embargo y gracias a la información prevista en esta guía, no requerirá 10 pantallas para hacer trading pues la única información que vas a necesitar es provista en una dinámica tabla de google sheet o excel que te proveo.",
-"Si tienes conocimientos básicos de Excel, puedes hacer diferentes tablas para que registres tu actividad de trading. Si no tienes esa habilidad, puedes hacerla a mano. Lo importante aquí, -aunque expandiré esto más adelante- es que tomes nota de la posición que has decidido abrir, el número de contratos, strike price, fecha de expiración, hora de entrada y salida, porcentaje que has ganado o perdido y una casilla para que se ingrese el resultado de tu día de trading. El acostumbrarse a registrar todo lo que haces, fortalecerá tus debilidades e incrementará tus ganancias."
-],
-directionHeading: "Sube o baja?",
-directionParagraphs: [
-"Esa es la transacción y decisión que debemos tomar cuando transamos:",
-"• un “Call” si creemos que el precio del índice o stock va a subir, o",
-"• un “Put” si por el contrario, percibimos que va a bajar.",
-"Aunque existen otras estrategias en el campo del trading e inversiones, solo consideraremos dos direcciones: ascenso (call) y descenso (put). Pero quiero dejar algo bien claro: el trading no es suerte, y esto no consiste en adivinar.",
-"En realidad, para que tú estimes que el índice o una determinada acción (stock) va en cierta dirección, es porque has hecho un estudio sobre las diferentes variables que lo afectan. La opción de compra es un derivado financiero que da al comprador, el derecho (mas no la obligación) de comprar un activo en un tiempo futuro a un determinado precio de manos del vendedor. En las opciones no necesariamente el comprador de ella se queda con los stocks, simplemente los transa, es decir, los activos pasan de mano en mano."
-],
-historyHeading: "La historia se repite",
-historyParagraphs: [
-"El famoso y millonario trader W. D Gann (Junio 6, 1878 – Junio 18, 1955) una vez escribió lo siguiente:",
-"“Mis cálculos están basados en la teoría cíclica y en secuencias matemáticas. La historia se repite. Eso es lo que siempre he afirmado, que para saber y predecir el futuro de algo solo tienes que mirar lo que ha sucedido en el pasado y tener una base correcta o punto de partida. Mi autoridad para asegurar que el futuro no es otra cosa que la repetición del pasado se encuentra en la Biblia”.",
-"Evidentemente, Gann no solo fue un fabuloso trader sino que aun sus libros son leídos hoy día como fuente de consulta para inversionistas.",
+
+---
+
+### 📜 Archivo `prosper.html` - PARTE 2 de 2
+*(Pega esto inmediatamente después de la última línea de arriba)*
+
+```html
+        es: {
+            title: "Claves para Transar o Invertir en el Índice bursátil S&P 500 y stocks",
+            author: "Por J. Victory",
+            indexTitle: "➢ Indice del Manual",
+            indexSubtitle: "(si deseas empezar desde cero, consulta este índice de temas)",
+            contentsHeading: "Contenido",
+            contents: [
+                "Prefacio",
+                "La Bolsa de Valores, horas y días de negocio",
+                "El índice que transamos: S&P 500",
+                "Antes de transar … date un baño",
+                "¿Cuándo hacemos un “Call” o un “Put”?",
+                "Lo que nos enseña … la historia",
+                "Ante todo, toma apuntes y registra todo lo que haces",
+                "Conexión a Internet confiable, un inamovible",
+                "Un broker se ligará a tú cuenta bancaria"
+            ],
+            prefaceHeading: "Prefacio",
+            prefaceParagraphs: [
+                "Antes que un libro, esta es una guía básica para que cualquier ciudadano de a pie pueda aprender a transar uno de los mercados más líquidos del mundo. Uso la palabra inglesa trading en vez de comercio pues ha sido aceptada mundialmente, de la misma forma que stock en vez de acción e igual para otros términos.",
+                "Cuando empecé a transar hace algunos años, lo hice más con el corazón que con la razón, con mis emociones a mil, lo que condujo a que sufriera muchas pérdidas. Sin embargo y con el paso del tiempo, fui aprendiendo lecciones vitales para mejorar mis estrategias en el trading y fue allí cuando empecé a ver ganancias. Igualmente he aprendido que así como es posible a vivir del trading, cualquier persona que siga los pasos adecuados puede hacerlo igualmente. En el último tiempo me he inclinado más a pensar en invertir antes que en transar, pero cada uno tiene su propia inclinación.",
+                "Tu ganarás o perderás conforme a lo que deposites en tu cuenta y deberías seguir la norma de los mejores traders del mundo, los cuales dicen que la regla número uno es no perder dinero, pero esto será posible en la medida que obedezcas ciertos principios del trading y aceptes que el mercado es un mundo de oportunidades.",
+                "El internet está lleno de libros digitales, por tanto mi trabajo es sintetizar estrategias prácticas para que puedas arrancar cuanto antes. Conmigo aprenderás a hacer “paper trading”, y hasta allí llego yo. Una vez que te sientas en capacidad de nadar, puedes tomar la decisión de invertir dinero real con tú propia personalidad de trader, pues tú eres único en el mundo. Dios te bendiga."
+            ],
+            marketHeading: "La Bolsa de Valores",
+            marketParagraphs: [
+                "En la bolsa de valores (o Mercado de Acciones) (física o virtual) sus clientes (los compradores y vendedores de acciones) se juntan para comprar, vender o transar dichos valores. La bolsa puede ser pública o privada. Para fines prácticos, nos concentramos en decir que el índice <span class='ticker'>SPY</span> al cual nos concierne se transa tanto en la bolsa de Nueva York como en el Nasdaq.",
+                "En el Mesón del textilero belga, Robert Van der Burse por alla en el siglo 14, se reunían comerciantes a negociar diferentes valores. En la Bolsa se negocian tanto renta variable (acciones) como renta fija (deuda). Aunque las bolsas más antiguas se remontan a Grecia y Roma, tenemos fecha y lugares que nos dicen mucho sobre la evolución de este tipo de actividad, como la bolsa de materias primas en Amberes (1460), Londres (1570), Lyon, Francia (1595), la bolsa de Madrid en 1831 y la de Nueva York en 1792.",
+                "En síntesis, el objetivo de la bolsa de valores es básicamente…",
+                "• procurar financiamiento a aquellas empresas que requieren de capital para ensanchar sus fronteras y",
+                "• permitir al mismo tiempo que inversionistas depositen su capital en procura de un retorno o ganancia sustancial.",
+                "El horario de la bolsa de NY y el Nasdaq es de lunes a viernes de 09:30 am hasta las 4:15 pm. Hay horarios extendidos conocidos como “after hours” (hasta las 8 pm) es decir, después del cierre de la bolsa y “premarket”; (antes del toque de campana) y que va de 4 am a 09:30 am EST.",
+                "Finalmente hay días feriados cuando la Bolsa está cerrada."
+            ],
+            spyHeading: "El Indice Standard & Poor's 500",
+            spyParagraphs: [
+                "Más conocido como el S&P 500, este índice sigue el rendimiento de 500 grandes empresas que cotizan en las bolsas de valores de los Estados Unidos. Entre las empresas más sobresalientes podemos mencionar de las 500 a: Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Nvidia, Berkshire Hathaway y JP Morgan Chase. Esta mención es solo para darte una idea del poderío económico de estas corporaciones.",
+                "El desglose del sector S&P 500, es así:",
+                "• Tecnología de la Información 27.48% | • Cuidado de la Salud 14.58% | • Consumidor Discrecional 11.18% | • Servicios de Comunicación 10.90% | • Finanzas 9.89% | • Acciones Industriales 7.90% | • Productos Básicos de Consumo 7.05% | • Utilidades 3.13% | • Bienes Raíces 2.80% | • Materiales 2.56% | • Energía 2.53%",
+                "Como puedes ver, el segmento de la tecnología ocupa un 27%, por lo cual cuando este sector transa a la baja o por el contrario va al alza, afecta significativamente el índice S&P 500.",
+                "Alguien puede sin duda, transar stocks (acciones) separadamente, como por ejemplo Apple, Microsoft, etc. Para ello debería hacer trading con 3, 4 o 5 empresas al mismo tiempo, cosa que pueda diversificar, de tal manera que tenga mayor probabilidad en unas por si las otras no salen bien. Sin embargo, el propósito de este manual como dije al principio es enfocarnos en primera instancia en el índice S&P 500 y luego en las empresas por separado."
+            ],
+            homeHeading: "Ofici-na tu Casa",
+            homeParagraphs: [
+                "Por el simple hecho de que estás trabajando desde tu casa y en pantuflas, no significa que no debas darte un baño. Es un craso error hacer trading sin tener todos los sentidos en alerta, además de estar bien alimentado. Por eso es importante que a tu casa le des un cierto aire de oficina, con lo esencial para funcionar.",
+                "Después del debido aseo de tu cuerpo, de un estado calmado y buena respiración, ten a mano los útiles básicos: una libreta de apuntes, lápiz y lapicero, calculadora, tu computador y celular y ante todo una confiable conexión a internet. Date cuenta que si esta falla y tienes posiciones abiertas, no podrás cerrarlas ya sea para provecho o pérdida. ¿Has notado que los traders profesionales tienen varias pantallas? Mientras más información manejes mejor, pues muchas de las decisiones a veces las debes hacer en segundos. Sin embargo y gracias a la información prevista en esta guía, no requerirá 10 pantallas para hacer trading pues la única información que vas a necesitar es provista en una dinámica tabla de google sheet o excel que te proveo.",
+                "Si tienes conocimientos básicos de Excel, puedes hacer diferentes tablas para que registres tu actividad de trading. Si no tienes esa habilidad, puedes hacerla a mano. Lo importante aquí, -aunque expandiré esto más adelante- es que tomes nota de la posición que has decidido abrir, el número de contratos, strike price, fecha de expiración, hora de entrada y salida, porcentaje que has ganado o perdido y una casilla para que se ingrese el resultado de tu día de trading. El acostumbrarse a registrar todo lo que haces, fortalecerá tus debilidades e incrementará tus ganancias."
+            ],
+            directionHeading: "Sube o baja?",
+            directionParagraphs: [
+                "Esa es la transacción y decisión que debemos tomar cuando transamos:",
+                "• un **“Call”** si creemos que el precio del índice o stock va a subir, o",
+                "• un **“Put”** si por el contrario, percibimos que va a bajar.",
+                "Aunque existen otras estrategias en el campo del trading e inversiones, solo consideraremos dos direcciones: ascenso (call) y descenso (put). Pero quiero dejar algo bien claro: el trading no es suerte, y esto no consiste en adivinar.",
+                "En realidad, para que tú estimes que el índice o una determinada acción (stock) va en cierta dirección, es porque has hecho un estudio sobre las diferentes variables que lo afectan. La opción de compra es un derivado financiero que da al comprador, el derecho (mas no la obligación) de comprar un activo en un tiempo futuro a un determinado precio de manos del vendedor. In las opciones no necesariamente el comprador de ella se queda con los stocks, simplemente los transa, es decir, los activos pasan de mano en mano."
+            ],
+            historyHeading: "La historia se repite",
+            historyParagraphs: [
+                "El famoso y millonario trader W. D Gann (Junio 6, 1878 – Junio 18, 1955) una vez escribió lo siguiente:",
+                "“Mis cálculos están basados en la teoría cíclica y en secuencias matemáticas. La historia se repite. Eso es lo que siempre he afirmado, que para saber y predecir el futuro de algo solo tienes que mirar lo que ha sucedido en el pasado y tener una base correcta o punto de partida. Mi autoridad para asegurar que el futuro no es otra cosa que la repetición del pasado se encuentra en la Biblia”.",
+                "Evidentemente, Gann no solo fue un fabuloso trader sino que aun sus libros son leídos hoy día como fuente de consulta para inversionistas.",
 "Es por ello de suma importancia que el trader debe aceptar que lo que pasó, indefectiblemente volverá a acontecer y así estar preparado para aprovechar las oportunidades. La historia debe ser un aliciente para cada uno de nosotros cuando tengamos días difíciles, en el sentido de que podremos tener remontadas o también cuando tengamos sonrisas en nuestros labios al haber repetido en tiempo presente una escena de tiempos anteriores."
 ],
 writeHeading: "“qui scribit bis legit”, (“quien escribe, lee dos veces”)",
@@ -422,13 +410,13 @@ contents: [
 prefaceHeading: "Préface",
 prefaceParagraphs: [
 "Plutôt qu'un livre, il s'agit d'un guide de base pour que tout citoyen ordinaire puisse apprendre à négocier sur l'un des marchés les plus liquides au monde. J'utilise le mot anglais trading plutôt que commerce car il a été accepté dans le monde entier, de la même manière que stock plutôt qu'action et de même pour d'autres termes.",
-"Quand j'ai commencé le trading il y a quelques années, je l'ai fait plus avec mon cœur qu'avec ma raison, avec mes émotions à mille, ce qui m'a conduit à de nombreuses pertes. Cependant, au fil du temps, j'ai appris des leçons vitales pour améliorer mes stratégies de trading et c'est à ce moment-là que j'ai commencé à voir des profits. Cela m'a également montré que tout comme il est possible de vivre du trading, toute personne qui suit les bonnes étapes peut également y parvenir. Dernièrement, j'ai eu tendance à penser davantage à investir plutôt qu'à trader, mais chacun a sa propre inclination.",
+"Quand j'ai commencé le trading il y a quelques années, je l'ai fait plus avec mon cœur qu'avec ma raison, avec mes émotions à mille, ce qui m'a conduit à de nombreuses pertes. Cependant, au fil du temps, j'ai appris des leçons vitales pour améliorer mes stratégies de trading et c'est à ce moment-là que j'ai commencé à voir des profits. Cela m'a également augmenté que tout comme il est possible de vivre du trading, toute personne qui suit les bonnes étapes peut également y parvenir. Dernièrement, j'ai eu tendance à penser davantage à investir plutôt qu'à trader, mais chacun a sa propre inclination.",
 "Vous gagnerez ou perdrez en fonction de ce que vous déposez sur votre compte, et vous devriez suivre la règle des meilleurs traders du monde, qui d'argent ; mais cela sera possible dans la mesure où vous obéirez à certains principes du trading et acceptez que le marché est un monde d'opportunités.",
-"Internet regorge de livres numériques, c'est pourquoi mon travail consiste à synthétiez des stratégies pratiques afin que vous puissiez démarrer le plus rapidement possible. Avec moi, vous apprendrez à faire du 'paper trading', et c'est là que s'arrêtent mes interventions. Une fois que vous vous sentirez capable de nager, vous pourrez prendre la décision d'investir de l'argent réel avec votre propre personnalité de trader, car vous êtes unique au monde. Que Dieu vous bénisse."
+"Internet regorge de livres numériques, c'est pourquoi mon travail consiste à synthétiser des stratégies pratiques afin que vous puissiez démarrer le plus rapidement possible. Avec moi, vous apprendrez à faire du 'paper trading', et c'est là que s'arrêtent mes interventions. Une fois que vous vous sentirez capable de nager, vous pourrez prendre la décision d'investir de l'argent réel avec votre propre personnalité de trader, car vous êtes unique au monde. Que Dieu vous bénisse."
 ],
 marketHeading: "La Bourse",
 marketParagraphs: [
-"À la bourse de valeurs (ou Marché des Actions) (physique ou virtuelle), ses clients (les acheteurs et les vendeurs d'actions) se rassemblent pour acheter, vendre ou négocier ces valeurs. La bourse peut être publique ou privée. À des fins pratiques, nous nous concentrons sur l'indice qui suit les tendances globales.",
+"À la bourse de valeurs (ou Marché des Actions) (physique ou virtuelle), ses clients (les acheteurs et les vendeurs d'actions) se rassemblent pour acheter, vendre ou négocier ces valeurs. La bourse peut être publique ou privée. À des fins pratiques, nous nous concentrons sur l'indice SPY qui nous concerne et qui se négocie à la fois à la bourse de New York et au Nasdaq.",
 "Dans l'auberge du travailleur du textile belge, Robert Van der Burse, vers le XIVe siècle, des marchands se réunissaient pour négocier différentes valeurs. En Bourse, on négocie aussi bien des actions (revenus variables) que des obligations (revenus fixes). Bien que les bourses les plus anciennes remontent à la Grèce et à la Rome antiques, nous avons des dates et des lieux qui nous en disent long sur l'évolution de ce type d'activité, comme la bourse des matières premières à Anvers (1460), Londres (1570), Lyon, France (1595), la bourse de Madrid en 1831 et celle de New York en 1792.",
 "En résumé, l'objectif de la bourse est fondamentalement...",
 "• obtenir un financement pour les entreprises qui ont besoin de capitaux pour élargir leurs frontières et",
@@ -481,8 +469,8 @@ connectParagraphs: [
 brokerHeading: "Le courtier... exécutera vos ordres",
 brokerParagraphs: [
 "En effet, pour pouvoir entrer dans l'arène du trading, un courtier liera votre compte bancaire au sien afin que vous puissiez déposer de l'argent, acheter, vendre et retirer vos gains quotidiennement. Il existe différents types de courtiers, certains ne facturent pas de frais pour le trading d'options, tandis que d'autres offrant plus de services le font.",
-"Tous les courtiers opérant aux États-Unis ne fonctionnent pas de la même manière à l'étranger. Pour cela, vous devez chercher sur internet quels courtiers sont disponibles dans votre région et qui effectuent non seulement l'achat et la vente d'actions mais aussi le trading d'options, ce qui est ce que nous enseignons dans ce manuel. Certains ne facturent pas de commissions, d'autres oui, généralement 0,65 $ par contrat pour entrer et sortir. Les frais varient d'un courtier à l'autre. Il existe également des plateformes qui ne vous facturent pas.",
-"Aux États-Unis, par exemple, je recommande Robinhood pour les débutants : ils ne facturent pas de frais pour les options. Si vous vous abonnez chez eux et ajoutez le service Gold (pour seulement 5 $ US par mois), vos dépôts seront instantanés. Votre compte peut être ouvert de 3 manières : instantané, gold et cash. Ouvrez votre compte immédiatement. Si Robinhood n'est pas dans votre pays, essayez Fidelity. Ouvrez un compte chez eux."
+"Tous les courtiers opérant aux États-Unis ne fonctionnent pas de la même manière à l'étranger. Pour cela, vous devez chercher sur internet quels courtiers sont disponibles dans votre région et qui effectuent non seulement l'achat et la vente d'actions mais aussi le trading d'options, ce qui es ce que nous enseignons dans ce manuel. Certains ne facturent pas de commissions, d'autres oui, généralement 0,65 $ par contrat pour entrer et sortir. Les frais varient d'un courtier à l'autre. Il existe également des plateformes qui ne vous facturent pas.",
+"Aux États-Unis, par exemple, je recommande Robinhood pour les débutants : ils ne facturent pas de frais pour les options. Si vous vous abonnez chez eux et ajoutez le service Gold (pour seulement 5 $ US par mois), vos d'achats seront instantanés. Votre compte peut être ouvert de 3 manières : instantané, gold et cash. Ouvrez votre compte immédiatement. Si Robinhood n'est pas dans votre pays, essayez Fidelity. Ouvrez un compte chez eux."
 ]
 }
 };
@@ -491,13 +479,11 @@ const buttons = document.querySelectorAll('.lang-btn');
 buttons.forEach(btn => btn.classList.remove('active'));
 const activeBtn = document.getElementById('btn-' + lang);
 if (activeBtn) activeBtn.classList.add('active');
-// Load baseline headers
 document.getElementById('main-title').innerText = translations[lang].title;
 document.getElementById('author-tag').innerText = translations[lang].author;
 document.getElementById('index-title').innerText = translations[lang].indexTitle;
 document.getElementById('index-subtitle').innerText = translations[lang].indexSubtitle;
 document.getElementById('contents-heading').innerText = translations[lang].contentsHeading;
-// Render sections dynamically
 const listContainer = document.getElementById('contents-list');
 listContainer.innerHTML = '';
 translations[lang].contents.forEach(item => {
@@ -512,14 +498,12 @@ const container = document.getElementById(sec + '-body');
 container.innerHTML = '';
 translations[lang][sec + 'Paragraphs'].forEach(text => {
 const p = document.createElement('p');
-p.innerHTML = text; // Permite renderizar los span.ticker dinámicamente
+p.innerHTML = text;
 container.appendChild(p);
 });
 });
-// Re-vincular eventos para los tooltips flotantes después del cambio de texto
 setupTickers();
 }
-// LISTA REGIONAL DE BROKERS DISPONIBLES
 const brokerData = {
 usa: ["Robinhood (No fees for options)", "Fidelity Investments", "Charles Schwab", "Interactive Brokers (IBKR)"],
 ca: ["Interactive Brokers Canada", "Questrade", "TD Direct Investing"],
@@ -544,7 +528,6 @@ ul.appendChild(li);
 output.appendChild(ul);
 }
 }
-// SIMULACIÓN DINÁMICA DE PRECIOS PARA EL HOVERING (TOOLTIP)
 const stockPrices = {
 "SPY": { price: 742.21, change: "+0.45%" },
 "PRAY": { price: 34.39, change: "-0.12%" },
@@ -555,10 +538,8 @@ const tickerSpans = document.querySelectorAll('.ticker');
 tickerSpans.forEach(span => {
 const symbol = span.innerText.trim();
 const data = stockPrices[symbol] || { price: 100.00, change: "0.00%" };
-// Eliminar tooltips anteriores si existen
 const oldTooltip = span.querySelector('.ticker-tooltip');
 if (oldTooltip) oldTooltip.remove();
-// Crear nuevo tooltip flotante
 const tooltip = document.createElement('span');
 tooltip.className = 'ticker-tooltip';
 tooltip.innerHTML = <strong>${symbol}</strong><br>Live Price: $${data.price}<br><span style="color: ${data.change.startsWith('+') ? '#34d399' : '#f87171'}">${data.change}</span>;
@@ -566,6 +547,8 @@ span.appendChild(tooltip);
 });
 }
 document.addEventListener("DOMContentLoaded", () => {
+changeLanguage('en');
+});
 changeLanguage('en');
 });
 </script>
