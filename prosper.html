@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading 500 Investments - Guía Prosper</title>
+    <title>Trading 500 Investments - Prosper Guide</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -11,15 +11,44 @@
             color: #f8fafc;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
+        /* LANGUAGE NAVBAR */
+        .lang-navbar {
+            background-color: #1e293b;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: flex-end;
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .lang-btn {
+            background: none;
+            border: 1px solid #475569;
+            color: #94a3b8;
+            padding: 6px 14px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .lang-btn.active, .lang-btn:hover {
+            color: #38bdf8;
+            border-color: #38bdf8;
+            background-color: #0f172a;
+        }
+        /* MAIN CONTAINER */
         .guide-container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 40px auto;
             background-color: #1e293b;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
         h1, h2, h3 {
             color: #38bdf8;
@@ -27,35 +56,27 @@
         h1 {
             font-size: 2.5rem;
             border-bottom: 2px solid #334155;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            margin-top: 0;
         }
         h2 {
             font-size: 1.8rem;
-            margin-top: 30px;
+            margin-top: 35px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 10px;
         }
         p {
             color: #cbd5e1;
             text-align: justify;
+            font-size: 1.05rem;
         }
-        ul, ol {
+        ul {
             color: #cbd5e1;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding-left: 20px;
         }
-        .placeholder-image {
-            background-color: #334155;
-            border: 2px dashed #64748b;
-            padding: 40px;
-            text-align: center;
-            margin: 20px 0;
-            color: #94a3b8;
-            border-radius: 4px;
-        }
-        .footnote {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            border-top: 1px solid #334155;
-            padding-top: 5px;
-            margin-top: 5px;
+        li {
+            margin-bottom: 8px;
         }
         .ticker {
             color: #34d399;
@@ -67,323 +88,156 @@
 </head>
 <body>
 
+<!-- Language Selector Navigation -->
+<div class="lang-navbar">
+    <button class="lang-btn active" onclick="changeLanguage('en')">English</button>
+    <button class="lang-btn" onclick="changeLanguage('es')">Español</button>
+    <button class="lang-btn" onclick="changeLanguage('fr')">Français</button>
+</div>
+
 <div class="guide-container">
-    <!-- PORTADA -->
-    <h1>Claves para Transar o Invertir en el Índice bursátil S&P 500 y stocks</h1>
-    <p><strong>Por J. Victory</strong></p>
+    <!-- DYNAMIC CONTENT CONTAINERS -->
+    <h1 id="main-title"></h1>
+    <p><strong id="author-tag"></strong></p>
 
-    <!-- INDICE -->
-    <h2>➢ Indice del Manual</h2>
-    <p>(si deseas empezar desde cero, consulta este índice de temas)</p>
+    <h2 id="index-title"></h2>
+    <p id="index-subtitle"></p>
     
-    <h2>Contenido</h2>
-    <ul>
-        <li>Prefacio</li>
-        <li>La Bolsa de Valores, horas y días de negocio</li>
-        <li>El índice que transamos: S&P 500</li>
-        <li>Antes de transar … date un baño</li>
-        <li>¿Cuándo hacemos un “Call” o un “Put”?</li>
-        <li>Lo que nos enseña … la historia</li>
-        <li>Ante todo, toma apuntes y registra todo lo que haces</li>
-        <li>Conexión a Internet confiable, un inamovible</li>
-        <li>Un broker se ligará a tú cuenta bancaria</li>
-        <li>Tres enemigos del trading</li>
-        <li>El mercado es imparcial y no te obedecerá</li>
-        <li>Tipos de análisis antes de transar</li>
-        <li>La tendencia es tu principal aliado</li>
-        <li>¿Qué es un stock o acción?</li>
-        <li>Cuál comprar: opción o stock?</li>
-        <li>Entrando y Saliendo oportunamente</li>
-        <li>Paciencia, paciencia y más paciencia</li>
-        <li>Cómo le fue al mercado que ya cerró</li>
-        <li>La Volatilidad como oportunidad</li>
-        <li>Retirando parte de mis ganancias</li>
-        <li>La transacción del día !!!</li>
-        <li>Detén la pérdida y deja correr la ganancia</li>
-        <li>Si perdiste el tren… otro vendrá</li>
-        <li>O lo piensas, o te tiras</li>
-    </ul>
+    <h2 id="contents-heading"></h2>
+    <ul id="contents-list"></ul>
 
-    <!-- CAPITULOS -->
-    <h2>Prefacio</h2>
-    <p>Antes que un libro, esta es una guía básica para que cualquier ciudadano de a pie pueda aprender a transar uno de los mercados más líquidos del mundo. Uso la palabra inglesa trading en vez de comercio pues ha sido aceptada mundialmente, de la misma forma que stock en vez de acción e igual para otros términos.</p>
-    <p>Cuando empecé a transar hace algunos años, lo hice más con el corazón que con la razón, con mis emociones a mil, lo que condujo a que sufriera muchas pérdidas. Sin embargo y con el paso del tiempo, fui aprendiendo lecciones vitales para mejorar mis estrategias en el trading y fue allí cuando empecé a ver ganancias. Igualmente he aprendido que así como es posible a vivir del trading, cualquier persona que siga los pasos adecuados puede hacerlo igualmente. En el último tiempo me he inclinado más a pensar en invertir antes que en transar, pero cada uno tiene su propia inclinación.</p>
-    <p>Tu ganarás o perderás conforme a lo que deposites en tu cuenta y deberías seguir la norma de los mejores traders del mundo, los cuales dicen que la regla número uno es no perder dinero, pero esto será posible en la medida que obedezcas ciertos principios del trading y aceptes que el mercado es un mundo de oportunidades.</p>
-    <p>El internet está lleno de libros digitales, por tanto mi trabajo es sintetizar estrategias prácticas para que puedas arrancar cuanto antes. Conmigo aprenderás a hacer “paper trading”, y hasta allí llego yo. Una vez que te sientas en capacidad de nadar, puedes tomar la decisión de invertir dinero real con tú propia personalidad de trader, pues tú eres único en el mundo. Dios te bendiga.</p>
+    <h2 id="preface-heading"></h2>
+    <div id="preface-body"></div>
+</div>
 
-    <h2>La Bolsa de Valores</h2>
-    <div class="placeholder-image">Imagen de Referencia: NYSE / Bolsa de Valores</div>
-    <p>En la bolsa de valores (o Mercado de Acciones) (física o virtual) sus clientes (los compradores y vendedores de acciones) se juntan para comprar, vender o transar dichos valores. La bolsa puede ser pública o privada. Para fines prácticos, nos concentramos en decir que el índice <span class="ticker">SPY</span> al cual nos concierne se transa tanto en la bolsa de Nueva York como en el Nasdaq.</p>
-    <p>En el Mesón del textilero belga, Robert Van der Burse por alla en el siglo 14, se reunían comerciantes a negociar diferentes valores. En la Bolsa se negocian tanto renta variable (acciones) como renta fija (deuda). Aunque las bolsas más antiguas se remontan a Grecia y Roma, tenemos fecha y lugares que nos dicen mucho sobre la evolución de este tipo de actividad, como la bolsa de materias primas en Amberes (1460), Londres (1570), Lyon, Francia (1595), la bolsa de Madrid en 1831 y la de Nueva York en 1792.</p>
-    <p>En síntesis, el objetivo de la bolsa de valores es básicamente…</p>
-    <ul>
-        <li>procurar financiamiento a aquellas empresas que requieren de capital para ensanchar sus fronteras y</li>
-        <li>permitir al mismo tiempo que inversionistas depositen su capital en procura de un retorno o ganancia sustancial.</li>
-    </ul>
-    <p>El horario de la bolsa de NY y el Nasdaq es de lunes a viernes de 09:30 am hasta las 4:15 pm. Hay horarios extendidos conocidos como “after hours” (hasta las 8 pm) es decir, después del cierre de la bolsa y “premarket”; (antes del toque de campana) y que va de 4 am a 09:30 am EST.</p>
-    <p>Finalmente hay días feriados cuando la Bolsa está cerrada.</p>
+<script>
+    // Dictionary containing translations for the initial parts
+    const translations = {
+        en: {
+            title: "Keys to Trade or Invest in the S&P 500 Stock Index and Stocks",
+            author: "By J. Victory",
+            indexTitle: "➢ Manual Index",
+            indexSubtitle: "(If you want to start from scratch, consult this topic index)",
+            contentsHeading: "Contents",
+            contents: [
+                "Preface",
+                "The Stock Exchange, business hours and days",
+                "The index we trade: S&P 500",
+                "Before trading… take a shower",
+                "When do we do a 'Call' or a 'Put'?",
+                "What history teaches us…"
+            ],
+            prefaceHeading: "Preface",
+            prefaceParagraphs: [
+                "Rather than a book, this is a basic guide so that any ordinary citizen can learn to trade one of the most liquid markets in the world. I use the English word trading instead of commerce because it has been accepted worldwide, in the same way as stock instead of share and the same for other terms.",
+                "When I started trading a few years ago, I did it more with my heart than with my reason, with my emotions at a thousand, which led to many losses. However, over time, I learned vital lessons to improve my trading strategies and that was when I started to see profits. It has also shown me that just as it is possible to live off trading, any person who follows the right steps can do it as well. Lately, I have leaned more toward thinking about investing rather than trading, but everyone has their own inclination.",
+                "You will win or lose according to what you deposit into your account, and you should follow the rule of the best traders in the world, who say that rule number one is not to lose money; but this will be possible to the extent that you obey certain principles of trading and accept that the market is a world of opportunities.",
+                "The internet is full of digital books, therefore my job is to synthesize practical strategies so you can get started as soon as possible. With me, you will learn to do 'paper trading', and that is as far as I go. Once you feel capable of swimming, you can make the decision to invest real money with your own trader personality, because you are unique in the world. God bless you."
+            ]
+        },
+        es: {
+            title: "Claves para Transar o Invertir en el Índice bursátil S&P 500 y stocks",
+            author: "Por J. Victory",
+            indexTitle: "➢ Indice del Manual",
+            indexSubtitle: "(si deseas empezar desde cero, consulta este índice de temas)",
+            contentsHeading: "Contenido",
+            contents: [
+                "Prefacio",
+                "La Bolsa de Valores, horas y días de negocio",
+                "El índice que transamos: S&P 500",
+                "Antes de transar … date un baño",
+                "¿Cuándo hacemos un “Call” o un “Put”?",
+                "Lo que nos enseña … la historia"
+            ],
+            prefaceHeading: "Prefacio",
+            prefaceParagraphs: [
+                "Antes que un libro, esta es una guía básica para que cualquier ciudadano de a pie pueda aprender a transar uno de los mercados más líquidos del mundo. Uso la palabra inglesa trading en vez de comercio pues ha sido aceptada mundialmente, de la misma forma que stock en vez de acción e igual para otros términos.",
+                "Cuando empecé a transar hace algunos años, lo hice más con el corazón que con la razón, con mis emociones a mil, lo que condujo a que sufriera muchas pérdidas. Sin embargo y con el paso del tiempo, fui aprendiendo lecciones vitales para mejorar mis estrategias en el trading y fue allí cuando empecé a ver ganancias. Igualmente he aprendido que así como es posible a vivir del trading, cualquier persona que siga los pasos adecuados puede hacerlo igualmente. En el último tiempo me he inclinado más a pensar en invertir antes que en transar, pero cada uno tiene su propia inclinación.",
+                "Tu ganarás o perderás conforme a lo que deposites en tu cuenta y deberías seguir la norma de los mejores traders del mundo, los cuales dicen que la regla número uno es no perder dinero, pero esto será posible en la medida que obedezcas ciertos principios del trading y aceptes que el mercado es un mundo de oportunidades.",
+                "El internet está lleno de libros digitales, por tanto mi trabajo es sintetizar estrategias prácticas para que puedas arrancar cuanto antes. Conmigo aprenderás a hacer “paper trading”, y hasta allí llego yo. Una vez que te sientas en capacidad de nadar, puedes tomar la decisión de invertir dinero real con tú propia personalidad de trader, pues tú eres único en el mundo. Dios te bendiga."
+            ]
+        },
+        fr: {
+            title: "Clés pour Traiter ou Investir dans l'Indice Boursier S&P 500 et les Actions",
+            author: "Par J. Victory",
+            indexTitle: "➢ Index du Manuel",
+            indexSubtitle: "(Si vous souhaitez repartir de zéro, consultez cet index thématique)",
+            contentsHeading: "Table des Matières",
+            contents: [
+                "Préface",
+                "La Bourse, heures et jours d'ouverture",
+                "L'indice que nous négocions : S&P 500",
+                "Avant de négocier… prenez una douche",
+                "Quand faisons-nous un 'Call' ou un 'Put' ?",
+                "Ce que l'histoire nous enseigne…"
+            ],
+            prefaceHeading: "Préface",
+            prefaceParagraphs: [
+                "Plutôt qu'un livre, il s'agit d'un guide de base pour que tout citoyen ordinaire puisse apprendre à négocier sur l'un des marchés les plus liquides au monde. J'utilise le mot anglais trading plutôt que commerce car il a été accepté dans le monde entier, de la même manière que stock plutôt qu'action et de même pour d'autres termes.",
+                "Quand j'ai commencé le trading il y a quelques années, je l'ai fait plus avec mon cœur qu'avec ma raison, avec mes émotions à mille, ce qui m'a conduit à de nombreuses pertes. Cependant, au fil du temps, j'ai appris des leçons vitales pour améliorer mes stratégies de trading et c'est à ce moment-là que j'ai commencé à voir des profits. Cela m'a également montré que tout comme il est possible de vivre du trading, toute personne qui suit les bonnes étapes peut également y parvenir. Dernièrement, j'ai eu tendance à penser davantage à investir plutôt qu'à trader, mais chacun a sa propre inclination.",
+"Vous gagnerez ou perdrez en fonction de ce que vous déposez sur votre compte, et vous devriez suivre la règle des meilleurs traders du monde, qui disent que la règle numéro un est de ne pas perdre d'argent ; mais cela sera possible dans la mesure où vous obéirez à certains principes du trading et accepterez que le marché est un monde d'opportunités.",
+"Internet regorge de livres numériques, c'est pourquoi mon travail consiste à synthétiser des stratégies pratiques afin que vous puissiez démarrer le plus rapidement possible. Avec moi, vous apprendrez à faire du 'paper trading', et c'est là que s'arrêtent mes interventions. Une fois que vous vous sentirez capable de nager, vous pourrez prendre la décision d'investir de l'argent réel avec votre propre personnalité de trader, car vous êtes unique au monde. Que Dieu vous bénisse."
+]
+}
+};
+function changeLanguage(lang) {
+// Update active class on buttons
+const buttons = document.querySelectorAll('.lang-btn');
+buttons.forEach(btn => btn.classList.remove('active'));
+event.target.classList.add('active');
+        // Load translations into the elements
+        document.getElementById('main-title').innerText = translations[lang].title;
+        document.getElementById('author-tag').innerText = translations[lang].author;
+        document.getElementById('index-title').innerText = translations[lang].indexTitle;
+        document.getElementById('index-subtitle').innerText = translations[lang].indexSubtitle;
+        document.getElementById('contents-heading').innerText = translations[lang].contentsHeading;
 
-    <h2>El Indice Standard & Poor's 500</h2>
-    <div class="placeholder-image">Imagen de Referencia: Gráfico de Evolución S&P 500</div>
-    <p>Más conocido como el S&P 500, este índice sigue el rendimiento de 500 grandes empresas que cotizan en las bolsas de valores de los Estados Unidos. Entre las empresas más sobresalientes podemos mencionar de las 500 a: Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Nvidia, Berkshire Hathaway y JP Morgan Chase. Esta mención es solo para darte una idea del poderío económico de estas corporaciones.</p>
-    <p>El desglose del sector S&P 500, es así:</p>
-    <ul>
-        <li>Tecnología de la Información 27.48%</li>
-        <li>Cuidado de la Salud 14.58%</li>
-        <li>Consumidor Discrecional 11.18%</li>
-        <li>Servicios de Comunicación 10.90%</li>
-        <li>Finanzas 9.89%</li>
-        <li>Acciones Industriales 7.90%</li>
-        <li>Productos Básicos de Consumo 7.05%</li>
-        <li>Utilidades 3.13%</li>
-        <li>Bienes Raíces 2.80%</li>
-        <li>Materiales 2.56%</li>
-        <li>Energía 2.53%</li>
-    </ul>
-    <p>Como puedes ver, el segmento de la tecnología ocupa un 27%, por lo cual cuando este sector transa a la baja o por el contrario va al alza, afecta significativamente el índice S&P 500.</p>
-    <p>Alguien puede sin duda, transar stocks (acciones) separadamente, como por ejemplo Apple, Microsoft, etc. Para ello debería hacer trading con 3, 4 o 5 empresas al mismo tiempo, cosa que pueda diversificar, de tal manera que tenga mayor probabilidad en unas por si las otras no salen bien. Sin embargo, el propósito de este manual como dije al principio es enfocarnos en primera instancia en el índice S&P 500 y luego en las empresas por separado.</p>
+        // Render index list
+        const listContainer = document.getElementById('contents-list');
+        listContainer.innerHTML = '';
+        translations[lang].contents.forEach(item => {
+            const li = document.createElement('li');
+            li.innerText = item;
+            listContainer.appendChild(li);
+        });
 
-    <h2>Ofici-na tu Casa</h2>
-    <div class="placeholder-image">Imagen de Referencia: Laptop en mesa y Trader frente a pantallas</div>
-    <p>Por el simple hecho de que estás trabajando desde tu casa y en pantuflas, no significa que no debas darte un baño. Es un craso error hacer trading sin tener todos los sentidos en alerta, además de estar bien alimentado. Por eso es importante que a tu casa le des un cierto aire de oficina, con lo esencias para funcionar.</p>
-    <p>Después del debido aseo de tu cuerpo, de un estado calmado y buena respiración, ten a mano los útiles básicos: una libreta de apuntes, lápiz y lapicero, calculadora, tu computador y celular y ante todo una confiable conexión a internet. Date cuenta que si esta falla y tienes posiciones abiertas, no podrás cerrarlas ya sea para provecho o pérdida. ¿Has notado que los traders profesionales tienen varias pantallas? Mientras más información manejes mejor, pues muchas de las decisiones a veces las debes hacer en segundos. Sin embargo y gracias a la información prevista en esta guía, no requerirá 10 pantallas para hacer trading pues la única información que vas a necesitar es provista en una dinámica tabla de google sheet o excel que te proveo.</p>
-Si tienes conocimientos básicos de Excel, puedes hacer diferentes tablas para que registres tu actividad de trading. Si no tienes esa habilidad, puedes hacerla a mano. Lo importante aquí, -aunque expandiré esto más adelante- es que tomes nota de la posición que has decidido abrir, el número de contratos, strike price, fecha de expiración, hora de entrada y salida, porcentaje que has ganado o perdido y una casilla para que se ingrese el resultado de tu día de trading. El acostumbrarse a registrar todo lo que haces, fortalecerá tus debilidades e incrementará tus ganancias.
-Sube o baja?
-Imagen de Referencia: Botones CALL y PUT
-Esa es la transacción y decisión que debemos tomar cuando transamos:
+        // Render Preface heading and paragraphs
+        document.getElementById('preface-heading').innerText = translations[lang].prefaceHeading;
+        const prefaceContainer = document.getElementById('preface-body');
+        prefaceContainer.innerHTML = '';
+        translations[lang].prefaceParagraphs.forEach(pText => {
+            const p = document.createElement('p');
+            p.innerText = pText;
+            prefaceContainer.appendChild(p);
+        });
 
-un “Call” si creemos que el precio del índice SPY o stock va a subir, o
-un “Put” si por el contrario, percibimos que va a bajar.
+        // Renderizar Bolsa de Valores (NUEVO BLOQUE)
+        document.getElementById('market-heading').innerText = translations[lang].marketHeading;
+        const marketContainer = document.getElementById('market-body');
+        marketContainer.innerHTML = '';
+        translations[lang].marketParagraphs.forEach(text => {
+            const p = document.createElement('p');
+            p.innerHTML = text;
+            marketContainer.appendChild(p);
+        });
 
-Aunque existen otras estrategias en el campo del trading e inversiones, solo consideraremos dos direcciones: ascenso (call) y descenso (put). Pero quiero dejar algo bien claro: el trading no es suerte, y esto no consiste en adivinar.
-En realidad, para que tú estimes que el SPY o una determinada acción (stock) va en cierta dirección, es porque has hecho un estudio sobre las diferentes variables que lo afectan. La opción de compra es un derivado financiero que da al comprador, el derecho (mas no la obligación) de comprar un activo en un tiempo futuro a un determinado precio de manos del vendedor. En las opciones no necesariamente el comprador de ella se queda con los stocks, simplemente los transa, es decir, los activos pasan de mano en mano.
-La historia se repite
-Imagen de Referencia: Concepto History Repeats
-El famoso y millonario trader W. D Gann (Junio 6, 1878 – Junio 18, 1955) una vez escribió lo siguiente:
-“Mis cálculos están basados en la teoría cíclica y en secuencias matemáticas. La historia se repite. Eso es lo que siempre he afirmado, que para saber y predecir el futuro de algo solo tienes que mirar lo que ha sucedido en el pasado y tener una base correcta o punto de partida. Mi autoridad para asegurar que el futuro no es otra cosa que la repetición del pasado se encuentra en la Biblia”.
-Evidentemente, Gann no solo fue un fabuloso trader sino que aun sus libros son leídos hoy día como fuente de consulta para inversionistas.
-Es por ello de suma importancia que el trader debe aceptar que lo que pasó, indefectiblemente volverá a acontecer y así estar preparado para aprovechar las oportunidades. La historia debe ser un aliciente para cada uno de nosotros cuando tengamos días difíciles, en el sentido de que podremos tener remontadas o también cuando tengamos sonrisas en nuestros labios al haber repetido en tiempo presente una escena de tiempos anteriores.
-“qui scribit bis legit”, (“quien escribe, lee dos veces”)
-Imagen de Referencia: Manos escribiendo en cuaderno
-Cuando te das a la tarea de escribir y llevar registro de todo lo que ha sucedido en tu sesión de trading, sin duda, contribuirá enormemente a tu progreso como trader profesional. Vas a poder revisar al final del día, cuál fue tu plan de inicio, como terminaste y que posibles errores pudiste haber cometido o que exitosa fue tu estrategia que te representó jugosos dividendos.
-Debes incluir en tus registros: tablas, gráficos (charts), y comentarios, así como vínculos (links) de sitios de internet útiles, y esto hará que tengas herramientas importantes al alcance de tus dedos.
-La gran mayoría de inversionistas siempre han recomendado algo muy simple: “debes saber, lo que estás haciendo, y saber interpretar los instrumentos financieros”. Esto lo ha dicho continuamente en sus conferencias Warren Buffet, uno de los mejores inversionistas en stocks en la historia. El conocer el significado de los conceptos básicos del trading y el aceptar la inminente repetición de la historia te dará paz para tus futuras acciones. Para darle más énfasis a este corto pensamiento, y no dejes tus datos en la mente solamente, recordemos las palabras del escritor español Miguel Unamuno:
-“vale más tener un lápiz corto que una memoria larga”
-¿Tienes una buena conexión?
-Imagen de Referencia: Ícono WiFi de señal
-Así como es imprescindible tener una muy buena comunicación con tus seres queridos y el prójimo en general, de la misma forma, es de vital importancia que tengas una excelente señal de internet para hacer trading desde cualquier lugar del mundo. Lo que menos deseas en esta disciplina es que pierdas tu señal de internet cuando estás en una transacción importante. Esta ocupación te da la oportunidad de generar ingresos desde cualquier país del planeta, pero para ello vas a requerir que tu conexión no tenga fallas, ya que segundos en la transmisión de tus órdenes ya sea para realizar tu transacción del día (sea compra, venta o ambas) valen muchos. Es tan rápido el movimiento de datos en la Web, que aun unos cuantos segundos pueden costarte dinero. Esto aumenta cuando hay mucha volatilidad¹ y volumen² en el mercado.
-El ideal sería que te conectes de dos formas: con tu portátil (PC) y tu celular. Si llegase a fallar el PC, tendrás tu móvil para continuar tu sesión de trading. Quiero señalar que independiente de la estrategia que vas a usar en tu sesión, sea day trading (scalping, por ejemplo), swing trading (salir en 1 o más días) o inversión (largo plazo), tu conexión debe ofrecer cierta forma de tranquilidad. Por todo lo anterior, aprenderás a dejar (setear), tu stop loss³, o en su defecto, si vas ganando, subir tu trailing stop⁴. El dejar lista la orden para asegurar ganancias en caso que tu acción vaya en el sentido deseado, sea hacia arriba o abajo es ventajoso, especialmente cuando has definido lista un punto de salida.
-¹ Variación rápida de los precios
-² títulos o contratos que se negocian de un activo financiero en un mercado
-³ orden de venta para limitar la cantidad de una eventual pérdida
-⁴ orden para asegurar ganancias en caso que tu acción vaya en el sentido deseado, sea hacia arriba o abajo.
-El Corredor de Bolsa… ejecutará tu encargo
-Imagen de Referencia: Persona frente a monitores ejecutando órdenes
-Efectivamente, para poder ingresar a la arena del trading, un corredor de bolsa y que se conoce como broker, será quien ligue tu cuenta bancaria con la suya y así tengas la capacidad para depositar dinero en su cuenta y comprar, vender, y retirar tus ganancias a diario. Hay diferentes tipos de broker, y algunos de ellos no cobran fees (cargos) por hacer opciones en trading, otros que ofrecen más servicios si los cobran.
-No todos los brokers que operan en Estados Unidos lo hacen igualmente en el extranjero. Para ello debes googlear en el Internet qué brokers están disponibles en tu región, y que hagan no solo compra y venta de acciones (stocks) sino también de opciones, que es lo que enseñamos en este manual. Algunos no cobran comisiones, otros si lo hacen, usualmente $0.65 centavos de dólar por contrato para entrar y salir. Ejemplo: si compras 10 contratos de un stock o index debes pagar $6.50 para entrar y la misma cantidad para salir. Los “fees” (cargos) varían de broker a broker. También hay plataformas que no te cobran.
-Después de llenar un formulario en línea y adjuntar tu identificación e información personal y de banco, tu cuenta quedará ligada a la de tu broker y así poder hacer el primer depósito para fundar la cuenta. En Estados Unidos por ejemplo recomiendo Robinhood para los principiantes: no cobran fees por opciones. Si te suscribes con ellos y le agregas el servicio Gold (por solo $5 US al mes), tus depósitos serán instantáneos, es decir, tú dinero estará disponible de inmediato para hacer trading. Si es menos de esa cantidad, toma de 4 a 5 días usualmente en que tus fondos estén disponibles para transar opciones, a menos que hicieras un wire (o transmisión electrónica, y el dinero llega el mismo día). Tu cuenta puedes abrirla en 3 formas: instantánea, oro (gold) y cash (efectivo). Abre tu cuenta de inmediato. Si abres una cuenta no estás sujeto a PDT (“pattern day trader”). Es decir, quedas libre de solo poder hacer 3 transacciones en 5 días y de tener que depositar $25000 para poder hacer day-trading. Es decir puedes hacer varias transacciones con dineros que no hayas usado, pues ya esa norma que estuvo por 25 años fue eliminada. Es decir, puedes hacer day trading hasta con menos de $1000 dólares.
-Si Robinhood no está en tu país, trata Fidelity. Abre una cuenta con ellos.
-Tres enemigos del Trading
-Históricamente se han identificado tres enemigos tanto en el trading como en las inversiones en general. Si el estudiante aprende a controlar estas emociones, habrá dado un paso fundamental en su aprendizaje. En otras palabras, aunque estas emociones son naturales al comienzo de la vida del trader, deben ser puestas en sujeción, pues de lo contrario el trader actuará movido por su estado de ánimo y sentimiento, y no tanto por la razón.
-Miedo
-Imagen de Referencia: Dibujo de personaje asustado con pelos de punta
-Se puede tener miedo ganando o perdiendo en la sesión de trading, y la causa principal es la falta de conocimiento además de conceptos erróneos sobre el trading. Alguien puede tener temor a perder y no siembra la cantidad adecuada para obtener una cosecha decente; o puede igualmente salir de una posición ganadora prematuramente (dejando dinero en la mesa o mucha carne en el hueso) por el temor a que el índice o stock se vaya de un momento a otro en la dirección opuesta. Con el conocimiento adquirido, la confianza irá reemplazando el temor y se habrá derrotado a uno de los tres enemigos del trading.
-Codicia
-Imagen de Referencia: Dibujo de hombre de negocios ambicioso con bolsas de dinero
-Suele pasar como en el temor, que a alguien se le vayan los ojos tras el dinero en una forma desmedida y en forma codiciosa tome riesgos innecesarios, además de utilizar procedimientos equivocados o incluso no cerrando a tiempo su posición, incurriendo en pérdidas. La codicia es al igual que el temor, una emoción que debe estar bajo control. Es difícil decir que las emociones se irán por completo del ser humano. No, eso no va a pasar. Sin embargo, el tomar control de ellas, hará que se tomen decisiones cuerdas en la sesión de trading.
-Esperanza
-Imagen de Referencia: Dibujo de persona orando/esperando
-Es bueno diferenciar el significado de los términos, conforme a lo que se viene hablando y por eso no quiero ser mal interpretado. Orar es bueno para que nos vaya bien. Y tener fe y esperanza en la vida es vital. Sin embargo, el concepto “esperanza” del cual se habla en trading, se refiere a aquel estado temporal del trader donde no toma decisiones oportunas y solo “espera” que las cosas cambien para bien, sin tener ningún tipo de respaldo técnico o fundamental. Sin embargo, con el correr de los minutos, las cosas empiezan a empeorar y el trader ya no basa su accionar en hechos razonables sino que entra en un periodo de súplica a su Creador para que las cosas mejoren, y se queda “esperando”, hasta que colapsa su posición y le toca encarar su pérdida.
-Una de las mejores maneras para aprender a no vivir de ese tipo de esperanza es aceptar las pérdidas cuando vemos que nos equivocamos en la dirección ese dia; no siempre vas a ganar, y en ocasiones deberás reconocer que simplemente la transacción no salió bien; y tendrás que ser realista y ya sea, que la deba enmendar (aunque con riesgos) o salir de ella. Solo un indicador técnico apropiado sería el que aguante la posición, pero ya no por el aspecto esperanzador de la misma sino por una decisión tomada con bases racionales.
-In conclusión, tanto el miedo, como la codicia y la esperanza deben ser separadas de la sesión de trading para obtener resultados victoriosos.
-El Mercado no tiene sentimientos, es neutral
-Imagen de Referencia: Cuadrícula de caras con diferentes emociones del trader
-El mercado se mueve siguiendo principios económicos, por tanto se ha dicho que como tal, es neutral. Quienes tienen sentimientos son los individuos, que a la postre son los que dinamizan los mercados. Y estas personas a su vez, encarnan a las instituciones financieras.
-Imagen de Referencia: Gráfico del ciclo de las emociones del mercado
-Así que cuando se dice en las noticias: “el mercado reaccionó a esto o reaccionó a aquello” es una expresión de cajón. Los individuos que componen el mercado con sus acciones son los que han producido tal reacción. (La figura de arriba nos muestra el ciclo de las emociones del mercado)
-Hay frases muy comunes que emanan de las emociones del trader en situaciones similares a estas. El trader dice en …
+        // Renderizar S&P 500 (NUEVO BLOQUE)
+        document.getElementById('spy-heading').innerText = translations[lang].spyHeading;
+        const spyContainer = document.getElementById('spy-body');
+        spyContainer.innerHTML = '';
+        translations[lang].spyParagraphs.forEach(text => {
+            const p = document.createElement('p');
+            p.innerHTML = text;
+            spyContainer.appendChild(p);
+        });
 
-Incredulidad: “Esta oportunidad fallará como las otras”
-Esperanza: La recuperación es posible
-Optimismo: “este incremento de precios es real”
-Creencia: “Es tiempo de invertir 100%”
-Emoción efusiva: “Compraré más con margen, y voy a exhortar a todos a comprar”
-Euforia: “Soy un genio. ¡Nos vamos a enriquecer!”
-Complacencia: “Necesitamos tranquilizarnos para la próxima ganancia”
-Ansiedad: “¿Por qué el broker me está cobrando el margen?”
-Negación: “Mis inversiones las tengo con grandes compañías. Saldrán adelante”
-Pánico: “Wow. Todos están vendiendo. Necesito salir ya!”
-Capitulación: “Estoy fuera del mercado 100%. No me puedo dar el lujo de perder más”
-Rabia: “¿Quién tiró a la baja al Mercado? ¿Por qué el gobierno permitió que esto pasara?”
-Depresión: El dinero de mi retiro se perdió. ¿Cómo pagaremos por todo esto que debemos? Soy un idiota”
-Incredulidad: “Este es el momento para otro imbécil”
-Considera esto antes transar
-Imagen de Referencia: Lupa analizando Data Analysis
-Hay básicamente tres (3) tipos de análisis que debemos atender antes de lanzar nuestra apuesta:
-
-Análisis Fundamental (AF)
-Análisis Técnico (AT)
-Análisis de Sentimiento (AS)
-
-El AF se refiere al análisis de los reportes financieros del negocio; salud (ingresos, deuda), competencia y mercados, considerando la condición de la economía y factores como la producción, tasas de interés, tasa de empleo, GDP, mercado inmobiliario, manufactura y manejo. Por ejemplo, el deceso de un CEO, un escándalo, una demanda en corte o la aprobación por la FDA a un producto farmacéutico o la salida al mercado de un producto sensación, influirá decididamente en el valor del stock.
-El AT estudia la acción del mercado, con la ayuda de gráficos con la idea central de anticipar cambios en la estructura de mercado con mayor probabilidad. La idea central del AT se basa en un simple hecho, del cual habló Gann: “la historia se repite”. En los Estados Unidos, el AT tuvo sus orígenes a finales del siglo XIX con Charles Henry Dow.
-En el AS, se evalúa el sentir de las masas en lo relacionado a la oferta y la demanda.
-Al mercader japonés Homma Munehisa (1724-1803) se le considera como uno de los padres del análisis técnico, y además fue el primero en atribuir al aspecto psicológico, como determinante en la inversión y éxito de los mercados. Dedujo que aparte de la oferta y la demanda (análisis técnico), el movimiento en el precio del arroz se debía en gran parte al estado de ánimo de los comerciantes (análisis sentimental).
-En consecuencia, deben considerarse los tres tipos de análisis, pues ellos hacen parte de un engranaje muy bien sincronizado que se equilibran debidamente.
-La tendencia es tu amiga
-Imagen de Referencia: Flecha verde alcista con el texto "The Trend Is Your Friend"
-La tendencia es tu amiga… mientras esta dure. Debes tener en cuenta que las tendencias fluctúan cada minuto y algunas cosas tienen que suceder para que estas se mantengan o terminen. Hay veces los cambios son lentos, pero en otras ocasiones los cambios son bruscos cuando el índice de volatilidad esta alto. Este índice, llamado también el indicador del miedo se representa por las iniciales VIX. De esto hablaremos más adelante. Hay …
-
-tendencia a la baja, “downtrend” (serie de máximos más bajos)
-tendencia alcista, “uptrend” (serie de mínimos más altos)
-
-Después del volumen, la tendencia es la herramienta técnica más importante a considerar. Es por ello que hay una frase muy popular en inglés que dice: “don’t fight the tape” y que quiere decir: no cruce la línea y se refiere al hecho de que es mejor no ir en contra de la tendencia. Si el precio va al alza, no te apresures a vender, y si esta declinado, no corras a comprar. Obviamente, hay decisiones que se toman basadas en consideraciones técnicas.
-¿Qué es una acción o stock?
-Imagen de Referencia: Certificado clásico de STOCK
-Los stocks o acciones son las partes (shares) en las que se divide una empresa. Para ilustrarlo, asumamos que compras una acción de coca cola a $62 US. Esto quiere decir que eres, -literalmente hablando- dueño de esa empresa y que tienes una participación por la cantidad que pagaste, dándote el derecho de participar de los activos y ganancias de la empresa conforme a tu aporte. Hay empresas que te dan además de la ganancia por el incremento en su precio, dividendos mensuales por conservar la acción.
-Un billonario puede por ejemplo darse el lujo de tener 7.5 millones de acciones de una cadena de supermercados a $149 por acción para un total de $1117.500.000 (así es, más de mil millones de dólares). Por tanto, puedes ser el dueño de una acción, de decenas, centenas o millones de ellas, de acuerdo a tu poder financiero).
-En realidad una inmensa mayoría de billonarios no hacen trading, sino que compran acciones a largo plazo, es decir, hacen inversión. Es curioso que Warren Buffet por ejemplo haya comprado pasados sus 80 años de edad acciones de compañías de ferrocarriles que él estima tendrán utilidad dentro de 200 años, cuando en realidad se sabe que no vivimos más de 120 máximo. Es evidente que lo ha hecho para su posteridad.
-Hacer trading es el tema principal de esta guía, sin dejar de considerar otras vías de generación de ingresos. Es aprender a transarlos, a mover acciones de mano a mano, a comprar cuando es oportuno el derecho a comprarlas y venderlas, más no necesariamente a ejercer la obligación. Scalping es una forma de especulación, en la cual, un trader obtiene pequeñas ganancias varias veces en el día (debido a pequeños movimientos en precio del instrumento) o sea que es un day-trader.
-Comprar opción vs Comprar acción
-Imagen de Referencia: Gráfico técnico con flecha verde arriba y roja abajo
-He explicado anteriormente que la movida a ejecutar es lo relacionado a las opciones. Es decir, en vez de comprar el stock, lo que vamos a hacer es comprar la opción (más no la obligación) a tenerla. Igualmente aclaré que…
-
-si creemos (previo estudio del mercado) que el índice SPY va a subir, compramos contratos, lo cual es una opción Call.
-Si creemos que el precio del SPY va a descender en precio, entonces compramos contratos con opción Put.
-
-Cuando compras un stock, este tiene un precio y solo debes multiplicar el número de acciones por su valor nominal. Ejemplo: supón que deseas comprar una acción de PRAY, la cual cuesta unos $34.39 dólares. Y vamos igualmente -para fines de ilustración- que compras 10 acciones (shares) de este stock, es decir, inviertes $343.90 en total.
-Ahora bien, cuál sería el propósito primordial de comprar opciones sobre el stock, en vez de comprar solo el stock? Sin duda, el apalancamiento.
-“Dadme un punto de apoyo y moveré el mundo” (Arquímedes)
-Imagen de Referencia: Ilustración de Arquímedes con palanca moviendo el mundo
-Hagamos la comparación entre comprar el stock y comprar la opción a adquirirlo.
-Carlos compra 10 acciones de la empresa Ricas Hamburguesa pues ve que se ha desatado la venta de este producto en todo el país. Su símbolo es RICH y en ese momento esta transando a $90 dólares. Invierte entonces 90x10= $900.
-Sin embargo Juan ve el mismo stock y con igual cantidad de dinero para transar por ese stock, decide comprar la opción a tenerlo e igualmente visualiza que el precio de la empresa RICH va a subir. Compra entonces contratos y cada uno cuesta $3.
-Hay dos precios: el del stock y el de la opción. Resulta que antes que expiren las opciones, RICH ya esta transando su stock a $103 y los calls a $8 y en ese momento ambos deciden vender. ¿Quién ganó más?
-
-Carlos: Compra de acciones RICH a $90: Ganancia = $13 por acción x 10 acciones = $130 = 14.4% retorno ($130 / $900).
-Juan: Compra 3 contratos $95 call option. Ganancia = $8 x 100 x 3 contratos = $2,400 menos el premium que pagó de $900 = $1500 = 166.7% retorno ($1,500 / $900).
-
-El anterior ejemplo se dio para calls, pero también aplica para puts. Recuerda que las opciones se compran y venden en lotes de 100. Es decir, cuando compraste 3 contratos Calls de RICH, lo que hiciste en realidad fue comprar el derecho (mas no la obligación) a adquirir 3x100=300 acciones del stock. Si por el contrario hubieras comprado puts, estarías entonces adquiriendo el derecho (mas no la obligación) a vender tus acciones a determinado precio.
-Otro ejemplo? ok.
-Cuando compras una acción, simplemente la compras al precio del mercado, a como se esté transando y esperas que suba a determinado precio. Esa será tú ganancia, conforme al número de acciones. O sea si compras 10 acciones de un stock de $50 que en 10 días consigue aumentar a $60, lo que ganas es 1200-1000= $200.
-¿Cuál es el precio strike en una opción?
-En términos simples, es el precio al cual debe llegar un stock o índice para que termine con valor. Todas las opciones tienen valores diferentes, y dependen de varios factores del mercado como las tasas de interés, volatilidad, etc. Si has hecho un call, el strike estará hacia arriba. Si es un put, el precio al cual debe llegar es hacia abajo.
-¿Qué es la expiración de una opción?
-Es la fecha donde se termina la operation. Las opciones tienen dos valores, el intrínseco y el decaimiento de tiempo, conocido como “time decay”. La expiración puede ser a 1 o más días, semanas y meses. Para fines del índice SPY, que es lo que nos concierne en este manual, usualmente tomamos de 2 a 5 días cuando se empieza el lunes, 2 cuando se hace el martes, 2 cuando se hace el miércoles, 1 cuando se hace el jueves, y 1 cuando se hace el viernes. En este último caso, si el día cae viernes, se puede hacer una transacción que expire el lunes. Usualmente las opciones de otros stocks, diferentes al índice SPY (que es del cual nos ocupamos) se pueden hacer a más de una semana, incluso hasta 3 meses.
-Hay que recordar que mientras más tiempo tenga la opción más costosa es, porque tiene más valor de tiempo.
-El strike no debe estar muy separado del valor actual del SPY, porque debemos asegurarnos que haya la probabilidad de que lo alcance. ¿Cuáles son los posibles escenarios de compra?
-
-Cuando se compra con mucho valor intrínseco, se llama “in-the-money options''. Ejemplo: el stock esta transando en $401 y hago un strike de $400 para un Call. En este caso, debido a que el strike esta por debajo del precio actual del SPY, se dice que la opción esta -in the money- y por tanto es más costosa y un poco menos lucrativa que otras. Su valor se mueve más lentamente. Sin embargo, tiene valor intrínseco, y es más conservadora que otras.
-Un caso intermedio, es cuando el strike y el precio del stock o índice es el mismo, ejemplo $400 strike, $400 precio del SPY. En ese caso se llama “at-the-money- options”.
-Cuando se compra con menos valor de tiempo, se llama “out-of the-money options''. Ejemplo: el stock está transando en #400 y hago un strike de $404 para un Call. En este caso, debido a que el strike está por arriba del precio actual del SPY, se dice que la opción esta -out of the money- y por tanto es un poco menos costosa que la primera y aún más lucrativa que otras, pero más riesgosa, pues tiene justamente tiene que recorrer un espacio mayor para llegar al strike! De todas maneras, su valor se mueve más rápidamente.
-Entrando y Saliendo oportunamente
-Imagen de Referencia: Dos puertas indicando Entrada y Salida con flechas oportunas
-Es la clave del trading. Debemos hacer énfasis que no es suficiente la tendencia del momento para tomar una decisión, sino que la misma debe ir acompañada de otros datos como el volumen (cantidad de compradores y vendedores participantes) y otros indicadores técnicos como el Stochastic, MACD, MA’s, RSI, Vix, etc. En trading, el principal enemigo es el tiempo (cuando tú estrategia es una opción como call o put, cuando es un call o bear spread, con excepción del put credit spread, del cual hablaremos más adelante, donde el tiempo es tú aliado). Es enemigo por aquello de la pérdida de valor de la opción a medida que transcurren los minutos, sino por el escaso tiempo que tenemos para tomar las decisiones. De hecho, en días de volatilidad, a pesar que el trade of the day (la transacción del día) que hayas decidido realizar sea racional, y con todos los cabales, puede irse en tu contra justamente por causa de la fluctuación y turbulencia en los mercados. Aun los mejores traders del mundo y las grandes instituciones (fondos de pensiones, fondos de cobertura, bancos, etc, han sufrido de este fenómeno).
-Como explicaba al comienzo del manual, no siempre es correcto entrar a transar a la mismísima 09:30 am (hora del este en los Estados Unidos) pues muchas veces, se toma varios minutos e incluso hasta 1 o 2 horas en que el índice SPY tome una determinada dirección.
-El índice puede ir:
-
-★ Hacia arriba
-★ Hacia abajo
-★ Hacia los lados (“sideways”).
-
-Puedes tener un pre-market fabuloso, es decir, ves (antes de las 09:30 am que es cuando suena la campana), un SPY ganando bastante, ejemplo: $4 dólares. Entonces emocionado (a), dices: “haré un Call”, pensando que la tendencia se va a mantener. Pero, para tu sorpresa, aun cuando la tendencia se veía prometedora, el mercado “reacciona” ante una serie de noticias no muy alentadoras, a saber:
-
-❖ Se desata una guerra por un país belicoso
-❖ Suben las tasas de interés en la reserva federal
-❖ Aumentó el desempleo
-❖ Subió el precio del petróleo
-❖ Elon Musk se fue para Marte :)
-
-Cualquiera de estas noticias, exceptuando la última, podrían afectar el mercado, si estas se presentan ya sea al momento de apertura de la bolsa. Entonces, por un apresuramiento, se pierde dinero.
-Lo contrario podría pasar y al no ver noticias, no actúas con prontitud y te pierdes del pastel. Ejemplo:
-
-➢ Se firma acuerdo de paz entre USA e Irán
-➢ Las empresas tecnológicas pagarán menos impuestos
-➢ La dosis # 50 finalmente terminó con el virus
-➢ Elon Musk regresó de Marte :)
-➢ Se levantó el debt ceiling for enésima vez
-
-De nuevo, con excepción de las bromas, las malas noticias deprimen el mercado pero las buenas lo estimularán.
-No te precipites en tus decisiones
-Imagen de Referencia: Caracol avanzando lento bajo un cielo despejado
-“La paciencia es la fortaleza del débil y la impaciencia, la debilidad del fuerte” (Imanuel Kant)
-¿Cuánta paciencia necesitamos antes y después de transar? ¡Bastante! Y pensar que la desechamos con mucha facilidad.
-La paciencia viene como consecuencia del dominio propio (aporte bíblico). Es un elemente fundamental no solo para el trading que practicamos a diario sino para cualquier faceta de nuestras vidas. Y justamente el dominio propio, el cual secunda a la paciencia está firmemente anclado en el conocimiento. Es decir, cuando nos impacientamos, cuando no tenemos el temple para esperar el momento oportuno para la toma de decisiones, es al final de las cosas como una falta de conocimiento del juego.
-¿Recuerdas lo que te dije en el capítulo anterior con respecto a las noticias? Pues bien, si tienes…
-
-conocimiento de lo que está pasando en el mercado, y a eso le agregas,
-Una mejor percepción del análisis técnico,
-
-sin duda, tendrás mayor dominio de tus sentidos y emociones, y podrás ejercitar muchísimo mejor la paciencia y aun las malas noticias no te harán daño, por el contrario, podrás manejar y digerir mejor el contenido que se ha despachado en los medios y tomarás decisiones adecuadas y oportunas. La paciencia habrá rendido su fruto!
-Hey, ¿qué tal estuvo la película?
-Imagen de Referencia: Cinta de película de cine y palomitas
-Ayuda mucho el saber cómo se movió el mercado en Asia y Europa antes de transar en los Estados Unidos o cualquier otra parte del mundo. Hay una frase muy popular que dice: “como es el desayuno, así se sabe cómo será el almuerzo”. Los asiáticos tienen otra muy similar, y para saber cómo es un lugar, preguntan a otros que ya vienen del mismo: “qué tal eso allá”? Aunque el hecho de que una región esté verde (bullish o al alza) no significa que la otra vaya a estar así (de hecho, a veces están contrarios), ayuda mucho siempre conocer el panorama mundial y así ver que estrategia se puede usar para el día.
-Es cierto, a alguien le puede parecer buena una película y otra persona puede opinar lo contrario, porque los gustos son subjetivos. Pero en el campo del trading, siendo que los mercados hoy día están muy interconectados, -así se murmure que se aproxima la desglobalización del mundo financiero-, hace mucho sentido considerar el efecto naipe de la economía mundial: si un país estornuda, el vecino toma el resfriado.
-Hay muchos portales que puedes visitar para ver las últimas noticias y cómo han cerrado las acciones en otros países y la influencia que podría tener en el índice Spy (el cual es el que nos interesa); solo basta que googlees “mercados financieros”. Para darte un par de ejemplos en español e inglés, toma este: eleconomista.es y el otro que también puedes visitar y así enterarte de la economía mundial en todo el planeta es marketwatch.com.
-En este último podrás ver a las principales bolsas del mundo en acción. Y en el botón de búsqueda (la lupa a la mano derecha), escribes SPY, con el botón ENTER, para así dejar abierto el valor del índice, una vez que estés en acción.
-Mientras más pestañas puedas ver, además de dispositivos, mejor panorámica tendrás: portátil, celular, tableta, etc.
-Los espejos y experiencias de otros también ayudan. Y ojalá todas estas, sean para bien.
-¡No le temas a los indicadores, aprovechalos!
-Imagen de Referencia: Personaje escalando un gráfico de barra volátil apuntando arriba
-El índice de volatilidad, conocido como el indicador del miedo, tiene su medidor. Y aunque el nombre asuste, no se debe temer a la volatilidad y en su lugar debe ser interpretado correctamente y aprovechar la volatilidad del mercado para obtener ganancias. Menos de 20 se considera “bajo riesgo”, más de ese número es alto.
-La volatilidad se define como la tasa a la cual el precio de un activo, puede subir o bajar. Y esa es la razón por la cual, en un ambiente volátil, los precios del SPY pueden ascender o descender bruscamente. En algunos casos se puede perder dinero y en otras ocasiones se puede ganar en grande. En tiempos de volatilidad, quien decida entrar en ella, no debe ser muy codicioso y cerrar pronto las posiciones para evitar sorpresas, a menos que se inserten trailer stops que son órdenes de salir de la posición al haber alcanzado cierta ganancia señalada. Otros dos índices muy importantes son el stochastic: Si el indicador se eleva por encima de 75, es muestra de la posible sobrecompra de activo; si cae por debajo de 25, esto muestra la posible sobreventa de activo. Y el RSI (índice de fortaleza relativa) oscila entre 0 y 100. Se le considera sobre comprado si pasa de 70 y sobre vendido si baja de 30.
-La palabra sobre comprado significa oportunidad para vender, pues el precio va a empezar a descender; mientras que la palabra sobre vendido es el tiempo apropiado para empezar a comprar pues el precio apunta hacia arriba.
-La resistencia y el soporte son igualmente vitales para determinar la transacción del día. En la primera, es justamente la oposición que tiene el precio por parte de los vendedores para que este suba, mientras que en el soporte, los compradores están ejerciendo una presión con su participación en el mercado para que el precio no baje, sino que vaya al alza.
-El volumen es finalmente la cantidad total de activos que están siendo transados en el mercado, es decir que están pasando de mano en mano. Ayuda muchísimo cuánto volumen hay en determinado momento para escoger el strike price, ya que estos difieren de acuerdo a este valor.
-Retirando parte de mis ganancias
-Imagen de Referencia: Mano acumulando monedas de oro y billetes
-El vender la mitad o parte de la ganancia es una estrategia muy conocida en el trading cuando se va ganando. De tal forma, si algo saliera mal adelante, se han asegurado al menos parte de las utilidades, y es en sí, una forma de proteger el capital invertido o transado. Esto pasa cuando se compran varios contratos. Ejemplo con valores no actualizados. Compras en Marzo unos 30 contratos de la empresa Facebook, cuyo símbolo es FB y que está transando a $200. Haces un “put” porque crees que en un tiempo de 3 meses va a descender a $180. El costo del put es $4. O sea haces la siguiente transacción en tu plataforma de trading: $180 Puts Jul 15 @$4
-En otras palabras, si de $200 el precio va en dirección de descenso hacia los $180 en un periodo de 3 meses, la opción obtiene valor. Es decir, compraste los 30 contratos por $12,000 y los ibas a vender en $17,250. Sin embargo, ves que aún hay espacio para descender aún más, entonces vendes la mitad de los contratos, es decir 15 por $5.75 o sea retiras primero $8,625 y dejas que sigan corriendo las ganancias.
-Para darle claridad al ejemplo en mención asumamos que efectivamente FB descendió en precio hasta $185 y que el precio de la opción pasó de $4 a $5.75.
-La transacción del dia (trade of the day)
-Imagen de Referencia: Profesional analizando gráficos de velas en su oficina limpia
-Tienes absoluta libertad para realizar tú propia transacción creas o no…
-
-que el mercado va a subir o caer en picada,
-puedes Ir largo comprando Calls o corto comprando Puts,
-Seleccionar un precio de ejercicio específico (strike price), así como el…
-Día de vencimiento (mismo día, 1 o más días, semanalmente o algunos meses, y
-Comprar “In-the-Money” (ITM), “At the Money” (ATM) o “Out of the Money Options” (OTM).
-
-Ten en cuenta que nadie puede predecir el futuro o garantizar que cualquier acción o índice vaya en una dirección determinada con certeza, o que también alcance un precio específico en determinado tiempo.
-Duedo a que esta guía es para que aprendas a practicar “simulación de trading”, puedes practicar hasta la saciedad pues no estás poniendo ningún dinero a la mesa. Y ese es mi objetivo, que adquieras la habilidad de tomar decisiones propias. Y cuando estés listo(a), entonces tomarás la decisión de entrar a los mercados.
-Después de haber estudiado el "pre-mercado", considerando los fundamentos y aspectos técnicos (pasados y presentes), estás listo para operar. También considera lo siguiente:
-
-➢ Los mercados asiático y europeos abren primero, luego el estadounidense,
-➢ Las noticias (buenas y malas) y los acontecimientos cuentan y cuentan mucho,
-➢ Un repunte temprano en el premercado podría convertirse en un retroceso en la apertura,
-➢ Una fuerte caída antes de la campana de apertura podría terminar en un mercado en alza, y
-➢ Una combinación de todo lo anterior podría iniciar una nueva tendencia!
-
-Por todo lo anterior, debes esperar algunos minutos después de la campana de apertura para hacer tu transacción. En algunos casos, ingresarás demasiado rápido, en otros, demasiado temprano; ganarás y perderás. Ese es el nombre del juego.
-Aprenderás con el tiempo y la acción, cuál es tu tolerancia de riesgo (si eres conservador o tolerante con respecto al riesgo). Con las emociones bajo control, el estudio, la gestión del riesgo y la acción, llegarán los buenos resultados. Dar por sentado.
-Por último, entiende que si compras más tiempo en tus opciones (calls o puts), estas te saldrán más caras. Lo mismo si compras en las opciones de dinero (ITM). Si decides ir “out of the money” con menos tiempo de vencimiento, y pensando en un mayor potencial de ganancias, estas te saldrán más baratas a pesar del riesgo que estés dispuesto a asumir.
-Detén el colapso a tiempo y deja correr las ganancias
-Imagen de Referencia: Mano deteniendo una línea descendente con un bolígrafo / Daga en mesa
-Hay un concepto muy interesante con respecto a evitar pérdidas cuando se hacen movimientos sin sentido, y también cuando se sale prematuramente de posiciones que están ofreciendo ganancias sustanciales.
-En el primer caso, se pueden presentar dos escenarios. Por ejemplo, cuando se trata de comprar un stock que ya viene en picada, cuando es mejor esperar a que se detenga su caída antes de comprar. Si esto no se hace hay pérdida. En segunda instancia es el caso cuando no se vende y solo se “espera” que la posición mejore cuando no hay indicativos técnicos de que esto fuera a suceder. En ese caso hay pérdidas sustanciales y esto debemos evitarlo a toda costa.
-Finalmente, se presentan escenarios donde salimos muy rápido cuando los mismos indicadores técnicos, ya sean volumen, tendencia, movimientos de promedio, indican que aún hay espacio para crecimiento en la posición.
-Cualquiera de estos casos deben ser bien evaluados tanto para evitar pérdidas como para dejar dinero sobre la mesa.
-Si crees que llegaste tarde, no te preocupes, siempre habrá otro chance
-Imagen de Referencia: Persona corriendo tras un tren en la estación que se va
-Esto pasa muy a menudo, ya sea por cuestiones de horario o simplemente porque esperamos demasiado para abrir una posición porque seguimos esperando confirmación en los charts (gráficos) o porque debido a la volatilidad y ascenso o descenso vertiginoso no nos da tiempo de entrar; y sucede que a veces cuando deseamos comprar un Call o un Put, por cuestiones de segundos ya vale más, y no se llena nuestra posición y pensamos que se nos fue la oportunidad de la vida y nos lamentamos de ello el resto del dia.
-De la misma forma, ya ha ganado cierta cantidad de dinero y pensariamos que es sabio irnos de “caza” por una opción específica. Sin embargo, en muchos casos no es el movimiento correcto, ya que como he dicho en el capítulo de la tendencia, esta tiene un límite y muy pronto viene el cambio de dirección. “No cazes stocks”, mejor espera, porque si crees que perdiste el último tren, no es así; vendrán más, y mejores oportunidades incluso!
-O lo piensas, o te lanzas
-Imagen de Referencia: Pies en el borde de un trampolín listos para saltar a una piscina
-Te ha llegado el momento de decidir si lo intentas o no; si te quedas pensando en lanzarte a la piscina o si te decides a hacerlo. Si, es cierto que puedes seguir practicando trading en papel o sea trading ficticio, en papel, donde las cantidades no son reales, pero que de todas maneras te podría dar una idea de cómo te está yendo. Sin embargo, ten en cuenta que no es lo mismo el paper trading al trading real, ya que en este último es donde pones dinero a tu cuenta y en cierta forma aceptas los riesgos que el trading o inversión tienen, mientras que en el paper trading, ninguno de tus sentidos se afecta ya que no hay nada en juego.
-Te recomiendo que tengas paciencia y dedicación para repasar y aprender los tips que te he expuesto en esta guía, para que tomes decisiones acertadas.
-// Entorno privado de desarrollo (No público en versión final)
-console.log("Trading500 Investments - Entorno de desarrollo activo.");
-console.log("Pendiente: Lógica de hovering para precios de stocks (Ej: PRAY, RICH).");
-console.log("Pendiente: Selector dinámico de brokers por país.");
-console.log("Pendiente: Integración con la tabla automatizada del SPY Sheet (Columnas L a P).");
-<script id="devScript">
-    // Entorno privado de desarrollo (No público en versión final)
-    console.log("Trading500 Investments - Entorno de desarrollo activo.");
-    console.log("Pendiente: Lógica de hovering para precios de stocks (Ej: PRAY, RICH).");
-    console.log("Pendiente: Selector dinámico de brokers por país.");
-    console.log("Pendiente: Integración con la tabla automatizada del SPY Sheet (Columnas L a P).");
-</script>
-
-</body>
-</html>
+        // Renderizar Oficina en Casa (NUEVO BLOQUE)
+        document.getElementById('home-heading').innerText = translations[lang].homeHeading;
+        const homeContainer = document.getElementById('home-body');
+        homeContainer.innerHTML = '';
+        translations[lang].homeParagraphs.forEach(text => {
+            const p = document.createElement('p');
+            p.innerHTML = text;
+            homeContainer.appendChild(p);
+        });
+    } 
