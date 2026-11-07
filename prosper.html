@@ -16,7 +16,8 @@
         p { color: #cbd5e1; text-align: justify; font-size: 1.05rem; }
         ul { color: #cbd5e1; margin-bottom: 25px; padding-left: 20px; }
         li { margin-bottom: 8px; }
-        .placeholder-image { background-color: #334155; border: 2px dashed #64748b; padding: 25px; text-align: center; margin: 20px 0; color: #94a3b8; border-radius: 4px; }
+        .content-image { display: block; width: 100%; height: auto; max-height: 430px; object-fit: contain; margin: 20px auto; border-radius: 8px; border: 1px solid #334155; }
+        .cover-image { max-height: 360px; margin-top: 0; }
         .ticker { color: #34d399; font-weight: bold; cursor: pointer; text-decoration: underline dotted; position: relative; display: inline-block; }
         .ticker-tooltip { visibility: hidden; width: 180px; background-color: #0f172a; color: #fff; text-align: center; border-radius: 6px; padding: 8px; position: absolute; z-index: 1001; bottom: 125%; left: 50%; margin-left: -90px; opacity: 0; transition: opacity 0.3s; border: 1px solid #38bdf8; font-size: 0.9rem; font-weight: normal; }
         .ticker:hover .ticker-tooltip { visibility: visible; opacity: 1; }
@@ -50,14 +51,14 @@
     <ul id="contents-list"></ul>
 
     <h2 id="preface-heading"></h2><div id="preface-body"></div>
-    <h2 id="market-heading"></h2><div class="placeholder-image">IMAGE: NYSE / Stock Market Reference</div><div id="market-body"></div>
-    <h2 id="spy-heading"></h2><div class="placeholder-image">IMAGE: S&P 500 Sector Allocation Grid</div><div id="spy-body"></div>
-    <h2 id="home-heading"></h2><div class="placeholder-image">IMAGE: Laptop & Home Trader Workspace Setup</div><div id="home-body"></div>
-    <h2 id="direction-heading"></h2><div class="placeholder-image">IMAGE: CALL and PUT Derivative Options Map</div><div id="direction-body"></div>
-    <h2 id="history-heading"></h2><div class="placeholder-image">IMAGE: W.D. Gann Mathematical Cycle Concept</div><div id="history-body"></div>
-    <h2 id="write-heading"></h2><div class="placeholder-image">IMAGE: Writing Trading Journal Logs Graph</div><div id="write-body"></div>
-    <h2 id="connect-heading"></h2><div class="placeholder-image">IMAGE: WiFi Signal Router and Mobile Backup Device</div><div id="connect-body"></div>
-    <h2 id="broker-heading"></h2><div class="placeholder-image">IMAGE: Professional Multi-screen Broker Office Trading Desk</div><div id="broker-body"></div>
+    <h2 id="market-heading"></h2><img class="content-image" src="nyse.png" alt="New York Stock Exchange and stock market reference" loading="lazy"><div id="market-body"></div>
+    <h2 id="spy-heading"></h2><img class="content-image" src="spy-sectors.png" alt="S&P 500 sector allocation" loading="lazy"><div id="spy-body"></div>
+    <h2 id="home-heading"></h2><img class="content-image" src="home-workspace.png" alt="Home trader workspace with laptop and trading equipment" loading="lazy"><div id="home-body"></div>
+    <h2 id="direction-heading"></h2><img class="content-image" src="calls-puts.png" alt="Call and put options explained" loading="lazy"><div id="direction-body"></div>
+    <h2 id="history-heading"></h2><img class="content-image" src="gann-cycles.png" alt="W. D. Gann mathematical cycles concept" loading="lazy"><div id="history-body"></div>
+    <h2 id="write-heading"></h2><img class="content-image" src="trading-journal.png" alt="Trading journal and record keeping" loading="lazy"><div id="write-body"></div>
+    <h2 id="connect-heading"></h2><img class="content-image" src="network-signal.png" alt="Internet connection and network backup" loading="lazy"><div id="connect-body"></div>
+    <h2 id="broker-heading"></h2><img class="content-image" src="broken-desk.png" alt="Trading desk and broker workstation" loading="lazy"><div id="broker-body"></div>
 
     <div class="broker-box">
         <h3 id="selector-title">Find Brokers Available in Your Region / Buscar Brokers en tu Región</h3>
