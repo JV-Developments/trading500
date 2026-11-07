@@ -56,9 +56,11 @@ p{color:#94a3b8;font-size:1.15rem;line-height:1.6;margin:0 auto;max-width:620px}
     try{localStorage.setItem("trading500-language",lang);}catch(error){}
   }
   buttons.forEach(function(button){button.addEventListener("click",function(){setLanguage(button.dataset.lang);});});
-  let initial="es";
-  try{initial=localStorage.getItem("trading500-language")||"es";}catch(error){}
-  setLanguage(initial);
+let initial="en";
+try{
+  initial=localStorage.getItem("trading500-language")||"en";
+}catch(error){}
+setLanguage(initial);
 })();
 </script>
 </body>
