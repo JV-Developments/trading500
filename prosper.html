@@ -183,7 +183,29 @@ tooltip.innerHTML = `<strong>${symbol}</strong><br>Reference price: $${data.pric
 span.appendChild(tooltip);
 });
 }
-document.addEventListener("DOMContentLoaded", () => { changeLanguage('en'); });
+document.addEventListener("DOMContentLoaded", () => {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlLanguage = urlParams.get("lang");
+
+    let initialLanguage = "en";
+
+    if (["en", "es", "fr"].includes(urlLanguage)) {
+        initialLanguage = urlLanguage;
+    } else {
+        try {
+            const savedLanguage = localStorage.getItem("trading500-language");
+
+            if (["en", "es", "fr"].includes(savedLanguage)) {
+                initialLanguage = savedLanguage;
+            }
+        } catch (error) {}
+    }
+
+    document.documentElement.lang = initialLanguage;
+    changeLanguage(initialLanguage);
+
+});
 </script>
 </body>
 </html>
