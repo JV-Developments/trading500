@@ -23,6 +23,14 @@
         .broker-box { background-color: #0f172a; border: 1px solid #334155; padding: 20px; border-radius: 6px; margin: 25px 0; }
         .broker-select { width: 100%; padding: 10px; background-color: #1e293b; color: #f8fafc; border: 1px solid #475569; border-radius: 4px; font-size: 1rem; margin-bottom: 15px; }
         .broker-results { color: #38bdf8; font-weight: bold; }
+        @media (max-width: 640px) {
+            .lang-navbar { justify-content: center; flex-wrap: wrap; gap: 8px; }
+            .lang-btn { margin-left: 0; }
+            .guide-container { margin: 18px 12px; padding: 22px 18px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.35rem; }
+            p { font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -171,7 +179,7 @@ const oldTooltip = span.querySelector('.ticker-tooltip');
 if (oldTooltip) oldTooltip.remove();
 const tooltip = document.createElement('span');
 tooltip.className = 'ticker-tooltip';
-tooltip.innerHTML = <strong>${symbol}</strong><br>Live Price: $${data.price}<br><span style="color: #34d399">${data.change}</span>;
+tooltip.innerHTML = `<strong>${symbol}</strong><br>Reference price: $${data.price}<br><span style="color: #34d399">${data.change}</span>`;
 span.appendChild(tooltip);
 });
 }
