@@ -330,21 +330,6 @@ li {
     }
 }
 
-/* Estado de actualización del desglose sectorial de SPY */
-.spy-sector-update {
-    margin: -4px 0 18px;
-    color: #94a3b8;
-    font-size: 0.82rem;
-    line-height: 1.5;
-    text-align: left;
-}
-.spy-sector-update a {
-    color: #38bdf8;
-    text-decoration: underline;
-}
-.spy-sector-update.is-warning {
-    color: #fbbf24;
-}
 </style>
 </head>
 
@@ -828,22 +813,6 @@ function renderSpySectorBreakdown(data, statusMessage) {
     ).join(" | ");
     sectorParagraph.textContent = "El desglose del sector S&P 500, es así: " + breakdown + ".";
 
-    let status = document.getElementById("spy-sector-update");
-    if (!status) {
-        status = document.createElement("div");
-        status.id = "spy-sector-update";
-        status.className = "spy-sector-update";
-        sectorParagraph.insertAdjacentElement("afterend", status);
-    }
-    status.classList.toggle("is-warning", statusMessage === "fallback" || statusMessage === "stale");
-    const dateLabel = formatSpySectorDate(data.asOf);
-    status.textContent = note + " Fuente: ";
-    const sourceLink = document.createElement("a");
-    sourceLink.href = SPY_SECTOR_SOURCE_URL;
-    sourceLink.target = "_blank";
-    sourceLink.rel = "noopener noreferrer";
-    sourceLink.textContent = "State Street";
-    status.appendChild(sourceLink);
 }
 
 async function refreshSpySectorData() {
