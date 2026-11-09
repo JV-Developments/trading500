@@ -466,7 +466,7 @@ en: {
 
     spyHeading: "The Standard & Poor's 500 Index",
     spyParagraphs: [
-        "Better known as the S&P 500, this index tracks the performance of 500 large companies listed on stock exchanges in the United States. Among the most outstanding companies we can mention out of the 500 are: Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Berkshire Hathaway, and JP Morgan Chase. This mention is just to give you an idea of the economic power of these corporations.",
+        "Better known as the S&P 500, this index tracks the performance of 500 large companies listed on stock exchanges in the United States. Among the most outstanding companies we can mention out of the 500 are: AAPL, NVDA, MSFT, AMZN, GOOGL, GOOG, META, AVGO, TSLA, and BRK.B. This mention is just to give you an idea of the economic power of these corporations.",
         "The breakdown of the S&P 500 sector is as follows: Information Technology 27.48% | Health Care 14.58% | Consumer Discretionary 11.18% | Communication Services 10.90% | Financials 9.89% | Industrials 7.90% | Consumer Staples 7.05% | Utilities 3.13% | Real Estate 2.80% | Materials 2.56% | Energy 2.53%",
         "As you can see, the technology segment occupies 27%, which is why when this sector trades down or, on the contrary, goes up, it significantly affects the S&P 500 index.",
         "Someone can undoubtedly trade stocks separately, such as Apple, Microsoft, etc. To do this, they should trade with 3, 4, or 5 companies at the same time, so that they can diversify, in such a way that they have a higher probability in some in case the others do not turn out well. However, the purpose of this manual, as I said at the beginning, is to focus primarily on the S&P 500 index and then on the companies separately."
@@ -556,7 +556,7 @@ es: {
 
     spyHeading: "El Indice Standard & Poor's 500",
     spyParagraphs: [
-        "Más conocido como el S&P 500, este índice sigue el rendimiento de 500 grandes empresas que cotizan en las bolsas de valores de los Estados Unidos. Entre las empresas más sobresalientes podemos mencionar de las 500 a: Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Nvidia, Berkshire Hathaway y JP Morgan Chase. Esta mención es solo para darte una idea del poderío económico de estas corporaciones.",
+        "Más conocido como el S&P 500, este índice sigue el rendimiento de 500 grandes empresas que cotizan en las bolsas de valores de los Estados Unidos. Entre las empresas más sobresalientes podemos mencionar de las 500 a: AAPL, NVDA, MSFT, AMZN, GOOGL, GOOG, META, AVGO, TSLA y BRK.B. Esta mención es solo para darte una idea del poderío económico de estas corporaciones.",
         "El desglose del sector S&P 500, es así: Tecnología de la Información 32.2% | Cuidado de la Salud 14.8% | Consumidor Discrecional 10.9% | Servicios de Comunicación 10.90% | Finanzas 14.2% | Acciones Industriales 8.9% | Productos Básicos de Consumo 7.05% | Utilidades 3.13% | Bienes Raíces 2.80% | Materiales 2.56% | Energía 2.53%",
         "Como puedes ver, el segmento de la tecnología es el sector lider, por lo cual cuando este sector transa a la baja o por el contrario va al alza, afecta significativamente el índice S&P 500.",
         "Nuestro propósito es enfocarnos en primera instancia en el índice S&P 500 y luego en las empresas por separado."
@@ -645,7 +645,7 @@ fr: {
 
     spyHeading: "L'Indice Standard & Poor's 500",
     spyParagraphs: [
-        "Mieux connu sous le nom de S&P 500, cet indice suit la performance de 500 grande entreprises cotées sur les bourses américaines. Parmi les entreprises les plus marquantes des 500, citons : Apple, Nvidia, Microsoft, Alphabet, Amazon, Meta Platforms, Tesla, Berkshire Hathaway et JP Morgan Chase. Cette mention vise juste à vous donner une idée de la puissance économique de ces corporations.",
+        "Mieux connu sous le nom de S&P 500, cet indice suit la performance de 500 grande entreprises cotées sur les bourses américaines. Parmi les entreprises les plus marquantes des 500, citons : AAPL, NVDA, MSFT, AMZN, GOOGL, GOOG, META, AVGO, TSLA et BRK.B. Cette mention vise juste à vous donner une idée de la puissance économique de ces corporations.",
         "La répartition sectorielle du S&P 500 est la suivante : Technologies de l'information 27.48% | Santé 14.58% | Consommation discrétionnaire 11.18% | Services de communication 10.90% | Finance 9.89% | Actions industrielles 7.90% | Produits de consommation de base 7.05% | Services publics 3.13% | Immobilier 2.80% | Matériaux 2.56% | Énergie 2.53%",
         "Comme vous pouvez le constater, le segment technologique occupe 27 %, c'est pourquoi lorsque ce secteur évolue à la baisse ou, au contraire, augmente, il affecte de manière significative l'indice S&P 500.",
         "On peut sans doute négocier des actions séparément, comme Apple, Microsoft, etc. Pour ce faire, il faudrait faire du trading avec 3, 4 ou 5 entreprises en même temps afin de se diversifier, de manière à maximiser les probabilités si certaines ne fonctionnent pas bien. Cependant, le but de ce manuel, comme je l'ai dit au début, est de se concentrer en premier lieu sur l'indice S&P 500, puis sur les entreprises séparément."
@@ -826,10 +826,16 @@ function updateBrokers() {
    Los datos pueden tener retraso según el mercado y el acceso disponible. */
 const tickerSymbols = {
     "SPY": "AMEX:SPY",
+    "AAPL": "NASDAQ:AAPL",
     "NVDA": "NASDAQ:NVDA",
-    "NVIDIA": "NASDAQ:NVDA",
-    "TESLA": "NASDAQ:TSLA",
-    "TSLA": "NASDAQ:TSLA"
+    "MSFT": "NASDAQ:MSFT",
+    "AMZN": "NASDAQ:AMZN",
+    "GOOGL": "NASDAQ:GOOGL",
+    "GOOG": "NASDAQ:GOOG",
+    "META": "NASDAQ:META",
+    "AVGO": "NASDAQ:AVGO",
+    "TSLA": "NASDAQ:TSLA",
+    "BRK.B": "NYSE:BRK.B"
 };
 
 function makeTextTickers(container) {
@@ -837,7 +843,7 @@ function makeTextTickers(container) {
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
 
-    const pattern = /\b(NVIDIA|Nvidia|NVDA|SPY|TESLA|Tesla|TSLA)\b/g;
+    const pattern = /\b(BRK\.B|AAPL|NVDA|MSFT|AMZN|GOOGL|GOOG|META|AVGO|TSLA|SPY)\b/g;
     nodes.forEach(node => {
         if (!node.nodeValue || (node.parentElement && node.parentElement.closest(".ticker"))) return;
         const value = node.nodeValue;
