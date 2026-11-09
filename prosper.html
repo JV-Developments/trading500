@@ -80,6 +80,7 @@ h1 {
     border-bottom: 2px solid #334155;
     padding-bottom: 12px;
     margin-top: 0;
+    text-align: center;
 }
 
 h2 {
@@ -191,28 +192,33 @@ li {
 }
 
 .ticker-tooltip {
-    visibility: hidden;
-    width: 180px;
-    background-color: #0f172a;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px;
+    display: none;
+    width: 360px;
+    max-width: 88vw;
+    height: 250px;
+    box-sizing: border-box;
+    background: #0f172a;
     position: absolute;
     z-index: 1001;
     bottom: 125%;
     left: 50%;
-    margin-left: -90px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    transform: translateX(-50%);
     border: 1px solid #38bdf8;
-    font-size: 0.9rem;
-    font-weight: normal;
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.45);
 }
 
-.ticker:hover .ticker-tooltip {
-    visibility: visible;
-    opacity: 1;
+.ticker:hover .ticker-tooltip,
+.ticker:focus .ticker-tooltip,
+.ticker:focus-within .ticker-tooltip {
+    display: block;
+}
+
+.ticker-widget,
+.ticker-widget > div {
+    width: 100%;
+    height: 100%;
 }
 
 .term-tooltip {
@@ -300,6 +306,7 @@ li {
 
     h1 {
         font-size: 1.8rem;
+        text-align: center;
     }
 
     h2 {
@@ -317,9 +324,9 @@ li {
 
 <div class="lang-navbar">
     <a id="home-btn" class="home-btn" href="/index.html">Return to Home</a>
-    <button id="btn-en" class="lang-btn active" onclick="changeLanguage('en')">English</button>
-    <button id="btn-es" class="lang-btn" onclick="changeLanguage('es')">Español</button>
-    <button id="btn-fr" class="lang-btn" onclick="changeLanguage('fr')">Français</button>
+    <button id="btn-en" class="lang-btn active" >English</button>
+    <button id="btn-es" class="lang-btn" >Español</button>
+    <button id="btn-fr" class="lang-btn" >Français</button>
 </div>
 
 <div class="guide-container">
@@ -498,7 +505,7 @@ en: {
 
 es: {
     title: "Claves para hacer trading e invertir en el índice S&P 500",
-    coverSubtitle: "Claves para hacer trading e invertir en el S&P 500",
+    coverSubtitle: "Claves para hacer trading e invertir en el índice S&P 500",
     author: "Por J. Victory",
     homeButton: "Regresar a la portada",
     indexTitle: "➢ Indice del Manual",
@@ -587,8 +594,8 @@ es: {
 },
 
 fr: {
-    title: "Clés pour trader et investir dans le S&P 500",
-    coverSubtitle: "Clés pour trader et investir dans le S&P 500",
+    title: "Clés pour trader et investir dans l’indice S&P 500",
+    coverSubtitle: "Clés pour trader et investir dans l’indice S&P 500",
     author: "Par J. Victory",
     homeButton: "Retour à la page d’accueil",
     indexTitle: "➢ Index du Manuel",
@@ -803,63 +810,142 @@ function updateBrokers() {
     }
 }
 
-/* Información emergente del ticker */
-const stockPrices = {
-    "SPY": {
-        price: 742.21,
-        change: "+0.45%"
-    }
+/* Cotizaciones dinámicas mediante el widget de TradingView.
+   Los datos pueden tener retraso según el mercado y el acceso disponible. */
+const tickerSymbols = {
+    "SPY": "AMEX:SPY",
+    "NVDA": "NASDAQ:NVDA",
+    "NVIDIA": "NASDAQ:NVDA",
+    "TESLA": "NASDAQ:TSLA",
+    "TSLA": "NASDAQ:TSLA"
 };
 
-function setupTickers() {
-    const tickerSpans = document.querySelectorAll(".ticker");
+function makeTextTickers(container) {
+    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
 
-    tickerSpans.forEach(span => {
-        const symbol = span.innerText.trim();
-        const data = stockPrices[symbol] || {
-            price: 742.21,
-            change: "+0.45%"
-        };
+    const pattern = /\b(NVIDIA|Nvidia|NVDA|SPY|TESLA|Tesla|TSLA)\b/g;
+    nodes.forEach(node => {
+        if (!node.nodeValue || (node.parentElement && node.parentElement.closest(".ticker"))) return;
+        const value = node.nodeValue;
+        pattern.lastIndex = 0;
+        if (!pattern.test(value)) return;
+        pattern.lastIndex = 0;
 
-        const oldTooltip = span.querySelector(".ticker-tooltip");
-        if (oldTooltip) oldTooltip.remove();
-
-        const tooltip = document.createElement("span");
-        tooltip.className = "ticker-tooltip";
-
-        tooltip.innerHTML =
-            `<strong>${symbol}</strong><br>
-            Reference price: $${data.price}<br>
-            <span style="color: #34d399">${data.change}</span>`;
-
-        span.appendChild(tooltip);
+        const fragment = document.createDocumentFragment();
+        let last = 0;
+        let match;
+        while ((match = pattern.exec(value)) !== null) {
+            fragment.appendChild(document.createTextNode(value.slice(last, match.index)));
+            const ticker = document.createElement("span");
+            ticker.className = "ticker";
+            ticker.tabIndex = 0;
+            ticker.dataset.symbol = tickerSymbols[match[0].toUpperCase()];
+            ticker.textContent = match[0];
+            fragment.appendChild(ticker);
+            last = match.index + match[0].length;
+        }
+        fragment.appendChild(document.createTextNode(value.slice(last)));
+        node.parentNode.replaceChild(fragment, node);
     });
 }
 
-/* Idioma inicial: inglés, salvo que la URL indique otro idioma */
+function loadTickerWidget(ticker, tooltip) {
+    if (tooltip.dataset.loaded === "true") return;
+    tooltip.dataset.loaded = "true";
+    const symbol = ticker.dataset.symbol;
+    if (!symbol) {
+        tooltip.textContent = "Quote unavailable for this symbol.";
+        return;
+    }
+
+    const widget = document.createElement("div");
+    widget.className = "ticker-widget";
+    const inner = document.createElement("div");
+    inner.className = "tradingview-widget-container__widget";
+    widget.appendChild(inner);
+
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
+    script.innerHTML = JSON.stringify({
+        symbols: [[symbol, symbol]],
+        chartOnly: false,
+        width: "100%",
+        height: "100%",
+        locale: "en",
+        colorTheme: "dark",
+        autosize: true,
+        showVolume: false,
+        showMA: false,
+        hideDateRanges: true,
+        hideMarketStatus: false,
+        hideSymbolLogo: false,
+        scalePosition: "right",
+        scaleMode: "Normal",
+        fontFamily: "Segoe UI, sans-serif",
+        fontSize: "10",
+        noTimeScale: false,
+        valuesTracking: "1",
+        changeMode: "price-and-percent",
+        chartType: "area",
+        lineWidth: 2,
+        lineType: 0,
+        dateRanges: ["1d|1"]
+    });
+    widget.appendChild(script);
+    tooltip.appendChild(widget);
+}
+
+function setupTickers() {
+    document.querySelectorAll("#preface-body, #market-body, #spy-body, #home-body, #direction-body, #history-body, #write-body, #connect-body, #broker-body")
+        .forEach(makeTextTickers);
+
+    document.querySelectorAll(".ticker").forEach(ticker => {
+        if (!ticker.dataset.symbol) {
+            ticker.dataset.symbol = tickerSymbols[ticker.textContent.trim().toUpperCase()] || "";
+        }
+        ticker.tabIndex = 0;
+        let tooltip = ticker.querySelector(".ticker-tooltip");
+        if (!tooltip) {
+            tooltip = document.createElement("span");
+            tooltip.className = "ticker-tooltip";
+            ticker.appendChild(tooltip);
+        }
+        const load = () => loadTickerWidget(ticker, tooltip);
+        ticker.addEventListener("mouseenter", load, { once: true });
+        ticker.addEventListener("focus", load, { once: true });
+    });
+}
+
+/* Inglés por defecto. La URL ?lang=en/es/fr tiene prioridad sobre la preferencia guardada. */
 document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlLanguage = urlParams.get("lang");
+    document.querySelectorAll(".lang-btn").forEach(button => {
+        button.addEventListener("click", () => {
+            const language = button.id.replace("btn-", "");
+            changeLanguage(language);
+            try {
+                localStorage.setItem("trading500-language", language);
+            } catch (error) {}
+            const url = new URL(window.location.href);
+            url.searchParams.set("lang", language);
+            window.history.replaceState({}, "", url);
+        });
+    });
 
+    const urlLanguage = new URLSearchParams(window.location.search).get("lang");
     let initialLanguage = "en";
-
     if (["en", "es", "fr"].includes(urlLanguage)) {
         initialLanguage = urlLanguage;
     } else {
         try {
             const savedLanguage = localStorage.getItem("trading500-language");
-
-            if (["en", "es", "fr"].includes(savedLanguage)) {
-                initialLanguage = savedLanguage;
-            }
+            if (["en", "es", "fr"].includes(savedLanguage)) initialLanguage = savedLanguage;
         } catch (error) {}
     }
-
     changeLanguage(initialLanguage);
-
-    try {
-        localStorage.setItem("trading500-language", initialLanguage);
-    } catch (error) {}
 });
 </script>
 
