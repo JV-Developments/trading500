@@ -837,10 +837,6 @@ function renderSpySectorBreakdown(data, statusMessage) {
     }
     status.classList.toggle("is-warning", statusMessage === "fallback" || statusMessage === "stale");
     const dateLabel = formatSpySectorDate(data.asOf);
-    let note = "Datos del fondo SPY publicados por State Street al " + dateLabel + ".";
-    if (statusMessage === "updating") note += " Consultando la actualización más reciente…";
-    if (statusMessage === "fallback") note += " Se muestra el último dato de respaldo disponible; no se pudo consultar la fuente en este momento.";
-    if (statusMessage === "stale") note += " No fue posible actualizar la consulta; se conserva el último dato guardado.";
     status.textContent = note + " Fuente: ";
     const sourceLink = document.createElement("a");
     sourceLink.href = SPY_SECTOR_SOURCE_URL;
