@@ -329,6 +329,22 @@ li {
         font-size: 1rem;
     }
 }
+
+/* Estado de actualización del desglose sectorial de SPY */
+.spy-sector-update {
+    margin: -4px 0 18px;
+    color: #94a3b8;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-align: left;
+}
+.spy-sector-update a {
+    color: #38bdf8;
+    text-decoration: underline;
+}
+.spy-sector-update.is-warning {
+    color: #fbbf24;
+}
 </style>
 </head>
 
@@ -557,7 +573,7 @@ es: {
     spyHeading: "El Indice Standard & Poor's 500",
     spyParagraphs: [
         "Más conocido como el S&P 500, este índice sigue el rendimiento de 500 grandes empresas que cotizan en las bolsas de valores de los Estados Unidos. Entre las empresas más sobresalientes por su poderío económico podemos mencionar a: AAPL, NVDA, MSFT, AMZN, GOOGL, GOOG, META, AVGO, TSLA y BRK.B.",
-        "El desglose del sector S&P 500, es así: Tecnología de la Información 32.2% | Cuidado de la Salud 14.8% | Consumidor Discrecional 10.9% | Servicios de Comunicación 10.90% | Finanzas 14.2% | Acciones Industriales 8.9% | Productos Básicos de Consumo 7.05% | Utilidades 3.13% | Bienes Raíces 2.80% | Materiales 2.56% | Energía 2.53%",
+        "__SPY_SECTOR_BREAKDOWN_DYNAMIC__",
         "Como puedes ver, el segmento de la tecnología es el sector lider, por lo cual cuando este sector transa a la baja o por el contrario va al alza, afecta significativamente el índice S&P 500.",
         "Nuestro propósito es enfocarnos en primera instancia en el índice S&P 500 y luego en las empresas por separado."
     ],
@@ -713,6 +729,151 @@ function buildNavigation(lang) {
     });
 }
 
+/*
+ * Desglose sectorial de SPY: datos oficiales de State Street.
+ * Se intenta consultar la página de State Street cada 6 horas. El último
+ * resultado válido queda guardado localmente durante 30 días para que el
+ * contenido siga visible si la fuente o el servicio intermediario falla.
+ */
+const SPY_SECTOR_SOURCE_URL = "https://www.ssga.com/us/en/individual/etfs/state-street-spdr-sp-500-etf-trust-spy";
+const SPY_SECTOR_PROXY_URL = "https://api.allorigins.win/raw?url=";
+const SPY_SECTOR_CACHE_KEY = "trading500-spy-sector-breakdown-v1";
+const SPY_SECTOR_REFRESH_MS = 6 * 60 * 60 * 1000;
+const SPY_SECTOR_CACHE_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+
+const spySectorNamesEs = [
+    "Tecnología de la Información",
+    "Finanzas",
+    "Cuidado de la Salud",
+    "Consumidor Discrecional",
+    "Servicios de Comunicación",
+    "Acciones Industriales",
+    "Productos Básicos de Consumo",
+    "Energía",
+    "Utilidades",
+    "Bienes Raíces",
+    "Materiales"
+];
+
+// Último respaldo oficial verificado, publicado por State Street al 6 nov 2026.
+const spySectorFallback = {
+    asOf: "Nov 06 2026",
+    values: [35.87, 12.64, 10.52, 9.51, 8.84, 8.13, 5.17, 3.54, 2.13, 1.88, 1.78]
+};
+
+function parseSpySectorData(html) {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const pageText = (doc.body ? doc.body.innerText : doc.documentElement.textContent)
+        .replace(/\s+/g, " ");
+    const headingMatch = pageText.match(/Fund Sector Breakdown\s+as of\s+([A-Za-z]{3,9}\s+\d{1,2},?\s+\d{4})/i);
+    if (!headingMatch) throw new Error("No se encontró la fecha del desglose sectorial oficial.");
+
+    const sourceNames = [
+        "Information Technology", "Financials", "Health Care",
+        "Consumer Discretionary", "Communication Services", "Industrials",
+        "Consumer Staples", "Energy", "Utilities", "Real Estate", "Materials"
+    ];
+    const values = sourceNames.map(name => {
+        const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const match = pageText.match(new RegExp(escaped + "\\s+([0-9]+(?:[.,][0-9]+)?)\\s*%", "i"));
+        if (!match) throw new Error("No se pudo leer el porcentaje de " + name + ".");
+        return Number(match[1].replace(",", "."));
+    });
+
+    if (values.some(value => !Number.isFinite(value) || value <= 0 || value > 100)) {
+        throw new Error("Los porcentajes recibidos no superaron la validación.");
+    }
+    const total = values.reduce((sum, value) => sum + value, 0);
+    if (total < 98 || total > 102) throw new Error("La suma del desglose recibido no es válida.");
+    return { asOf: headingMatch[1], values, fetchedAt: Date.now() };
+}
+
+function readSpySectorCache() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(SPY_SECTOR_CACHE_KEY) || "null");
+        if (saved && Array.isArray(saved.values) && saved.values.length === 11 &&
+            saved.values.every(value => Number.isFinite(value) && value > 0 && value <= 100) &&
+            typeof saved.asOf === "string") return saved;
+    } catch (error) {}
+    return null;
+}
+
+function saveSpySectorCache(data) {
+    try { localStorage.setItem(SPY_SECTOR_CACHE_KEY, JSON.stringify(data)); } catch (error) {}
+}
+
+function formatSpySectorDate(dateText) {
+    const parsed = new Date(dateText);
+    if (Number.isNaN(parsed.getTime())) return dateText;
+    return new Intl.DateTimeFormat("es", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }).format(parsed);
+}
+
+function getSpySectorDataForDisplay() {
+    const cached = readSpySectorCache();
+    if (cached && Date.now() - (cached.fetchedAt || 0) <= SPY_SECTOR_CACHE_MAX_AGE_MS) {
+        return { data: cached, status: "cached" };
+    }
+    return { data: spySectorFallback, status: "fallback" };
+}
+
+function renderSpySectorBreakdown(data, statusMessage) {
+    const container = document.getElementById("spy-body");
+    if (!container) return;
+    const paragraphs = container.querySelectorAll("p");
+    const sectorParagraph = paragraphs[1];
+    if (!sectorParagraph) return;
+
+    const breakdown = spySectorNamesEs.map((name, index) =>
+        name + " " + data.values[index].toFixed(2) + "%"
+    ).join(" | ");
+    sectorParagraph.textContent = "El desglose del sector S&P 500, es así: " + breakdown + ".";
+
+    let status = document.getElementById("spy-sector-update");
+    if (!status) {
+        status = document.createElement("div");
+        status.id = "spy-sector-update";
+        status.className = "spy-sector-update";
+        sectorParagraph.insertAdjacentElement("afterend", status);
+    }
+    status.classList.toggle("is-warning", statusMessage === "fallback" || statusMessage === "stale");
+    const dateLabel = formatSpySectorDate(data.asOf);
+    let note = "Datos del fondo SPY publicados por State Street al " + dateLabel + ".";
+    if (statusMessage === "updating") note += " Consultando la actualización más reciente…";
+    if (statusMessage === "fallback") note += " Se muestra el último dato de respaldo disponible; no se pudo consultar la fuente en este momento.";
+    if (statusMessage === "stale") note += " No fue posible actualizar la consulta; se conserva el último dato guardado.";
+    status.textContent = note + " Fuente: ";
+    const sourceLink = document.createElement("a");
+    sourceLink.href = SPY_SECTOR_SOURCE_URL;
+    sourceLink.target = "_blank";
+    sourceLink.rel = "noopener noreferrer";
+    sourceLink.textContent = "State Street";
+    status.appendChild(sourceLink);
+}
+
+async function refreshSpySectorData() {
+    const cached = readSpySectorCache();
+    if (cached && Date.now() - (cached.fetchedAt || 0) < SPY_SECTOR_REFRESH_MS) return;
+
+    const current = getSpySectorDataForDisplay();
+    renderSpySectorBreakdown(current.data, current.status === "fallback" ? "fallback" : "updating");
+    try {
+        const proxyUrl = SPY_SECTOR_PROXY_URL + encodeURIComponent(SPY_SECTOR_SOURCE_URL);
+        const response = await fetch(proxyUrl, { method: "GET", cache: "no-store" });
+        if (!response.ok) throw new Error("La consulta de datos no respondió correctamente.");
+        const html = await response.text();
+        const freshData = parseSpySectorData(html);
+        saveSpySectorCache(freshData);
+        if (document.documentElement.lang === "es") renderSpySectorBreakdown(freshData, "fresh");
+    } catch (error) {
+        const lastKnown = readSpySectorCache();
+        if (document.documentElement.lang === "es") {
+            if (lastKnown) renderSpySectorBreakdown(lastKnown, "stale");
+            else renderSpySectorBreakdown(spySectorFallback, "fallback");
+        }
+        console.warn("No se pudo actualizar el desglose sectorial de SPY:", error);
+    }
+}
+
 /* Actualiza los textos de la página */
 function changeLanguage(lang) {
     if (!translations[lang]) return;
@@ -747,6 +908,11 @@ function changeLanguage(lang) {
             p.innerHTML = text;
             container.appendChild(p);
         });
+
+        if (sec === "spy" && lang === "es") {
+            const sectorData = getSpySectorDataForDisplay();
+            renderSpySectorBreakdown(sectorData.data, sectorData.status === "fallback" ? "fallback" : "cached");
+        }
 
         const backLink = document.createElement("a");
         backLink.className = "back-to-contents";
@@ -946,6 +1112,11 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {}
     }
     changeLanguage(initialLanguage);
+    refreshSpySectorData();
+    // Revisa de nuevo al regresar a la pestaña, sin consultar continuamente.
+    document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) refreshSpySectorData();
+    });
 });
 </script>
 
