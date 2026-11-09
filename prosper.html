@@ -200,9 +200,9 @@ li {
     display: none;
     width: 360px;
     max-width: 88vw;
-    height: 250px !important;
-    max-height: 250px !important;
-    overflow: hidden !important;
+    height: 250px;
+    max-height: 250px;
+    overflow: hidden;
     box-sizing: border-box;
     background: #0f172a;
     position: absolute;
@@ -222,23 +222,28 @@ li {
     display: block;
 }
 
-.ticker-widget,
-.ticker-widget > div {
+.ticker-widget {
+    position: relative;
     width: 100%;
-    height: 238px !important;
-    max-height: 238px !important;
-    min-height: 238px !important;
-    overflow: hidden !important;
+    height: 250px;
+    overflow: hidden;
 }
+
+/* TradingView places the quote/chart below an oversized blank header area.
+   Crop that header while keeping the quote and chart visible. */
+.ticker-widget > div {
+    position: absolute;
+    top: -245px;
+    left: 0;
+    width: 100%;
+    height: 480px;
+} 
 
 .ticker-widget iframe {
     display: block;
     width: 100% !important;
-    height: 238px !important;
-    min-height: 238px !important;
-    max-height: 238px !important;
+    height: 480px !important;
     border: 0;
-    transform: none !important;
 }
 
 .term-tooltip {
@@ -882,9 +887,6 @@ function loadTickerWidget(ticker, tooltip) {
 
     const widget = document.createElement("div");
     widget.className = "ticker-widget";
-    widget.style.height = "238px";
-    widget.style.maxHeight = "238px";
-    widget.style.overflow = "hidden";
     const inner = document.createElement("div");
     inner.className = "tradingview-widget-container__widget";
     widget.appendChild(inner);
@@ -897,7 +899,7 @@ function loadTickerWidget(ticker, tooltip) {
         symbols: [[symbol, symbol]],
         chartOnly: false,
         width: "100%",
-        height: 238,
+        height: 480,
         locale: "en",
         colorTheme: "dark",
         autosize: false,
