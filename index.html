@@ -12,10 +12,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0f172a;
 .language-bar{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 22px;margin:0 0 34px}
 .lang-btn{border:1px solid #475569;border-radius:5px;background:transparent;color:#cbd5e1;padding:7px 13px;font:inherit;font-size:.92rem;cursor:pointer}
 .lang-btn:hover,.lang-btn:focus-visible,.lang-btn.active{color:#38bdf8;border-color:#38bdf8;background:#0f172a}
-h1{font-size:clamp(2rem,6vw,3rem);margin:0 0 10px;letter-spacing:-1px;background:linear-gradient(to right,#38bdf8,#3b82f6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-p{color:#94a3b8;font-size:1.15rem;line-height:1.6;margin:0 auto;max-width:620px}
-.guide-link{display:inline-block;margin-top:24px;padding:12px 26px;border-radius:6px;background:#2563eb;color:#fff;text-decoration:none;font-weight:600;transition:background .2s ease,transform .2s ease}
-.guide-link:hover,.guide-link:focus-visible{background:#1d4ed8;transform:translateY(-1px)}
+h1{font-size:clamp(2rem,6vw,3rem);margin:0 0 18px;letter-spacing:-1px;background:linear-gradient(to right,#38bdf8,#3b82f6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+p{color:#cbd5e1;font-size:1.25rem;line-height:1.6;margin:0 auto;max-width:620px}
 @media(max-width:480px){.container{padding:26px 18px}.language-bar{gap:8px;margin-bottom:28px}.lang-btn{padding:7px 10px;font-size:.85rem}}
 </style>
 </head>
@@ -24,30 +22,26 @@ p{color:#94a3b8;font-size:1.15rem;line-height:1.6;margin:0 auto;max-width:620px}
   <nav class="language-bar" aria-label="Select language">
     <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">English</button>
     <button class="lang-btn active" type="button" data-lang="es" aria-pressed="true">Español</button>
-        <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false">Français</button>
+    <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false">Français</button>
   </nav>
   <h1 id="page-title">Trading 500 Investments</h1>
-  <p id="welcome-text">Bienvenido. Consulta nuestra guía para comenzar.</p>
-  <a class="guide-link" id="guide-link" href="prosper.html?lang=es">Abrir la guía</a>
+  <p id="maintenance-message">Página en mantenimiento, y no admito colados. :)</p>
 </main>
 <script>
 (function(){
   "use strict";
   const copy={
-    es:{title:"Trading 500 Investments",welcome:"Bienvenido. Consulta nuestra guía para comenzar.",button:"Abrir la guía",lang:"es"},
-    en:{title:"Trading 500 Investments",welcome:"Welcome. Explore our guide and learn how to get started.",button:"Open the guide",lang:"en"},
-    fr:{title:"Trading 500 Investments",welcome:"Bienvenue. Consultez notre guide pour commencer.",button:"Ouvrir le guide",lang:"fr"}
+    es:{title:"Trading 500 Investments",message:"Página en mantenimiento, y no admito colados. :)"},
+    en:{title:"Trading 500 Investments",message:"This page is under maintenance, and no sneaking in! :)"},
+    fr:{title:"Trading 500 Investments",message:"Page en maintenance, et les resquilleurs ne sont pas admis ! :)"}
   };
   const buttons=document.querySelectorAll(".lang-btn");
-  const link=document.getElementById("guide-link");
   function setLanguage(lang){
     if(!copy[lang]) lang="es";
     const data=copy[lang];
-    document.documentElement.lang=data.lang;
+    document.documentElement.lang=lang;
     document.title=data.title;
-    document.getElementById("welcome-text").textContent=data.welcome;
-    link.textContent=data.button;
-    link.href="prosper.html?lang="+lang;
+    document.getElementById("maintenance-message").textContent=data.message;
     buttons.forEach(function(button){
       const active=button.dataset.lang===lang;
       button.classList.toggle("active",active);
@@ -56,11 +50,9 @@ p{color:#94a3b8;font-size:1.15rem;line-height:1.6;margin:0 auto;max-width:620px}
     try{localStorage.setItem("trading500-language",lang);}catch(error){}
   }
   buttons.forEach(function(button){button.addEventListener("click",function(){setLanguage(button.dataset.lang);});});
-let initial="en";
-try{
-  initial=localStorage.getItem("trading500-language")||"en";
-}catch(error){}
-setLanguage(initial);
+  let initial="en";
+  try{initial=localStorage.getItem("trading500-language")||"en";}catch(error){}
+  setLanguage(initial);
 })();
 </script>
 </body>
