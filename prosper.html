@@ -346,8 +346,6 @@ li {
 <div class="guide-container">
 
     <h1 id="main-title"></h1>
-    <p><strong id="author-tag"></strong></p>
-
     <div class="cover-frame">
         <img class="cover-image" src="cover.png" alt="Trading 500 Investments — cover illustration by J. Victory">
         <div class="cover-subtitle" id="cover-subtitle">Keys to Trading and Investing in the S&amp;P 500</div>
@@ -430,8 +428,7 @@ const sectionIds = [
 const translations = {
 en: {
     title: "Simplified Keys to Trading\nand Investing in the\nS&P 500 Index",
-    coverSubtitle: "Keys to Trading and Investing in the S&P 500",
-    author: "By J. Victory",
+    coverSubtitle: "Practical Tips to Success",
     homeButton: "Return to Home",
     indexTitle: "➢ Manual Index",
     indexSubtitle: "(If you want to start from scratch, consult this topic index)",
@@ -520,8 +517,7 @@ en: {
 
 es: {
     title: "Claves simplificadas para hacer\ntrading e invertir en el\níndice S&P 500",
-    coverSubtitle: "Claves para hacer trading e invertir en el índice S&P 500",
-    author: ,
+    coverSubtitle: "Consejos prácticos para alcanzar el éxito",
     homeButton: "Regresar a la portada",
     indexTitle: "➢ Indice del Manual",
     indexSubtitle: "(si deseas empezar desde cero, consulta este índice de temas)",
@@ -610,8 +606,7 @@ es: {
 
 fr: {
     title: "Clés simplifiées pour trader\net investir dans l’indice\nS&P 500",
-    coverSubtitle: "Clés pour trader et investir dans l’indice S&P 500",
-    author: "Par J. Victory",
+    coverSubtitle: "Conseils pratiques pour réussir",
     homeButton: "Retour à la page d’accueil",
     indexTitle: "➢ Index du manuel",
     indexSubtitle: "(Si vous souhaitez repartir de zéro, consultez cet index thématique)",
@@ -855,7 +850,6 @@ function changeLanguage(lang) {
     document.documentElement.lang = lang;
 
     document.getElementById("main-title").innerText = translations[lang].title;
-    document.getElementById("author-tag").innerText = translations[lang].author;
     document.getElementById("home-btn").innerText = translations[lang].homeButton;
     document.getElementById("cover-subtitle").innerText = translations[lang].coverSubtitle;
     document.getElementById("index-title").innerText = translations[lang].indexTitle;
