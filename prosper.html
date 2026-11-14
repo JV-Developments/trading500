@@ -71,6 +71,60 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
+
+/* Public introduction: concise overview of the platform */
+.platform-intro {
+    margin: 34px 0 42px;
+    padding: 24px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+}
+
+.platform-intro > h2 {
+    margin-top: 0;
+}
+
+.platform-intro .intro-lead {
+    color: #cbd5e1;
+    line-height: 1.7;
+}
+
+.approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.approach-card {
+    padding: 16px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 7px;
+}
+
+.approach-card h3 {
+    margin: 0 0 9px;
+    font-size: 1.05rem;
+}
+
+.approach-card p {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.platform-disclaimer {
+    margin: 18px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid #334155;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
 h1, h2, h3 {
     color: #38bdf8;
 }
@@ -317,6 +371,15 @@ li {
         padding: 22px 18px;
     }
 
+    .platform-intro {
+        padding: 18px;
+        margin: 26px 0 34px;
+    }
+
+    .approach-grid {
+        grid-template-columns: 1fr;
+    }
+
     h1 {
         font-size: 1.8rem;
         text-align: center;
@@ -350,6 +413,26 @@ li {
         <img class="cover-image" src="cover.png" alt="Trading 500 Investments — cover illustration by J. Victory">
         <div class="cover-subtitle" id="cover-subtitle">Keys to Trading and Investing in the S&amp;P 500</div>
     </div>
+
+    <section class="platform-intro" aria-labelledby="platform-intro-title">
+        <h2 id="platform-intro-title">What Is Trading 500 Investments?</h2>
+        <p class="intro-lead" id="platform-intro-lead"></p>
+        <div class="approach-grid">
+            <article class="approach-card">
+                <h3 id="approach-shares-title"></h3>
+                <p id="approach-shares-text"></p>
+            </article>
+            <article class="approach-card">
+                <h3 id="approach-spreads-title"></h3>
+                <p id="approach-spreads-text"></p>
+            </article>
+            <article class="approach-card">
+                <h3 id="approach-cash-title"></h3>
+                <p id="approach-cash-text"></p>
+            </article>
+        </div>
+        <p class="platform-disclaimer" id="platform-disclaimer"></p>
+    </section>
 
     <h2 id="index-title"></h2>
     <p id="index-subtitle"></p>
@@ -413,6 +496,42 @@ li {
 </div>
 
 <script>
+const platformIntroTranslations = {
+    en: {
+        title: "What Is Trading 500 Investments?",
+        lead: "Trading 500 Investments is an educational project focused on the S&amp;P 500, combining a long-term investing perspective with a practical approach to market trading. Its Market Decision Dashboard is being developed to help users assess market conditions and understand when a bullish, bearish, or cash position may be appropriate.",
+        sharesTitle: "SPY Shares — Long-Term Investing",
+        sharesText: "Investors may choose to buy shares of the SPY ETF and hold them over the long term, seeking to participate in the performance of the S&amp;P 500. This approach does not require frequent trading, but the investment can lose value as well as gain value.",
+        spreadsTitle: "Options Spreads — Active Trading",
+        spreadsText: "The website's preferred trading strategies are options spreads, including Bull Call Spreads for bullish conditions and Bear Put Spreads for bearish conditions. These defined-risk strategies still involve potential losses, costs, and expiration dates that must be understood before trading.",
+        cashTitle: "CASH — Sometimes, No Trade Is Best",
+        cashText: "When conditions do not present a sufficiently clear opportunity, staying in cash and avoiding a trade is a valid decision. The Dashboard is designed to consider this possibility alongside bullish and bearish scenarios.",
+        disclaimer: "The Dashboard is currently in private paper-trading development and testing. It is not a public signal service, does not place trades, and does not guarantee results. This material is educational, not individualized investment advice."
+    },
+    es: {
+        title: "¿Qué es Trading 500 Investments?",
+        lead: "Trading 500 Investments es un proyecto educativo enfocado en el S&amp;P 500 que combina una perspectiva de inversión a largo plazo con un enfoque práctico del trading. Su Market Decision Dashboard está en desarrollo para ayudar a evaluar las condiciones del mercado y comprender cuándo podría ser apropiado un escenario alcista, bajista o permanecer en efectivo.",
+        sharesTitle: "Participaciones de SPY — Inversión a largo plazo",
+        sharesText: "El inversionista puede comprar participaciones del ETF SPY y mantenerlas a largo plazo, buscando participar en el desempeño del S&amp;P 500. Este enfoque no requiere operar constantemente, pero la inversión puede tanto subir como perder valor.",
+        spreadsTitle: "Options Spreads — Trading activo",
+        spreadsText: "Las estrategias preferidas del sitio son los spreads de opciones, incluidos Bull Call Spreads para escenarios alcistas y Bear Put Spreads para escenarios bajistas. Aunque estas estrategias tienen riesgo definido, implican posibles pérdidas, costos y fechas de vencimiento que deben comprenderse antes de operar.",
+        cashTitle: "CASH — A veces, lo mejor es no operar",
+        cashText: "Cuando las condiciones no presentan una oportunidad suficientemente clara, permanecer en efectivo y evitar una operación también es una decisión válida. El Dashboard contempla esta posibilidad junto con los escenarios alcistas y bajistas.",
+        disclaimer: "Actualmente, el Dashboard se encuentra en desarrollo y pruebas privadas mediante paper trading. No es un servicio público de señales, no ejecuta operaciones y no garantiza resultados. Este contenido es educativo y no constituye asesoramiento de inversión personalizado."
+    },
+    fr: {
+        title: "Qu’est-ce que Trading 500 Investments ?",
+        lead: "Trading 500 Investments est un projet éducatif consacré au S&amp;P 500, qui associe une approche de l’investissement à long terme à une méthode pratique de trading. Son Market Decision Dashboard est en cours de développement afin d’aider à évaluer les conditions du marché et à comprendre quand un scénario haussier, baissier ou une position en liquidités pourrait être approprié.",
+        sharesTitle: "Parts de SPY — Investissement à long terme",
+        sharesText: "Les investisseurs peuvent choisir d’acheter des parts de l’ETF SPY et de les conserver à long terme afin de participer à l’évolution du S&amp;P 500. Cette approche ne nécessite pas de transactions fréquentes, mais la valeur de l’investissement peut aussi bien augmenter que diminuer.",
+        spreadsTitle: "Options Spreads — Trading actif",
+        spreadsText: "Les stratégies de trading privilégiées du site sont les spreads d’options, notamment les Bull Call Spreads dans un contexte haussier et les Bear Put Spreads dans un contexte baissier. Ces stratégies à risque défini comportent néanmoins des pertes potentielles, des coûts et des dates d’expiration qu’il faut comprendre avant toute opération.",
+        cashTitle: "CASH — Parfois, mieux vaut ne pas trader",
+        cashText: "Lorsque les conditions ne présentent pas d’occasion suffisamment claire, rester en liquidités et éviter une opération constitue aussi une décision valable. Le Dashboard prend cette possibilité en compte, au même titre que les scénarios haussiers et baissiers.",
+        disclaimer: "Le Dashboard est actuellement en phase de développement et de tests privés en paper trading. Il ne s’agit pas d’un service public de signaux ; il ne passe pas d’ordres et ne garantit aucun résultat. Ce contenu est éducatif et ne constitue pas un conseil en investissement personnalisé."
+    }
+};
+
 const sectionIds = [
     "preface",
     "market",
@@ -695,6 +814,20 @@ fr: {
 };
 
 /* Construye el índice y los enlaces de regreso */
+function renderPlatformIntro(lang) {
+    const content = platformIntroTranslations[lang];
+    if (!content) return;
+    document.getElementById("platform-intro-title").textContent = content.title;
+    document.getElementById("platform-intro-lead").innerHTML = content.lead;
+    document.getElementById("approach-shares-title").textContent = content.sharesTitle;
+    document.getElementById("approach-shares-text").innerHTML = content.sharesText;
+    document.getElementById("approach-spreads-title").textContent = content.spreadsTitle;
+    document.getElementById("approach-spreads-text").innerHTML = content.spreadsText;
+    document.getElementById("approach-cash-title").textContent = content.cashTitle;
+    document.getElementById("approach-cash-text").innerHTML = content.cashText;
+    document.getElementById("platform-disclaimer").textContent = content.disclaimer;
+}
+
 function buildNavigation(lang) {
     const listContainer = document.getElementById("contents-list");
     listContainer.innerHTML = "";
@@ -848,6 +981,7 @@ function changeLanguage(lang) {
     if (activeBtn) activeBtn.classList.add("active");
 
     document.documentElement.lang = lang;
+    renderPlatformIntro(lang);
 
     document.getElementById("main-title").innerText = translations[lang].title;
     document.getElementById("home-btn").innerText = translations[lang].homeButton;
