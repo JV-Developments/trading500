@@ -125,6 +125,21 @@ body {
     line-height: 1.6;
 }
 
+.getting-started-body a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.getting-started-body a:hover {
+    color: #f8fafc;
+    text-decoration: underline;
+}
+
+.getting-started-body strong {
+    color: #f8fafc;
+}
+
 h1, h2, h3 {
     color: #38bdf8;
 }
@@ -434,6 +449,9 @@ li {
         <p class="platform-disclaimer" id="platform-disclaimer"></p>
     </section>
 
+    <h2 id="gettingStarted-heading"></h2>
+    <div id="gettingStarted-body" class="getting-started-body"></div>
+
     <h2 id="index-title"></h2>
     <p id="index-subtitle"></p>
 
@@ -533,6 +551,7 @@ const platformIntroTranslations = {
 };
 
 const sectionIds = [
+    "gettingStarted",
     "preface",
     "market",
     "spy",
@@ -555,6 +574,7 @@ en: {
     backToContents: "↑ Back to Contents",
 
     contents: [
+        "Getting Started: Two Ways to Participate in the Market",
         "Preface",
         "The Stock Exchange: Business Hours and Trading Days",
         "The Index We Trade: S&P 500",
@@ -564,6 +584,16 @@ en: {
         "Above All, Take Notes and Keep a Record of Everything You Do",
         "A Reliable Internet Connection: An Essential Requirement",
         "The Broker… Will Execute Your Orders"
+    ],
+
+    gettingStartedHeading: "Getting Started: Two Ways to Participate in the Market",
+    gettingStartedParagraphs: [
+        "Trading 500 Investments recognizes two complementary approaches to participating in the stock market. You may choose one approach or combine both according to your goals, experience, and risk tolerance.",
+        "<strong>1. Long-Term Investing: Buy and Hold SPY.</strong> One approach is to purchase shares of the SPDR S&amp;P 500 ETF (SPY) and hold them as a long-term investment. You generally need a brokerage account that allows ETF trading. Before investing, learn how ETFs work, review the fund information, and understand the risks. Free resource: <a href=\"https://www.investor.gov/introduction-investing/investing-basics/investment-products/mutual-funds-and-exchange-traded-2\" target=\"_blank\" rel=\"noopener noreferrer\">Investor.gov — Understanding Exchange-Traded Funds (ETFs)</a>.",
+        "<strong>2. Active Trading: Options Spreads.</strong> Trading 500 Investments focuses primarily on two directional strategies: <strong>Bull Call Spread</strong> for a bullish market outlook and <strong>Bear Put Spread</strong> for a bearish market outlook. These strategies combine two option positions and, when properly structured, have a defined maximum risk and potential reward. Options nevertheless involve risks and require additional knowledge and approval from your brokerage firm. Free resources: <a href=\"https://www.optionseducation.org/optionsoverview/getting-started-with-options\" target=\"_blank\" rel=\"noopener noreferrer\">OIC — Getting Started with Options</a>; <a href=\"https://www.optionseducation.org/theoptionseducationcenter/learning-resources-by-topic/simple-spreads-and-verticals\" target=\"_blank\" rel=\"noopener noreferrer\">Simple Spreads and Verticals</a>; and <a href=\"https://www.optionseducation.org/theoptionseducationcenter/occ-learning\" target=\"_blank\" rel=\"noopener noreferrer\">OCC Learning</a>.",
+        "<strong>Where the Trading 500 Dashboard Fits In.</strong> Learning how to invest and structure a trade is the first step. The Market Decision Dashboard serves a different purpose: it evaluates technical and fundamental market conditions and presents a market assessment along with a preferred trading direction or strategy when conditions support one. Depending on the market environment, it may favor a bullish approach, a bearish approach, or <strong>CASH — NO TRADE</strong> when conditions do not justify taking a position.",
+        "The Dashboard does not place orders or manage brokerage accounts. It provides information to help users evaluate market conditions and make their own decisions. Long-term SPY investing and options spread trading do not have to be competing choices; they can be complementary approaches within an individual's overall investment plan.",
+        "<strong>Understand the market. Learn the strategies. Evaluate the risk. Make informed decisions.</strong> Educational information only. This material is not personalized investment advice or a recommendation to buy or sell any security. Investing and options trading involve risk, including the possible loss of capital. Options are not suitable for every investor."
     ],
 
     prefaceHeading: "Preface",
@@ -644,6 +674,7 @@ es: {
     backToContents: "↑ Volver al Contenido",
 
     contents: [
+        "Cómo comenzar: dos maneras de participar en el mercado",
         "Prefacio",
         "La Bolsa de Valores, horas y días de negocio",
         "El índice que transamos: S&P 500",
@@ -653,6 +684,16 @@ es: {
         "Ante todo, toma apuntes y registra todo lo que haces",
         "Conexión a Internet confiable, un inamovible",
         "Un broker se ligará a tú cuenta bancaria"
+    ],
+
+    gettingStartedHeading: "Cómo comenzar: dos maneras de participar en el mercado",
+    gettingStartedParagraphs: [
+        "Trading 500 Investments reconoce dos enfoques complementarios para participar en el mercado bursátil. Puedes elegir uno de ellos o combinar ambos, según tus objetivos, experiencia y tolerancia al riesgo.",
+        "<strong>1. Inversión a largo plazo: comprar y mantener SPY.</strong> Una alternativa es comprar participaciones del ETF SPDR S&amp;P 500 (SPY) y mantenerlas como inversión a largo plazo. Generalmente necesitas una cuenta de corretaje que permita operar ETF. Antes de invertir, aprende cómo funcionan estos fondos, revisa la información del fondo y comprende los riesgos. Recurso gratuito: <a href=\"https://www.investor.gov/introduction-investing/investing-basics/investment-products/mutual-funds-and-exchange-traded-2\" target=\"_blank\" rel=\"noopener noreferrer\">Investor.gov — Comprender los fondos cotizados en bolsa (ETF)</a>.",
+        "<strong>2. Trading activo: spreads de opciones.</strong> Trading 500 Investments se enfoca principalmente en dos estrategias direccionales: <strong>Bull Call Spread</strong> para un panorama alcista y <strong>Bear Put Spread</strong> para un panorama bajista. Estas estrategias combinan dos posiciones de opciones y, cuando están correctamente estructuradas, tienen un riesgo máximo y una ganancia potencial definidos. Sin embargo, las opciones implican riesgos y requieren conocimientos adicionales y la aprobación correspondiente de tu firma de corretaje. Recursos gratuitos: <a href=\"https://www.optionseducation.org/optionsoverview/getting-started-with-options\" target=\"_blank\" rel=\"noopener noreferrer\">OIC — Cómo comenzar con las opciones</a>; <a href=\"https://www.optionseducation.org/theoptionseducationcenter/learning-resources-by-topic/simple-spreads-and-verticals\" target=\"_blank\" rel=\"noopener noreferrer\">Spreads simples y estrategias verticales</a>; y <a href=\"https://www.optionseducation.org/theoptionseducationcenter/occ-learning\" target=\"_blank\" rel=\"noopener noreferrer\">OCC Learning</a>.",
+        "<strong>¿Dónde encaja el Dashboard de Trading 500?</strong> Aprender a invertir y a estructurar una operación es el primer paso. El Market Decision Dashboard cumple una función diferente: evalúa las condiciones técnicas y fundamentales del mercado y presenta una evaluación junto con una dirección o estrategia de trading preferida cuando las condiciones lo justifican. Dependiendo del entorno del mercado, puede favorecer un enfoque alcista, uno bajista o <strong>CASH — NO TRADE</strong> cuando las condiciones no justifican asumir una posición.",
+        "El Dashboard no coloca órdenes ni administra cuentas de corretaje. Proporciona información para ayudar al usuario a evaluar las condiciones del mercado y tomar sus propias decisiones. La inversión a largo plazo en SPY y el trading con spreads de opciones no tienen por qué ser alternativas excluyentes; pueden complementarse dentro del plan de inversión de una persona.",
+        "<strong>Comprende el mercado. Aprende las estrategias. Evalúa el riesgo. Toma decisiones informadas.</strong> Contenido exclusivamente educativo. Este material no constituye asesoramiento financiero personalizado ni una recomendación para comprar o vender valores. La inversión y el trading con opciones implican riesgos, incluida la posible pérdida de capital. Las opciones no son adecuadas para todos los inversionistas."
     ],
 
     prefaceHeading: "Prefacio",
@@ -733,6 +774,7 @@ fr: {
     backToContents: "↑ Retour au sommaire",
 
     contents: [
+        "Pour commencer : deux façons de participer au marché",
         "Préface",
         "La Bourse : horaires et jours de négociation",
         "L’indice que nous négocions : S&P 500",
@@ -742,6 +784,16 @@ fr: {
         "Avant tout, prenez des notes et consignez tout ce que vous faites",
         "Une connexion Internet fiable : une nécessité absolue",
         "Le courtier… exécutera vos ordres"
+    ],
+
+    gettingStartedHeading: "Pour commencer : deux façons de participer au marché",
+    gettingStartedParagraphs: [
+        "Trading 500 Investments reconnaît deux approches complémentaires pour participer au marché boursier. Vous pouvez choisir l'une de ces approches ou combiner les deux, selon vos objectifs, votre expérience et votre tolérance au risque.",
+        "<strong>1. Investissement à long terme : acheter et conserver SPY.</strong> Une première approche consiste à acheter des parts du fonds négocié en bourse SPDR S&amp;P 500 (SPY) et à les conserver comme investissement à long terme. Vous avez généralement besoin d'un compte de courtage permettant de négocier des ETF. Avant d'investir, apprenez comment fonctionnent ces fonds, consultez les informations du fonds et comprenez les risques. Ressource gratuite : <a href=\"https://www.investor.gov/introduction-investing/investing-basics/investment-products/mutual-funds-and-exchange-traded-2\" target=\"_blank\" rel=\"noopener noreferrer\">Investor.gov — Comprendre les fonds négociés en bourse (ETF)</a>.",
+        "<strong>2. Trading actif : les spreads sur options.</strong> Trading 500 Investments se concentre principalement sur deux stratégies directionnelles : le <strong>Bull Call Spread</strong> pour un marché haussier et le <strong>Bear Put Spread</strong> pour un marché baissier. Ces stratégies combinent deux positions sur options et, lorsqu'elles sont correctement structurées, présentent un risque maximal et un gain potentiel définis. Les options comportent néanmoins des risques et nécessitent des connaissances supplémentaires ainsi que l'approbation de votre société de courtage. Ressources gratuites : <a href=\"https://www.optionseducation.org/optionsoverview/getting-started-with-options\" target=\"_blank\" rel=\"noopener noreferrer\">OIC — Débuter avec les options</a> ; <a href=\"https://www.optionseducation.org/theoptionseducationcenter/learning-resources-by-topic/simple-spreads-and-verticals\" target=\"_blank\" rel=\"noopener noreferrer\">Spreads simples et stratégies verticales</a> ; et <a href=\"https://www.optionseducation.org/theoptionseducationcenter/occ-learning\" target=\"_blank\">OCC Learning</a>.",
+        "<strong>Quel est le rôle du Dashboard Trading 500 ?</strong> Apprendre à investir et à structurer une opération est la première étape. Le Market Decision Dashboard remplit une fonction différente : il évalue les conditions techniques et fondamentales du marché et présente une évaluation ainsi qu'une orientation ou une stratégie de trading privilégiée lorsque les conditions le justifient. Selon l'environnement du marché, il peut privilégier une approche haussière, une approche baissière ou <strong>CASH — NO TRADE</strong> lorsque les conditions ne justifient pas de prendre une position.",
+        "Le Dashboard ne passe pas d'ordres et ne gère pas les comptes de courtage. Il fournit des informations pour aider l'utilisateur à évaluer les conditions du marché et à prendre ses propres décisions. L'investissement à long terme dans SPY et le trading avec des spreads sur options ne sont pas nécessairement des choix opposés ; ces deux approches peuvent être complémentaires dans un plan d'investissement personnel.",
+        "<strong>Comprenez le marché. Apprenez les stratégies. Évaluez les risques. Prenez des décisions éclairées.</strong> Contenu fourni à des fins éducatives uniquement. Ce document ne constitue pas un conseil financier personnalisé ni une recommandation d'achat ou de vente de titres. L'investissement et le trading d'options comportent des risques, notamment la perte éventuelle du capital investi. Les options ne conviennent pas à tous les investisseurs."
     ],
 
     prefaceHeading: "Préface",
