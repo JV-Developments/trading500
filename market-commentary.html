@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f172a">
+<title>Market Commentary | Trading 500 Investments</title>
+<style>
+:root{
+  --bg:#0f172a;--card:#1e293b;--inner:#172337;--line:#334155;
+  --text:#f8fafc;--muted:#94a3b8;--blue:#38bdf8;--green:#34d399;
+  --gold:#fbbf24;--red:#f87171;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;padding:28px 18px 48px;background:var(--bg);color:var(--text);
+  font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;line-height:1.6
+}
+main{width:min(100%,1000px);margin:0 auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.brand{font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.languages{display:flex;gap:8px;flex-wrap:wrap}
+.languages button,.action{
+  border:1px solid #475569;border-radius:6px;background:transparent;color:#cbd5e1;
+  padding:8px 12px;font:inherit;font-size:.9rem;cursor:pointer
+}
+.languages button.active,.languages button:hover,.action:hover{border-color:var(--blue);color:var(--blue)}
+.hero,.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:25px;margin-bottom:18px}
+.hero{background:linear-gradient(135deg,#1e293b,#172b45)}
+h1{font-size:clamp(2rem,5vw,2.8rem);line-height:1.15;margin:0 0 10px;letter-spacing:-.04em}
+h2{font-size:1.2rem;margin:0 0 14px}
+h3{font-size:1rem;margin:0 0 5px}
+p{margin:7px 0;color:#cbd5e1}
+.subtle,.meta,.muted{color:var(--muted);font-size:.9rem}
+.statusline{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.pill{display:inline-block;border-radius:999px;padding:5px 11px;font-size:.8rem;font-weight:700;background:#334155;color:#e2e8f0}
+.pill.good{background:#064e3b;color:#a7f3d0}
+.pill.warn{background:#713f12;color:#fde68a}
+.pill.danger{background:#7f1d1d;color:#fecaca}
+.pill.neutral{background:#334155;color:#cbd5e1}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.metric{background:var(--inner);border:1px solid #29384d;border-radius:10px;padding:14px;min-width:0}
+.metric .label{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+.metric .value{font-size:1.08rem;font-weight:700;overflow-wrap:anywhere;margin-top:4px}
+.news-list{display:grid;gap:12px}
+.news-item{padding:13px 14px;border:1px solid #29384d;border-radius:9px;background:var(--inner)}
+.news-item a{color:#e0f2fe;text-decoration:none;font-weight:600}
+.news-item a:hover{text-decoration:underline;color:var(--blue)}
+.news-meta{font-size:.8rem;color:var(--muted);margin-top:5px}
+.notice{border-left:3px solid var(--gold);padding:10px 13px;background:#292b2d;border-radius:4px;color:#cbd5e1;font-size:.88rem;margin-top:14px}
+.error{border-left-color:var(--red)}
+.footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 3px;color:var(--muted);font-size:.82rem}
+button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+@media(max-width:620px){
+  body{padding:18px 12px 34px}.hero,.panel{padding:19px}
+  .grid{grid-template-columns:1fr 1fr;gap:9px}.metric{padding:11px}
+  .metric .value{font-size:.98rem}
+}
+@media(max-width:390px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <div class="topbar">
+    <div class="brand">Trading 500 Investments</div>
+    <nav class="languages" aria-label="Select language">
+      <button type="button" data-lang="en" class="active">English</button>
+      <button type="button" data-lang="es">Español</button>
+      <button type="button" data-lang="fr">Français</button>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <h1 id="title">Market Commentary</h1>
+    <p id="intro">A daily overview of market context, economic headlines, geopolitical risk and trading cautions.</p>
+    <div class="statusline">
+      <span class="pill neutral" id="publication-status">Loading commentary…</span>
+      <span class="meta" id="updated-at">—</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 id="outlook-title">Market Outlook</h2>
+    <p id="snapshot-label" class="subtle">Latest saved dashboard snapshot</p>
+    <div class="grid" id="market-metrics">
+      <div class="metric"><div class="label">SPY</div><div class="value">—</div></div>
+      <div class="metric"><div class="label">Market Bias</div><div class="value">—</div></div>
+      <div class="metric"><div class="label">VIX</div><div class="value">—</div></div>
+      <div class="metric"><div class="label">10Y Yield</div><div class="value">—</div></div>
+      <div class="metric"><div class="label">ES Futures</div><div class="value">—</div></div>
+      <div class="metric"><div class="label">Oil</div><div class="value">—</div></div>
+      <div class="metric"><div class="label">Support</div><div class="value">—</div></div>
+      <div class="metric"><div class="label">Resistance</div><div class="value">—</div></div>
+    </div>
+    <div class="notice" id="snapshot-notice">The dashboard snapshot is not a live pre-market signal.</div>
+  </section>
+
+  <section class="panel">
+    <h2 id="geo-title">Geopolitical Risk</h2>
+    <div class="statusline">
+      <span class="pill neutral" id="geo-status">VERIFY</span>
+      <span id="geo-note" class="subtle">Geopolitical status requires verification.</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 id="economic-title">Economic Events & Watchlist</h2>
+    <p id="economic-desc" class="subtle">Recent headlines related to inflation, employment, growth and Federal Reserve policy.</p>
+    <div class="news-list" id="economic-news"><p class="muted">Loading…</p></div>
+    <div class="notice" id="economic-notice">Headlines are not an official economic release calendar. Confirm event dates and times with the official source.</div>
+  </section>
+
+  <section class="panel">
+    <h2 id="market-news-title">Market Headlines</h2>
+    <div class="news-list" id="market-news"><p class="muted">Loading…</p></div>
+    <div class="notice" id="market-notice">Headlines provide context and are not trading recommendations.</div>
+  </section>
+
+  <section class="panel">
+    <h2 id="cautions-title">Trading Cautions</h2>
+    <ul id="cautions-list">
+      <li>Confirm the freshness of market data before making a decision.</li>
+      <li>Do not treat a single headline as confirmation of a market direction.</li>
+      <li>Respect position sizing, defined risk and the possibility of gaps.</li>
+    </ul>
+  </section>
+
+  <div class="footer">
+    <span id="disclaimer">For educational purposes only. Not investment advice or a trade signal.</span>
+    <button class="action" id="refresh-button" type="button">Refresh</button>
+  </div>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  const API_URL = "https://script.google.com/macros/s/AKfycbwFlkMJyXAZxtfI60BYmJ7bz2kJQsqrcKj2Z_lTBgyhulhVDrz5QttoFjOmEohaXg37/exec";
+
+  const COPY = {
+    en:{
+      title:"Market Commentary",
+      intro:"A daily overview of market context, economic headlines, geopolitical risk and trading cautions.",
+      loading:"Loading commentary…",loaded:"Commentary published",unavailable:"Commentary not available",
+      outlook:"Market Outlook",snapshot:"Latest saved dashboard snapshot",
+      snapshotNotice:"The values below are from the latest saved T_Decision session. They are not live pre-market prices or a new trading signal.",
+      geo:"Geopolitical Risk",economic:"Economic Events & Watchlist",
+      economicDesc:"Recent headlines related to inflation, employment, growth and Federal Reserve policy.",
+      economicNotice:"These are news headlines, not an official economic release calendar. Confirm event dates and times with the official source.",
+      marketNews:"Market Headlines",marketNotice:"Headlines provide context and are not trading recommendations.",
+      cautions:"Trading Cautions",
+      cautionItems:[
+        "Confirm the freshness of market data before making a decision.",
+        "Do not treat a single headline as confirmation of a market direction.",
+        "Respect position sizing, defined risk and the possibility of gaps."
+      ],
+      disclaimer:"For educational purposes only. Not investment advice or a trade signal.",
+      refresh:"Refresh",asOf:"Snapshot date",noSnapshot:"No saved dashboard snapshot is available.",
+      noHeadlines:"No headlines were available from the feed at this time.",
+      feedError:"The commentary has not been published yet, or its data endpoint is not connected.",
+      noDate:"Date not available",lastUpdated:"Last updated",
+      labels:{spy:"SPY",bias:"Market Bias",vix:"VIX",yield:"10Y Yield",es:"ES Futures",oil:"Oil",support:"Support",resistance:"Resistance"},
+      geoNotes:{
+        NO_ALERT:"No qualifying severe or elevated alerts were detected in the monitored feed. This does not mean geopolitical risk is zero.",
+        SITUATION:"Elevated geopolitical risk signals were detected. Monitor developments and verify important reports.",
+        ESCALATION:"Multiple severe reports met the GEO module threshold. Review risk exposure and verify developments from independent sources.",
+        VERIFY:"The GEO feed or its evidence requires verification. Do not interpret this status as an all-clear.",
+        CLEARED:"The existing decision module reports CLEARED. Continue monitoring new developments."
+      }
+    },
+    es:{
+      title:"Comentario del Mercado",
+      intro:"Resumen diario del contexto del mercado, noticias económicas, riesgo geopolítico y precauciones de trading.",
+      loading:"Cargando comentario…",loaded:"Comentario publicado",unavailable:"Comentario no disponible",
+      outlook:"Perspectiva del Mercado",snapshot:"Último resumen guardado del Dashboard",
+      snapshotNotice:"Los valores siguientes corresponden a la última sesión guardada en T_Decision. No son precios premarket en vivo ni una nueva señal de trading.",
+      geo:"Riesgo Geopolítico",economic:"Eventos Económicos y Seguimiento",
+      economicDesc:"Titulares recientes sobre inflación, empleo, crecimiento y política de la Reserva Federal.",
+      economicNotice:"Estos son titulares de noticias, no un calendario oficial de publicaciones económicas. Confirma fechas y horas con la fuente oficial.",
+      marketNews:"Noticias del Mercado",marketNotice:"Los titulares aportan contexto y no constituyen recomendaciones de trading.",
+      cautions:"Precauciones de Trading",
+      cautionItems:[
+        "Confirma que los datos del mercado estén actualizados antes de decidir.",
+        "No consideres un solo titular como confirmación de una dirección del mercado.",
+        "Respeta el tamaño de posición, el riesgo definido y la posibilidad de movimientos bruscos."
+      ],
+      disclaimer:"Solo con fines educativos. No constituye asesoría de inversión ni señal de operación.",
+      refresh:"Actualizar",asOf:"Fecha del resumen",noSnapshot:"No hay un resumen guardado del Dashboard.",
+      noHeadlines:"No hay titulares disponibles en este momento.",
+      feedError:"El comentario aún no se ha publicado o el enlace de datos no está conectado.",
+      noDate:"Fecha no disponible",lastUpdated:"Última actualización",
+      labels:{spy:"SPY",bias:"Sesgo del Mercado",vix:"VIX",yield:"Rendimiento 10 años",es:"Futuros ES",oil:"Petróleo",support:"Soporte",resistance:"Resistencia"},
+      geoNotes:{
+        NO_ALERT:"No se detectaron alertas graves o elevadas que cumplan los criterios del feed monitoreado. Esto no significa que el riesgo geopolítico sea cero.",
+        SITUATION:"Se detectaron señales de mayor riesgo geopolítico. Sigue los acontecimientos y verifica los informes importantes.",
+        ESCALATION:"Varios informes graves alcanzaron el umbral del módulo GEO. Revisa la exposición al riesgo y verifica los hechos con fuentes independientes.",
+        VERIFY:"El feed GEO o sus evidencias requieren verificación. No interpretes este estado como una señal de tranquilidad.",
+        CLEARED:"El módulo de decisiones existente informa CLEARED. Continúa vigilando nuevos acontecimientos."
+      }
+    },
+    fr:{
+      title:"Commentaire des Marchés",
+      intro:"Aperçu quotidien du marché, des actualités économiques, du risque géopolitique et des précautions de trading.",
+      loading:"Chargement du commentaire…",loaded:"Commentaire publié",unavailable:"Commentaire indisponible",
+      outlook:"Perspectives du Marché",snapshot:"Dernier instantané enregistré du Dashboard",
+      snapshotNotice:"Les valeurs ci-dessous proviennent de la dernière session enregistrée dans T_Decision. Ce ne sont pas des cours pré-marché en direct ni un nouveau signal de trading.",
+      geo:"Risque Géopolitique",economic:"Événements Économiques et Suivi",
+      economicDesc:"Actualités récentes sur l'inflation, l'emploi, la croissance et la politique de la Réserve fédérale.",
+      economicNotice:"Il s'agit de titres d'actualité, pas d'un calendrier officiel des publications économiques. Vérifiez les dates et heures auprès de la source officielle.",
+      marketNews:"Actualités des Marchés",marketNotice:"Ces titres apportent du contexte et ne constituent pas des recommandations de trading.",
+      cautions:"Précautions de Trading",
+      cautionItems:[
+        "Vérifiez l'actualité des données de marché avant toute décision.",
+        "Ne considérez pas un seul titre comme une confirmation de la direction du marché.",
+        "Respectez la taille des positions, le risque défini et la possibilité de mouvements brusques."
+      ],
+      disclaimer:"À des fins éducatives uniquement. Ceci ne constitue ni un conseil en investissement ni un signal de trading.",
+      refresh:"Actualiser",asOf:"Date de l'instantané",noSnapshot:"Aucun instantané du Dashboard n'est disponible.",
+      noHeadlines:"Aucun titre n'est disponible pour le moment.",
+      feedError:"Le commentaire n'a pas encore été publié ou la connexion aux données n'est pas configurée.",
+      noDate:"Date indisponible",lastUpdated:"Dernière mise à jour",
+      labels:{spy:"SPY",bias:"Orientation du Marché",vix:"VIX",yield:"Rendement à 10 ans",es:"Contrats ES",oil:"Pétrole",support:"Support",resistance:"Résistance"},
+      geoNotes:{
+        NO_ALERT:"Aucune alerte grave ou élevée répondant aux critères du flux surveillé n'a été détectée. Cela ne signifie pas que le risque géopolitique est nul.",
+        SITUATION:"Des signaux de risque géopolitique accru ont été détectés. Suivez l'évolution et vérifiez les informations importantes.",
+        ESCALATION:"Plusieurs rapports graves ont atteint le seuil du module GEO. Réévaluez l'exposition au risque et vérifiez les informations auprès de sources indépendantes.",
+        VERIFY:"Le flux GEO ou ses éléments nécessitent une vérification. N'interprétez pas ce statut comme un feu vert.",
+        CLEARED:"Le module de décision existant indique CLEARED. Continuez à surveiller les nouveaux développements."
+      }
+    }
+  };
+
+  let language = "en";
+  let lastPayload = null;
+
+  function el(id){return document.getElementById(id);}
+  function setText(id,value){if(el(id))el(id).textContent=value==null?"":String(value);}
+  function safeValue(value){return value==null||String(value).trim()===""?"—":String(value);}
+  function currentCopy(){return COPY[language];}
+
+  function getInitialLanguage(){
+    const requested=new URLSearchParams(location.search).get("lang");
+    if(["en","es","fr"].includes(requested))return requested;
+    try{
+      const saved=localStorage.getItem("trading500-language");
+      if(["en","es","fr"].includes(saved))return saved;
+    }catch(e){}
+    return "en";
+  }
+
+  function setLanguage(next){
+    language=COPY[next]?next:"en";
+    const c=currentCopy();
+    document.documentElement.lang=language;
+    document.title=c.title+" | Trading 500 Investments";
+    setText("title",c.title);setText("intro",c.intro);
+    setText("outlook-title",c.outlook);setText("snapshot-label",c.snapshot);
+    setText("snapshot-notice",c.snapshotNotice);
+    setText("geo-title",c.geo);setText("economic-title",c.economic);
+    setText("economic-desc",c.economicDesc);setText("economic-notice",c.economicNotice);
+    setText("market-news-title",c.marketNews);setText("market-notice",c.marketNotice);
+    setText("cautions-title",c.cautions);setText("disclaimer",c.disclaimer);
+    setText("refresh-button",c.refresh);
+    const list=el("cautions-list");list.textContent="";
+    c.cautionItems.forEach(function(item){const li=document.createElement("li");li.textContent=item;list.appendChild(li);});
+    document.querySelectorAll("[data-lang]").forEach(function(btn){
+      btn.classList.toggle("active",btn.dataset.lang===language);
+    });
+    try{localStorage.setItem("trading500-language",language);}catch(e){}
+    if(lastPayload)renderPayload(lastPayload);
+  }
+
+  function makeMetric(label,value){
+    const wrap=document.createElement("div");wrap.className="metric";
+    const lab=document.createElement("div");lab.className="label";lab.textContent=label;
+    const val=document.createElement("div");val.className="value";val.textContent=safeValue(value);
+    wrap.appendChild(lab);wrap.appendChild(val);return wrap;
+  }
+
+  function renderSnapshot(snapshot){
+    const c=currentCopy();const grid=el("market-metrics");grid.textContent="";
+    if(!snapshot||!snapshot.available){
+      grid.appendChild(makeMetric(c.labels.spy,"—"));
+      setText("snapshot-label",c.noSnapshot);
+      return;
+    }
+    const v=snapshot.values||{};
+    setText("snapshot-label",c.snapshot+" · "+c.asOf+": "+safeValue(snapshot.asOfDate));
+    [
+      [c.labels.spy,v.spy],[c.labels.bias,v.bias],[c.labels.vix,v.vix],
+      [c.labels.yield,v.yields],[c.labels.es,v.es],[c.labels.oil,v.oil],
+      [c.labels.support,v.support],[c.labels.resistance,v.resistance]
+    ].forEach(function(pair){grid.appendChild(makeMetric(pair[0],pair[1]));});
+  }
+
+  function renderGeo(geo){
+    const c=currentCopy();const status=geo&&geo.status?String(geo.status).toUpperCase():"VERIFY";
+    setText("geo-status",status);
+    setText("geo-note",c.geoNotes[status]||c.geoNotes.VERIFY);
+    const pill=el("geo-status");pill.className="pill "+(status==="NO_ALERT"||status==="CLEARED"?"good":status==="ESCALATION"?"danger":status==="SITUATION"?"warn":"neutral");
+  }
+
+  function renderNews(containerId,items){
+    const c=currentCopy();const container=el(containerId);container.textContent="";
+    if(!Array.isArray(items)||!items.length){
+      const p=document.createElement("p");p.className="muted";p.textContent=c.noHeadlines;container.appendChild(p);return;
+    }
+    items.forEach(function(item){
+      const article=document.createElement("article");article.className="news-item";
+      const a=document.createElement("a");a.textContent=safeValue(item.title);
+      if(/^https?:\/\//i.test(String(item.url||""))){a.href=item.url;a.target="_blank";a.rel="noopener noreferrer";}
+      else{a.removeAttribute("href");}
+      const meta=document.createElement("div");meta.className="news-meta";
+      meta.textContent=[item.source,item.published].filter(Boolean).join(" · ");
+      article.appendChild(a);article.appendChild(meta);container.appendChild(article);
+    });
+  }
+
+  function renderPayload(payload){
+    const c=currentCopy();
+    if(!payload||!payload.success){
+      setText("publication-status",c.unavailable);
+      setText("updated-at",c.feedError);
+      return;
+    }
+    setText("publication-status",c.loaded);
+    setText("updated-at",c.lastUpdated+": "+(payload.generatedAtDisplay||payload.generatedAt||"—"));
+    renderSnapshot(payload.marketSnapshot);
+    renderGeo(payload.geo);
+    renderNews("economic-news",payload.economicHeadlines);
+    renderNews("market-news",payload.marketHeadlines);
+  }
+
+  function loadCommentary(){
+    setText("publication-status",currentCopy().loading);
+    const old=el("mc-jsonp");if(old)old.remove();
+    const script=document.createElement("script");
+    script.id="mc-jsonp";
+    const callbackName="trading500CommentaryCallback";
+    window[callbackName]=function(payload){
+      lastPayload=payload;renderPayload(payload);
+      try{delete window[callbackName];}catch(e){window[callbackName]=undefined;}
+      script.remove();
+    };
+    script.onerror=function(){
+      setText("publication-status",currentCopy().unavailable);
+      setText("updated-at",currentCopy().feedError);
+      script.remove();
+    };
+    script.src=API_URL+"?action=marketCommentaryData&callback="+callbackName+"&_="+Date.now();
+    document.body.appendChild(script);
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(function(btn){
+    btn.addEventListener("click",function(){setLanguage(btn.dataset.lang);});
+  });
+  el("refresh-button").addEventListener("click",loadCommentary);
+
+  setLanguage(getInitialLanguage());
+  loadCommentary();
+})();
+</script>
+</body>
+</html>
