@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -82,17 +83,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
   <section class="panel">
     <h2 id="outlook-title">Market Outlook</h2>
     <p id="snapshot-label" class="subtle">Latest saved dashboard snapshot</p>
-    <div class="grid" id="market-metrics">
-      <div class="metric"><div class="label">SPY</div><div class="value">—</div></div>
-      <div class="metric"><div class="label">Market Bias</div><div class="value">—</div></div>
-      <div class="metric"><div class="label">VIX</div><div class="value">—</div></div>
-      <div class="metric"><div class="label">10Y Yield</div><div class="value">—</div></div>
-      <div class="metric"><div class="label">ES Futures</div><div class="value">—</div></div>
-      <div class="metric"><div class="label">Oil</div><div class="value">—</div></div>
-      <div class="metric"><div class="label">Support</div><div class="value">—</div></div>
-      <div class="metric"><div class="label">Resistance</div><div class="value">—</div></div>
+    <div class="grid" id="market-metrics"></div>
+    <div class="notice" id="snapshot-notice">
+      The values below are from the latest saved T_Decision session. They are not live pre-market prices or a new trading signal.
     </div>
-    <div class="notice" id="snapshot-notice">The dashboard snapshot is not a live pre-market signal.</div>
   </section>
 
   <section class="panel">
@@ -107,7 +101,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
     <h2 id="economic-title">Economic Events & Watchlist</h2>
     <p id="economic-desc" class="subtle">Recent headlines related to inflation, employment, growth and Federal Reserve policy.</p>
     <div class="news-list" id="economic-news"><p class="muted">Loading…</p></div>
-    <div class="notice" id="economic-notice">Headlines are not an official economic release calendar. Confirm event dates and times with the official source.</div>
+    <div class="notice" id="economic-notice">
+      These are news headlines, not an official economic release calendar. Confirm event dates and times with the official source.
+    </div>
   </section>
 
   <section class="panel">
@@ -135,7 +131,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 (function(){
   "use strict";
 
-  const API_URL = "https://script.google.com/macros/s/AKfycbwFlkMJyXAZxtfI60BYmJ7bz2kJQsqrcKj2Z_lTBgyhulhVDrz5QttoFjOmEohaXg37/exec";
+  // Current Apps Script Web App deployment: Version 7
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbzBnzVcvpifLk8XwdkIjyex5Yi_DpVTlTaBI6FS5FPcOxFdpdZqTM4FaN_7-C4EiBhY/exec";
 
   const COPY = {
     en:{
@@ -159,7 +157,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
       noHeadlines:"No headlines were available from the feed at this time.",
       feedError:"The commentary has not been published yet, or its data endpoint is not connected.",
       noDate:"Date not available",lastUpdated:"Last updated",
-      labels:{spy:"SPY",bias:"Market Bias",vix:"VIX",yield:"10Y Yield",es:"ES Futures",oil:"Oil",support:"Support",resistance:"Resistance"},
+      labels:{
+        spy:"SPY",bias:"Market Bias",favors:"Favors",play:"Play",
+        strikes:"Strikes",expiration:"Expiration",support:"Support",resistance:"Resistance"
+      },
       geoNotes:{
         NO_ALERT:"No qualifying severe or elevated alerts were detected in the monitored feed. This does not mean geopolitical risk is zero.",
         SITUATION:"Elevated geopolitical risk signals were detected. Monitor developments and verify important reports.",
@@ -189,7 +190,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
       noHeadlines:"No hay titulares disponibles en este momento.",
       feedError:"El comentario aún no se ha publicado o el enlace de datos no está conectado.",
       noDate:"Fecha no disponible",lastUpdated:"Última actualización",
-      labels:{spy:"SPY",bias:"Sesgo del Mercado",vix:"VIX",yield:"Rendimiento 10 años",es:"Futuros ES",oil:"Petróleo",support:"Soporte",resistance:"Resistencia"},
+      labels:{
+        spy:"SPY",bias:"Sesgo del Mercado",favors:"Favorece",play:"Operación",
+        strikes:"Strikes",expiration:"Vencimiento",support:"Soporte",resistance:"Resistencia"
+      },
       geoNotes:{
         NO_ALERT:"No se detectaron alertas graves o elevadas que cumplan los criterios del feed monitoreado. Esto no significa que el riesgo geopolítico sea cero.",
         SITUATION:"Se detectaron señales de mayor riesgo geopolítico. Sigue los acontecimientos y verifica los informes importantes.",
@@ -219,7 +223,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
       noHeadlines:"Aucun titre n'est disponible pour le moment.",
       feedError:"Le commentaire n'a pas encore été publié ou la connexion aux données n'est pas configurée.",
       noDate:"Date indisponible",lastUpdated:"Dernière mise à jour",
-      labels:{spy:"SPY",bias:"Orientation du Marché",vix:"VIX",yield:"Rendement à 10 ans",es:"Contrats ES",oil:"Pétrole",support:"Support",resistance:"Résistance"},
+      labels:{
+        spy:"SPY",bias:"Orientation du Marché",favors:"Favorise",play:"Opération",
+        strikes:"Strikes",expiration:"Expiration",support:"Support",resistance:"Résistance"
+      },
       geoNotes:{
         NO_ALERT:"Aucune alerte grave ou élevée répondant aux critères du flux surveillé n'a été détectée. Cela ne signifie pas que le risque géopolitique est nul.",
         SITUATION:"Des signaux de risque géopolitique accru ont été détectés. Suivez l'évolution et vérifiez les informations importantes.",
@@ -232,128 +239,295 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 
   let language = "en";
   let lastPayload = null;
+  let requestNumber = 0;
 
-  function el(id){return document.getElementById(id);}
-  function setText(id,value){if(el(id))el(id).textContent=value==null?"":String(value);}
-  function safeValue(value){return value==null||String(value).trim()===""?"—":String(value);}
-  function currentCopy(){return COPY[language];}
+  function el(id){
+    return document.getElementById(id);
+  }
+
+  function setText(id,value){
+    if(el(id)) el(id).textContent=value==null?"":String(value);
+  }
+
+  function safeValue(value){
+    return value==null||String(value).trim()===""?"—":String(value);
+  }
+
+  function currentCopy(){
+    return COPY[language];
+  }
 
   function getInitialLanguage(){
     const requested=new URLSearchParams(location.search).get("lang");
-    if(["en","es","fr"].includes(requested))return requested;
+    if(["en","es","fr"].includes(requested)) return requested;
+
     try{
       const saved=localStorage.getItem("trading500-language");
-      if(["en","es","fr"].includes(saved))return saved;
+      if(["en","es","fr"].includes(saved)) return saved;
     }catch(e){}
+
     return "en";
   }
 
   function setLanguage(next){
     language=COPY[next]?next:"en";
     const c=currentCopy();
+
     document.documentElement.lang=language;
     document.title=c.title+" | Trading 500 Investments";
-    setText("title",c.title);setText("intro",c.intro);
-    setText("outlook-title",c.outlook);setText("snapshot-label",c.snapshot);
+
+    setText("title",c.title);
+    setText("intro",c.intro);
+    setText("outlook-title",c.outlook);
+    setText("snapshot-label",c.snapshot);
     setText("snapshot-notice",c.snapshotNotice);
-    setText("geo-title",c.geo);setText("economic-title",c.economic);
-    setText("economic-desc",c.economicDesc);setText("economic-notice",c.economicNotice);
-    setText("market-news-title",c.marketNews);setText("market-notice",c.marketNotice);
-    setText("cautions-title",c.cautions);setText("disclaimer",c.disclaimer);
+    setText("geo-title",c.geo);
+    setText("economic-title",c.economic);
+    setText("economic-desc",c.economicDesc);
+    setText("economic-notice",c.economicNotice);
+    setText("market-news-title",c.marketNews);
+    setText("market-notice",c.marketNotice);
+    setText("cautions-title",c.cautions);
+    setText("disclaimer",c.disclaimer);
     setText("refresh-button",c.refresh);
-    const list=el("cautions-list");list.textContent="";
-    c.cautionItems.forEach(function(item){const li=document.createElement("li");li.textContent=item;list.appendChild(li);});
+
+    const list=el("cautions-list");
+    list.textContent="";
+
+    c.cautionItems.forEach(function(item){
+      const li=document.createElement("li");
+      li.textContent=item;
+      list.appendChild(li);
+    });
+
     document.querySelectorAll("[data-lang]").forEach(function(btn){
       btn.classList.toggle("active",btn.dataset.lang===language);
     });
-    try{localStorage.setItem("trading500-language",language);}catch(e){}
-    if(lastPayload)renderPayload(lastPayload);
+
+    try{
+      localStorage.setItem("trading500-language",language);
+    }catch(e){}
+
+    if(lastPayload) renderPayload(lastPayload);
   }
 
   function makeMetric(label,value){
-    const wrap=document.createElement("div");wrap.className="metric";
-    const lab=document.createElement("div");lab.className="label";lab.textContent=label;
-    const val=document.createElement("div");val.className="value";val.textContent=safeValue(value);
-    wrap.appendChild(lab);wrap.appendChild(val);return wrap;
+    const wrap=document.createElement("div");
+    wrap.className="metric";
+
+    const lab=document.createElement("div");
+    lab.className="label";
+    lab.textContent=label;
+
+    const val=document.createElement("div");
+    val.className="value";
+    val.textContent=safeValue(value);
+
+    wrap.appendChild(lab);
+    wrap.appendChild(val);
+
+    return wrap;
   }
 
   function renderSnapshot(snapshot){
-    const c=currentCopy();const grid=el("market-metrics");grid.textContent="";
+    const c=currentCopy();
+    const grid=el("market-metrics");
+    grid.textContent="";
+
     if(!snapshot||!snapshot.available){
-      grid.appendChild(makeMetric(c.labels.spy,"—"));
       setText("snapshot-label",c.noSnapshot);
+      [
+        c.labels.spy,c.labels.bias,c.labels.favors,c.labels.play,
+        c.labels.strikes,c.labels.expiration,c.labels.support,c.labels.resistance
+      ].forEach(function(label){
+        grid.appendChild(makeMetric(label,"—"));
+      });
       return;
     }
-    const v=snapshot.values||{};
-    setText("snapshot-label",c.snapshot+" · "+c.asOf+": "+safeValue(snapshot.asOfDate));
+
+    // The API publishes these fields directly inside marketSnapshot.
+    // It does not use a nested snapshot.values object.
+    setText(
+      "snapshot-label",
+      c.snapshot+" · "+c.asOf+": "+safeValue(snapshot.asOfDate)
+    );
+
     [
-      [c.labels.spy,v.spy],[c.labels.bias,v.bias],[c.labels.vix,v.vix],
-      [c.labels.yield,v.yields],[c.labels.es,v.es],[c.labels.oil,v.oil],
-      [c.labels.support,v.support],[c.labels.resistance,v.resistance]
-    ].forEach(function(pair){grid.appendChild(makeMetric(pair[0],pair[1]));});
+      [c.labels.spy,snapshot.spy],
+      [c.labels.bias,snapshot.bias],
+      [c.labels.favors,snapshot.favors],
+      [c.labels.play,snapshot.play],
+      [c.labels.strikes,snapshot.strikes],
+      [c.labels.expiration,snapshot.expiration],
+      [c.labels.support,snapshot.support],
+      [c.labels.resistance,snapshot.resistance]
+    ].forEach(function(pair){
+      grid.appendChild(makeMetric(pair[0],pair[1]));
+    });
   }
 
   function renderGeo(geo){
-    const c=currentCopy();const status=geo&&geo.status?String(geo.status).toUpperCase():"VERIFY";
+    const c=currentCopy();
+    const status=geo&&geo.status
+      ?String(geo.status).toUpperCase()
+      :"VERIFY";
+
     setText("geo-status",status);
     setText("geo-note",c.geoNotes[status]||c.geoNotes.VERIFY);
-    const pill=el("geo-status");pill.className="pill "+(status==="NO_ALERT"||status==="CLEARED"?"good":status==="ESCALATION"?"danger":status==="SITUATION"?"warn":"neutral");
+
+    const pill=el("geo-status");
+    pill.className="pill "+(
+      status==="NO_ALERT"||status==="CLEARED"
+        ?"good"
+        :status==="ESCALATION"
+          ?"danger"
+          :status==="SITUATION"
+            ?"warn"
+            :"neutral"
+    );
   }
 
   function renderNews(containerId,items){
-    const c=currentCopy();const container=el(containerId);container.textContent="";
+    const c=currentCopy();
+    const container=el(containerId);
+    container.textContent="";
+
     if(!Array.isArray(items)||!items.length){
-      const p=document.createElement("p");p.className="muted";p.textContent=c.noHeadlines;container.appendChild(p);return;
+      const p=document.createElement("p");
+      p.className="muted";
+      p.textContent=c.noHeadlines;
+      container.appendChild(p);
+      return;
     }
+
     items.forEach(function(item){
-      const article=document.createElement("article");article.className="news-item";
-      const a=document.createElement("a");a.textContent=safeValue(item.title);
-      if(/^https?:\/\//i.test(String(item.url||""))){a.href=item.url;a.target="_blank";a.rel="noopener noreferrer";}
-      else{a.removeAttribute("href");}
-      const meta=document.createElement("div");meta.className="news-meta";
-      meta.textContent=[item.source,item.published].filter(Boolean).join(" · ");
-      article.appendChild(a);article.appendChild(meta);container.appendChild(article);
+      const article=document.createElement("article");
+      article.className="news-item";
+
+      const a=document.createElement("a");
+      a.textContent=safeValue(item.title);
+
+      if(/^https?:\/\//i.test(String(item.url||""))){
+        a.href=item.url;
+        a.target="_blank";
+        a.rel="noopener noreferrer";
+      }else{
+        a.removeAttribute("href");
+      }
+
+      const meta=document.createElement("div");
+      meta.className="news-meta";
+      meta.textContent=[item.source,item.published]
+        .filter(Boolean)
+        .join(" · ");
+
+      article.appendChild(a);
+      article.appendChild(meta);
+      container.appendChild(article);
     });
   }
 
   function renderPayload(payload){
     const c=currentCopy();
+
     if(!payload||!payload.success){
       setText("publication-status",c.unavailable);
       setText("updated-at",c.feedError);
       return;
     }
+
     setText("publication-status",c.loaded);
-    setText("updated-at",c.lastUpdated+": "+(payload.generatedAtDisplay||payload.generatedAt||"—"));
+    setText(
+      "updated-at",
+      c.lastUpdated+": "+
+      (payload.generatedAtDisplay||payload.generatedAt||"—")
+    );
+
     renderSnapshot(payload.marketSnapshot);
     renderGeo(payload.geo);
     renderNews("economic-news",payload.economicHeadlines);
     renderNews("market-news",payload.marketHeadlines);
   }
 
+  function showLoadError(){
+    const c=currentCopy();
+    setText("publication-status",c.unavailable);
+    setText("updated-at",c.feedError);
+  }
+
   function loadCommentary(){
-    setText("publication-status",currentCopy().loading);
-    const old=el("mc-jsonp");if(old)old.remove();
+    const thisRequest=++requestNumber;
+    const c=currentCopy();
+
+    setText("publication-status",c.loading);
+    setText("updated-at","");
+
+    const old=el("mc-jsonp");
+    if(old) old.remove();
+
+    const callbackName="trading500CommentaryCallback";
+
+    // Remove any callback left by an earlier request.
+    try{
+      delete window[callbackName];
+    }catch(e){
+      window[callbackName]=undefined;
+    }
+
     const script=document.createElement("script");
     script.id="mc-jsonp";
-    const callbackName="trading500CommentaryCallback";
+
+    let completed=false;
+
     window[callbackName]=function(payload){
-      lastPayload=payload;renderPayload(payload);
-      try{delete window[callbackName];}catch(e){window[callbackName]=undefined;}
+      if(completed||thisRequest!==requestNumber) return;
+      completed=true;
+
+      lastPayload=payload;
+      renderPayload(payload);
+
+      try{
+        delete window[callbackName];
+      }catch(e){
+        window[callbackName]=undefined;
+      }
+
       script.remove();
     };
+
     script.onerror=function(){
-      setText("publication-status",currentCopy().unavailable);
-      setText("updated-at",currentCopy().feedError);
+      if(completed||thisRequest!==requestNumber) return;
+      completed=true;
+
+      showLoadError();
+
+      try{
+        delete window[callbackName];
+      }catch(e){
+        window[callbackName]=undefined;
+      }
+
       script.remove();
     };
-    script.src=API_URL+"?action=marketCommentaryData&callback="+callbackName+"&_="+Date.now();
+
+    const separator=API_URL.includes("?")?"&":"?";
+
+    script.src=
+      API_URL+
+      separator+
+      "action=marketCommentaryData"+
+      "&callback="+encodeURIComponent(callbackName)+
+      "&_="+Date.now();
+
     document.body.appendChild(script);
   }
 
   document.querySelectorAll("[data-lang]").forEach(function(btn){
-    btn.addEventListener("click",function(){setLanguage(btn.dataset.lang);});
+    btn.addEventListener("click",function(){
+      setLanguage(btn.dataset.lang);
+    });
   });
+
   el("refresh-button").addEventListener("click",loadCommentary);
 
   setLanguage(getInitialLanguage());
@@ -362,3 +536,4 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 </script>
 </body>
 </html>
+```
